@@ -14,7 +14,16 @@ TEST(TestSuite01, Subtest01) {
 
 TEST(TestSuite01, Subtest02) {
 
-    ASSERT_EQ(6, 6);
+    // Arrange
+    int base = 12;
+    int inc = 3;
+    int result = 0;
+
+    // Act
+    result = base + inc;
+
+    // Assert
+    ASSERT_EQ(result, 15);
 }
 
 int main(int argc, char **argv) {
