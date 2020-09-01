@@ -25,6 +25,7 @@ A `shared_ptr` can be copied, passed by value in function arguments, and assigne
 ```c++
 auto ptrA = make_shared<Song>("May it be", "Enya");
 auto ptr1 = ptrA;
+ptr1.use_count(); // get reference count
 
 shared_ptr<Song> ptrB(new Song("Lady Gaga", "Just Dance"));
 auto ptr2(ptrB);
