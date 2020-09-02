@@ -48,6 +48,14 @@ A subtest result can be *success*, *non-fatal failure* (program continues), or *
 
 **Assert**: verify the output
 
+Take [test/test01.cpp](./test/test01.cpp) as the example.
+
+### Test Fixture `TEST_F`
+
+A test fixture is a class that inherits from `::testing::Test` and its internal state is accessible to the tests that use it. The `SetUp()` function will be called before executing each `TEST_F` and `TearDown()` is executed after each `TEST_F`.
+
+Take [test/test02.cpp](./test/test02.cpp) as the example.
+
 ## Compile the Test
 
 ```
