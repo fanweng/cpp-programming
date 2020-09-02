@@ -62,8 +62,43 @@ Take [test/test02.cpp](./test/test02.cpp) as the example.
 $ g++ -o test01 test01.cpp -lgtest -lgtest_main -lphtread
 ```
 
-## References
+
+
+
+
+# Google Mock
+
+When writing a test, sometimes it's not feasible to rely on real objects entirely, e.g. data base connect function. A **mock object** implements the same interface as a real object, and lets you specify at **runtime** how it will be used and what it should do (which methods to be called? in which order? how many times? with what arguments? what will return? etc.)
+
+Using gMock as a testing tool - cut off the test's outbound dependencies and probe the interaction between your module and its collaborators.
+
+## Installation
+
+gMock is included in the same development package of gTest. Compile the gmock source code and copy the libraries to */usr/lib/* directory.
+
+```
+$ sudo apt-get install cmake
+$ sudo apt-get install libgtest-dev
+$ cd /usr/src/gmock
+$ sudo cmake CMakeLists.txt
+$ sudo make
+$ sudo cp libgmock.a libgmock_main.a /usr/lib/
+```
+
+## Compile the Test
+
+```
+$ g++ -o mock01 mock01.cpp -lgtest -lgtest_main -lgmock -lphtread
+```
+
+
+
+
+
+# References
 
 [GTest GitHub page](https://github.com/google/googletest)
+
+[GMock Github doc](https://github.com/google/googletest/tree/master/googlemock/docs)
 
 [CodesBay Google C++ Test Framework YouTube playlist](https://www.youtube.com/playlist?list=PL_dsdStdDXbo-zApdWB5XiF2aWpsqzV55)
