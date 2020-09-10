@@ -37,3 +37,14 @@ void main() {
     Bar e = (Bar)3;     // OK: calls Bar::Bar(int)
 }
 ```
+
+## `auto`
+
+The `auto` keyword specifies that the type of the variable that is being declared will be automatically deducted from its initializer. Developer can spend less time having to write out the data type that compiler already knows. Thus, the time for compilation increases slightly but it doesn't affect the runtime of the program.
+
+```c++
+auto x = 4;
+auto ptr = &x;
+std::cout << std::typeid(x).name() << std::endl;
+std::cout << std::typeid(ptr).name() << std::endl;
+```
