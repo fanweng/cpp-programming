@@ -20,6 +20,8 @@ auto ptrB = std::move(ptrA);
 
 Defined in the `<memory>` header in the C++ Standard Library.
 
+A `shared_ptr` shares the **ownership** of a resource.
+
 A `shared_ptr` can be copied, passed by value in function arguments, and assigned to other `shared_ptr` instances. All instances point to the **same object**, and point to the **same control block** which keeps the reference count. When reference count reaches 0, the control block deletes the memory resource and itself.
 
 ```c++
@@ -33,3 +35,13 @@ auto ptr2(ptrB);
 shared_ptr<Song> ptrC(nullptr);
 ptrC = make_shared<Song>("Elton John", "I'm Still Standing");
 ```
+
+## `weak_ptr`
+
+A `weak_ptr` holds a weak reference to an object that is owned by a `shared_ptr` without increasing the reference count. It must be converted to `shared_ptr` in order to access the referenced object. A `weak_ptr` will only return a *non-null* `shared_ptr` when there is a `shared_ptr` somewhere keeping the object alive.
+
+`weak_ptr` helps to break the *circular references (cyclic dependency)* between `shared_ptr` instances. Take this `C->A<->B` as an example: C points to the circular reference entity made by A and B.
+
+- If all pointers are `shared_ptr`: when going out of the scope, only C will be released properly. After C is deleted, A cannot be released because the reference count for A is non-zero (pointed by B). Thus, B cannot be released, too.
+
+- If B points to A as a `weak_ptr`, others are `shared_ptr`: when going out of the scope, all pointers will be cleaned up. Since B points to A *weakly*, the reference count for A reaches zero after C is release. Then, A can be cleaned up and reference count for B decreases to zero. Thus, B is cleaned up, too.
