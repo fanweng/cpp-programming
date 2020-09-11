@@ -48,3 +48,16 @@ auto ptr = &x;
 std::cout << std::typeid(x).name() << std::endl;
 std::cout << std::typeid(ptr).name() << std::endl;
 ```
+
+## `using`
+
+1. *using-directives* for namespaces.
+2. *using-declarations* for introducing namepsace/class members.
+3. For type aliasing, similar to `typedef`.
+
+```c++
+using namespace std; // 1
+using std::string; // 2
+using int_ptr = std::shared_ptr<int>; // 3
+int_ptr myPtr;
+```
