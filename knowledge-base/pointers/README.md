@@ -16,6 +16,29 @@ auto ptrA = make_unique<Song>("May it be", "Enya");
 auto ptrB = std::move(ptrA);
 ```
 
+#### `unique_ptr::get`, `unique_ptr::release`, `unique_ptr::reset`
+
+* `get()` returns the *stored pointer* which points to the object managed by the `unique_ptr`. The `unique_ptr` still has the ownershipe of the pointer, i.e. responsible for deleting the managed data at some point.
+* `release()` releases the ownership of its *stored pointer* by returning its value and replacing it with `nullptr`. It doesn't destroy the managed object but `unique_ptr` is free of the responsbility of deleting the object.
+* `reset()` destroys the managed object.
+
+```c++
+                                         // foo   bar    p
+                                         // ---   ---   ---
+std::unique_ptr<int> foo;                // null
+std::unique_ptr<int> bar;                // null  null
+int* p = nullptr;                        // null  null  null
+
+foo = std::unique_ptr<int>(new int(10)); // (10)  null  null
+bar = std::move(foo);                    // null  (10)  null
+p = bar.get();                           // null  (10)  (10)
+*p = 20;                                 // null  (20)  (20)
+p = nullptr;                             // null  (20)  null
+foo = std::unique_ptr<int>(new int(30)); // (30)  (20)  null
+p = foo.release();                       // null  (20)  (30)
+*p = 40;                                 // null  (20)  (40)
+```
+
 ## `shared_ptr`
 
 Defined in the `<memory>` header in the C++ Standard Library.
