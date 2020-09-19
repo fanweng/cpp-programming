@@ -71,14 +71,14 @@ struct StructA {
         cout << "dummyLogin1 gets called!" << endl;
         return true;
     }
-}
+};
 
 struct StructB {
     void dummyLogin2(string a, string b) {
         cout << "dummyLogin2 gets called!" << endl;
         return;
     }
-}
+};
 
 TEST(MyDBTest, loginTest1) {
 

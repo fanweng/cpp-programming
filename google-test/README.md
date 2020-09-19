@@ -85,6 +85,19 @@ $ sudo make
 $ sudo cp libgmock.a libgmock_main.a /usr/lib/
 ```
 
+## Mock Functions
+
+Take [mock/mock01.cpp](./mock/mock01.cpp) as the example.
+
+#### `MOCK_METHOD`
+
+`MOCK_METHOD` macro needs 3 or 4 parameters. The 4th parameter accepts a list of qualifiers, e.g. `const`, `override`, etc. Old-style uses `MOCK_METHODn` and `n` represents the number of arguments.
+
+```c++
+MOCK_METHOD(ReturnType, MethodName, (Args..));
+MOCK_METHOD(ReturnType, MethodName, (Args..), (Specs...));
+```
+
 ## Compile the Test
 
 ```
@@ -100,5 +113,9 @@ $ g++ -o mock01 mock01.cpp -lgtest -lgtest_main -lgmock -lphtread
 [GTest GitHub page](https://github.com/google/googletest)
 
 [GMock Github doc](https://github.com/google/googletest/tree/master/googlemock/docs)
+
+[gMock Cookbook](https://chromium.googlesource.com/external/github.com/google/googletest/+/HEAD/googlemock/docs/cook_book.md)
+
+[gMock Cheatsheet](https://chromium.googlesource.com/external/github.com/google/googletest/+/HEAD/googlemock/docs/cheat_sheet.md)
 
 [CodesBay Google C++ Test Framework YouTube playlist](https://www.youtube.com/playlist?list=PL_dsdStdDXbo-zApdWB5XiF2aWpsqzV55)
