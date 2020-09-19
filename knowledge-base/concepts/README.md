@@ -106,3 +106,33 @@ int* z=const_cast<int *>(y);    // only this can allow us to make change to the 
 *z=100;
 cout<<"new value is"<<*y;       // y=100
 ```
+
+## Namespace
+
+Namespaces allow us to group named entities that otherwise would have *global scope* into narrower scopes. This organizes the elements of programs into different logical scopes referred to by name.
+
+* Namespace declaration appears only at global scope.
+* Namespace declaration can be nested within another namespace.
+* No access specifiers (`public`, `private`, etc.).
+* No semicolon after the closing brace.
+* Definition of namespace can be split into several units.
+
+```c++
+namespace ns 
+{ 
+    void display(); 
+    class geek 
+    { 
+    public: 
+       void display(); 
+    }; 
+} 
+void ns::geek::display() 
+{ 
+    cout << "ns::geek::display()\n"; 
+} 
+void ns::display() 
+{ 
+    cout << "ns::display()\n"; 
+} 
+```
