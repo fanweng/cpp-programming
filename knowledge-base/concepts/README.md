@@ -136,3 +136,43 @@ void ns::display()
     cout << "ns::display()\n"; 
 } 
 ```
+
+## Template
+
+Template is a powerful tool which idea is to pass data type as a parameter so that we don't need to write the same code for different data type. Templates are expanded at compiler time, similar to macros, but compiler does type checking before template expansion.
+
+Keywords: `template`, `typename`/`class`.
+
+1. Function templates: A generic function can be used for different data types.
+
+```c++
+template <typename T>
+T myMax(T x, T y) {
+    return (x > y)? x : y;
+}
+
+cout << myMax<int>(3, 7) << endl;
+cout << myMax<double>(1.2, 3.8) << endl;
+```
+
+2. Class templates: if the class definition is independent of the data type.
+
+```c++
+template <typename T>
+class Array {
+private:
+    T *ptr;
+    int size;
+public:
+    Array(T arr[], int s);
+    void print;
+};
+
+template <typename T>
+Array<T>::Array(T arr[], int s) { // constructor
+}
+
+template <typename T>
+void Array<T>::print() { // method
+}
+```
