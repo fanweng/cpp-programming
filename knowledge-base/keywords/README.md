@@ -52,7 +52,7 @@ std::cout << std::typeid(ptr).name() << std::endl;
 ## `using`
 
 1. *using-directives* for namespaces.
-2. *using-declarations* for introducing namepsace/class members.
+2. *using-declarations* for introducing namespace/class members.
 3. For type aliasing, similar to `typedef`.
 
 ```c++
@@ -61,3 +61,22 @@ using std::string; // 2
 using int_ptr = std::shared_ptr<int>; // 3
 int_ptr myPtr;
 ```
+
+## `constexpr`
+
+`constexpr` specifier evaluates an object or function at compile time and the expression can be used in other constant expressions. The main idea is to improve the performance by doing the computation at compile time rather than run time.
+
+* Difference with `const`
+
+`const` may be initialized at compile time or run time. Therefore, it cannot be used for initializing a compile-time constant.
+
+```c++
+const     double PI1 = 3.14;
+constexpr double PI2 = 3.14;
+
+constexpr double AREA1 = PI1 * 1^2; // error
+constexpr double AREA2 = PI2 * 1^2; // OK
+```
+* Difference with `inline`
+
+Both are for performance improvement. `inline` only expands the function at compile time which saves time of function call overhead, the expression is still evaluated at run time.
