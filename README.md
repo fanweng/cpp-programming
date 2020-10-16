@@ -1,6 +1,10 @@
 # C++ Programming 
 Everything C++
 
+## Modern C++
+
+Modern C++ usually refers to C++11, C++14, C++17 and later. C++11 was a revolution and it actually became another language compared to classical C++ as C++98 and before.
+
 # Reference
 
 [1] [GeeksforGeeks](https://www.geeksforgeeks.org/c-plus-plus/).
@@ -10,3 +14,5 @@ Everything C++
 [3] [cplusplus.com](http://www.cplusplus.com/)
 
 [4] [cppreference.com](https://en.cppreference.com/w/)
+
+[5] "Beginning C++ Programming - From Beginner to Beyond" course by Frank Mitropoulos on Udemy.
