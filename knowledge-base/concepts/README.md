@@ -1,5 +1,95 @@
 # Concepts
 
+## Object-Oriented Programming (OOP)
+
+- Classes and objects
+- Encapsulation
+- Information-hiding
+- Inheritance
+- Polymorphism
+
+## Classes and Objects
+
+Class is a blueprint from which objects are created. It has attributes (data) and methods (functions).
+
+Object represents a specific instance of a class.
+
+```c++
+class Player {
+private:
+    std::string name;
+    int health;
+public:
+    void talk(std::string);
+};
+Player mike;
+mike.name = "Mike";
+Player *mary = new Player();
+(*mary).name = "Mary";
+mary->health = 100;
+delete mary;
+```
+
+### Constructors and Destructors
+
+- **Constructor**
+
+A special member method, invoked during the object creation. It has the same name as the class, no return type, and can be overloaded. If no constructor provided in the class, C++ will use default no-argument constructor with no initialization.
+
+- **Initialization list**
+
+A better way to create an object with initial attribute values. Assignment in the constructor is a less efficient way because the object is first created with empty values then is assigned with the intial values, one step more than the initialization list.
+
+- **Copy constructor**
+
+Called when an object is copied:
+1. passing object *by value* as a parameter, `void display_player(Plaery p)`
+2. returning an object from a function *by value*, `return player_obj`
+3. construct one object based on another with the same class, `Player another_player {player_obj}`
+
+C++ uses a default compiler-defined copy constructor if there is no user-defined one. It copies the value of each data member to the new object, which is perfectly fine in many cases. (NOTE: if data member is a *pointer*, the pointer itself will be copied, not the data it points to.)
+
+Best practices:
+1. use your own copy constructor when the class has **raw pointer** members
+2. provide the copy constructor with a **const reference** parameter
+3. use STL classes as they're provided with copy constructors
+4. avoid using raw pointer data members if possible
+
+- **Destructor**
+
+A special member method, invoked when object is destroyed. It has the same name as the class with a preceeding tilde (~). No return type and no parameters. No overloading is allowed. It's useful to release memory and other resources.
+
+```c++
+class Player {
+private:
+    std::string name;
+    int health;
+public:
+    // Overloaded constructors
+    Player();
+    Player(std::string name_val);
+    Player(std::string name_val, int health_val);
+    Player(std::string name_val, int health_val, int xp = 0);   // default parameter
+    // Copy Constructor
+    Player(const Player &source);
+    // Destructor
+    ~Player() {std::cout << "Destructor called" << std::endl;}
+};
+Player::Player() {
+    name = "None";  // this is assignment, not initialization
+    age = 0;
+}
+Player::Player(std::string name_val)
+    : Player {name_val, 0} {    // delegating constructor
+}
+Player::Player(std::string name_val, int health_val)
+    : name{name_val}, health{health_val} {  // initialization lists
+}
+Player::Player(const Player &source)
+    : name{source.name}, health{source.health}, xp{source.xp} {
+}
+```
+
 ## Inheritance
 
 It is possible to inherit attributes and methods from one class to another.
