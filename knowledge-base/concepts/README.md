@@ -47,7 +47,19 @@ Called when an object is copied:
 2. returning an object from a function *by value*, `return player_obj`
 3. construct one object based on another with the same class, `Player another_player {player_obj}`
 
-C++ uses a default compiler-defined copy constructor if there is no user-defined one. It copies the value of each data member to the new object, which is perfectly fine in many cases. (NOTE: if data member is a *pointer*, the pointer itself will be copied, not the data it points to.)
+C++ uses a default compiler-defined copy constructor if there is no user-defined one. It copies the value of each data member to the new object, which is perfectly fine in many cases. (NOTE: default copy constructor uses **shallow copy**, i.e. if a data member is a *raw pointer*, the pointer itself will be copied, not the data it points to. In this situation, both pointers point to the same memory area, if one object is released by destructor, the memory area is no longer valid. The other pointer still refers to the memory without knowing anything.)
+
+The workaround for the above issue is **deep copy**.
+
+```c++
+Deep::Deep(const Deep &source)
+    : Deep{*source.data} { // delegating way
+}
+Deep::Deep(const Deep &source) { // assignment way
+    data = new int;
+    *data = *source.data;
+}
+```
 
 Best practices:
 1. use your own copy constructor when the class has **raw pointer** members
