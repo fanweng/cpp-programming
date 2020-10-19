@@ -278,3 +278,13 @@ template <typename T>
 void Array<T>::print() { // method
 }
 ```
+
+## l-value and r-value
+
+- **lvalue**
+
+Refers to **memory location** which identifies an object. A *lvalue* may appear as either left hand or right hand side of an assignment operator.
+
+- **rvalue**
+
+Refers to **data value** that is stored at some address in memory. A *rvalue* can't have a value assigned to it which means it can only appear on the right hand side of an assignment operator.
