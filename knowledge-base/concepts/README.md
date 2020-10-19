@@ -52,6 +52,7 @@ C++ uses a default compiler-defined copy constructor if there is no user-defined
 The workaround for the above issue is **deep copy**.
 
 ```c++
+/* suppose data is a raw pointer data member in the Deep class */
 Deep::Deep(const Deep &source)
     : Deep{*source.data} { // delegating way
 }
@@ -66,6 +67,38 @@ Best practices:
 2. provide the copy constructor with a **const reference** parameter
 3. use STL classes as they're provided with copy constructors
 4. avoid using raw pointer data members if possible
+
+- **Move ctor**
+
+C++11 introduced move constructor which moves an object instead of copies it. Copy constructor doing deep copy can have significant performance bottleneck. For example: 
+
+```c++
+/* suppose data is a raw pointer data member in the Deep class */
+Player::Player(const Player &source) {
+    data = new int;
+    *data = *source.data;
+}
+vector<Player> vec; // only deep copy ctor, no move ctor is defined
+// temporary object (rvalue) is created
+// compiler uses copy ctor to add it to the vector
+// temp object then is dtor-ed
+vec.push_pack(Player{"mike"});
+```
+
+Move constructor simply *copies the address of resource from source to the current object*, and *nulls out the pointer in the source*. It's like a shallow copy plus nulling out the copied source pointer.
+
+```c++
+/* suppose data is a raw pointer data member in the Deep class */
+Player::Player(Player &&source)
+    : data{source.data} {
+        source.data = nullptr;
+}
+vector<Player> vec; // with move ctor is defined
+// because temporary object is an rvalue
+// compiler will use move ctor to move it into the vector, more efficient than copy
+// temp object then is dtor-ed and its pointer is null-ed
+vec.push_pack(Player{"mike"});
+```
 
 - **Destructor**
 
@@ -283,8 +316,20 @@ void Array<T>::print() { // method
 
 - **lvalue**
 
-Refers to **memory location** which identifies an object. A *lvalue* may appear as either left hand or right hand side of an assignment operator.
+Refers to **memory location** which identifies an object. An *lvalue* may appear as either left hand or right hand side of an assignment operator.
+
+L-value reference uses `&`.
 
 - **rvalue**
 
-Refers to **data value** that is stored at some address in memory. A *rvalue* can't have a value assigned to it which means it can only appear on the right hand side of an assignment operator.
+Refers to **data value** that is stored at some address in memory. An *rvalue* can't have a value assigned to it which means it can only appear on the right hand side of an assignment operator.
+
+R-value reference uses `&&`.
+
+```c++
+int x{100};
+void func(int &num);    // A
+void func(int &&num);   // B
+func(x);    // calls prototype A, x is an lvalue
+func(300);  // calls prototype B, 300 is an rvalue 
+```
