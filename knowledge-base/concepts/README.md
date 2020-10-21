@@ -8,6 +8,12 @@
 - Inheritance
 - Polymorphism
 
+## `struct` vs. `class`
+
+Use `struct` for passive objects with public access (default), don't declare methods in it.
+
+Use `class` for active objects with default private access members, implementing getters/setters and other methods in it.
+
 ## Classes and Objects
 
 Class is a blueprint from which objects are created. It has attributes (data) and methods (functions).
