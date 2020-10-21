@@ -62,6 +62,56 @@ using int_ptr = std::shared_ptr<int>; // 3
 int_ptr myPtr;
 ```
 
+## `static`
+
+If a class data member is declared as `static`:
+- the data member belongs to the class, *not the specific object*
+- useful to store class-wide information
+
+If a class method is declared as `static`:
+- it's independent of any particular object
+- can only access `static` data members and functions, not even `this` pointer
+- can be called using the class name
+- can be called even without any object is created
+
+```c++
+/* .hpp */
+class Player {
+private:
+    static int num_players; // cannot be initialized here
+public:
+    static int get_num_players();
+};
+
+/* .cpp */
+int Player::num_players = 0; // init in the .cpp
+Player::Player(std::string name_val)
+    : name{name_val} {
+        ++num_players;
+}
+Player::~Player() {
+    --num_players;
+}
+int Player::get_num_players() {
+    return num_players;
+}
+```
+
+## `const`
+
+A `const` object should not be modified at any time. Compiler assumes a method could change the class object so that a `const` object calls any of its method without `const` qualifier will throw a compiler error.
+
+```c++
+class Player {
+public:
+    std::string get_name() const;   // with "const" qualifier, if get_name modifies this object, it gets compiler error
+    std::string set_name();         // set_name() is expected to modify this object
+};
+const Player villain {"Villan", 100, 0};
+villain.set_name("Hero");   // compiler error, because const-correctness
+villain.get_name();         // ok, because get_name() is declared with const qualifier
+```
+
 ## `constexpr`
 
 `constexpr` specifier evaluates an object or function at compile time and the expression can be used in other constant expressions. The main idea is to improve the performance by doing the computation at compile time rather than run time.
@@ -80,3 +130,16 @@ constexpr double AREA2 = PI2 * 1^2; // OK
 * Difference with `inline`
 
 Both are for performance improvement. `inline` only expands the function at compile time which saves time of function call overhead, the expression is still evaluated at run time.
+
+## `this`
+
+`this` contains the address of the object, which can only be used in the class scope. All member access is done via the `this` pointer.
+
+```c++
+void Account::set_balance(double bal) {
+    balance = bal; // this->balance is implied
+}
+void Account::compare_balance(const Account &other) {
+    if (this == &other) ...
+}
+```
