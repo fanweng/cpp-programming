@@ -143,3 +143,20 @@ void Account::compare_balance(const Account &other) {
     if (this == &other) ...
 }
 ```
+
+## `friend`
+
+`friend` function or class can access the private class member.
+
+Friendship is declared explicitly in the class that is granting friendship, i.e. friendship must be granted not taken:
+- not symmetric: if A is a friend of B, then B is not a friend of A
+- no transitive: if A is a friend of B and B is a friend of C, then A is not a friend of C
+
+```c++
+class Player {
+private:
+    friend void display_player(Player &p); // this non-member function can access all private members of Player class
+    friend void other_class::show_player(Player &p); // this member function of other_class can access all private members of Player class
+    friend class another_clas;  // another_class can access all private members of Player class
+};
+```
