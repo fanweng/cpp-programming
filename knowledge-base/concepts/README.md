@@ -141,6 +141,38 @@ Player::Player(const Player &source)
 }
 ```
 
+## Operator Overloading
+
+C++ doesn't know how to deal with the operators on a user-defined type data, it will only apply the default member-wise assignment `=` (shallow copy). Operator overloading must be explicitly defined before using that operator on user-defined data types.
+
+The majority of C++ operators can be overloaded except `::`, `:?`, `.*`, `.`, `sizeof`.
+
+#### Assignment operator
+
+Since the default assignment operator is shallow copy, sometimes it's required to overload the copy assignment operator to do a deep copy.
+
+```c++
+class MyString {
+private:
+    char *str;
+public:
+    MyString &MyString::operator=(const MyString &rhs);
+};
+
+MyString &MyString::operator=(const MyString &rhs) {
+    if (this == &rhs) { // if the same object, return the current object
+        return *this;
+    }
+    delete [] str; // deallocate storage for this->str since it'll be overwritten
+    str = new char[std::strlen(rhs.str)+1]; // allocate storage for the deep copy
+    std::strcpy(str, rhs.str); // perform deep copy
+    return *this;
+}
+
+str1 = str2;        // we write this in the real code
+str1.operator=(s2); // operator= method is called actually
+```
+
 ## Inheritance
 
 It is possible to inherit attributes and methods from one class to another.
