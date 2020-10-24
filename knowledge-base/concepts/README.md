@@ -225,7 +225,7 @@ bool operator!(const Number &obj);
 class MyString {
     friend MyString operator+(const MyString &lhs, const MyString &rhs);
 ...
-}
+};
 
 MyString operator+(const MyString &lhs, const MyString &rhs) {
     size_t buf_size = std::strlen(lhs.str) + std::strlen(rhs.str) + 1;
@@ -242,6 +242,31 @@ MyString operator<(const MyString &lhs, const MyString &rhs);
 
 MyString larry{"Larry"};
 result = "Moe" + larry; // Ok with non-member function 
+```
+
+#### Overloading stream insertion and extraction operators
+
+When overloading the insertion stream operator, make sure to return the *reference* of stream so that the *chain of insertion* is possible.
+
+```c++
+class MyString {
+    friend std::ostream &operator<<(std::ostream &os, const MyString &rhs);
+    friend std::istream &operator>>(std::istream &in, MyString &rhs);
+...
+};
+
+std::ostream &operator<<(std::ostream &os, const MyString &rhs) {
+    os << rhs.str;
+    return os;
+}
+
+std::istream &operator>>(std::istream &in, MyString &rhs) {
+    char *buf = new char[100];
+    in >> buf;
+    rhs = MyString(buf); // depends on the overloaded copy or move assignment operator
+    delete [] buf;
+    return in;
+}
 ```
 
 ## Inheritance
