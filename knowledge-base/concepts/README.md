@@ -159,9 +159,9 @@ private:
     char *str;
 public:
     // Overloading copy assignment operator
-    MyString &MyString::operator=(const MyString &rhs);
+    MyString &operator=(const MyString &rhs);
     // Overloading move assignment operator
-    MyString &MyString::operator=(MyString &&rhs);
+    MyString &operator=(MyString &&rhs);
 };
 
 MyString &MyString::operator=(const MyString &rhs) {
@@ -186,6 +186,62 @@ MyString &MyString::operator=(MyString &&rhs) { // rvalue reference, it'll be ch
 str1 = str2;        // we write this in the real code
 str1.operator=(s2); // operator= method is called actually
 str1 = MyString{"Hello"}; // move assignment is called, more efficient than copying
+```
+
+#### Overloading operators as member methods
+
+If using member method to overload an operator, the element on the left-hand side of the operator must be that class object.
+
+```c++
+/* Unary Operators */
+Number Number::operator-() const;   // -n
+Number Number::operator++();        // pre-increment, ++n
+Number Number::operator++(int);     // post-increment, n++
+bool Number::operator!() const;     // !n
+
+/* Binary Operators */
+MyString MyString::operator+(const MyString &rhs) const;
+MyString MyString::operator-(const MyString &rhs) const;
+bool MyString::operator==(const MyString &rhs) const;
+bool MyString::operator<(const MyString &rhs) const;
+
+MyString larry{"Larry"};
+MyString moe{"Moe"};
+MyString result = larry + moe;  // Ok
+result = larry + "Moe";         // Ok
+result = "Moe" + larry;         // "Moe".operator+(larry), Error, must be a class object
+```
+
+#### Overloading operators as global functions (non-member methods)
+
+Since operators may need to access the private members of the class object, they need to be declared as **friend** functions in the class declaration. Otherwise, they need to use getter/setter methods.
+
+```c++
+Number operator-(const Number &obj);
+Number operator++(Number &obj);         // ++n
+Number operator++(Number &obj, int);    // n++
+bool operator!(const Number &obj);
+
+class MyString {
+    friend MyString operator+(const MyString &lhs, const MyString &rhs);
+...
+}
+
+MyString operator+(const MyString &lhs, const MyString &rhs) {
+    size_t buf_size = std::strlen(lhs.str) + std::strlen(rhs.str) + 1;
+    char *buf = new char[buf_size];
+    std::strcpy(buf, lhs.str);
+    std::strcat(buf, rhs.str);
+    MyString temp{buf};
+    delete [] buf;
+    return temp;
+}
+MyString operator-(const MyString &lhs, const MyString &rhs);
+MyString operator==(const MyString &lhs, const MyString &rhs);
+MyString operator<(const MyString &lhs, const MyString &rhs);
+
+MyString larry{"Larry"};
+result = "Moe" + larry; // Ok with non-member function 
 ```
 
 ## Inheritance
