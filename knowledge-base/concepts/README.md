@@ -149,14 +149,19 @@ The majority of C++ operators can be overloaded except `::`, `:?`, `.*`, `.`, `s
 
 #### Assignment operator
 
-Since the default assignment operator is shallow copy, sometimes it's required to overload the copy assignment operator to do a deep copy.
+Since the default assignment operator is shallow copy, sometimes it's required to overload the **copy assignment operator** to do a deep copy.
+
+As mentioned in the *Move ctor* section, move operation is more efficient when dealing with the raw pointer data. Thus, we need to overload the **move assignment operator** sometimes.
 
 ```c++
 class MyString {
 private:
     char *str;
 public:
+    // Overloading copy assignment operator
     MyString &MyString::operator=(const MyString &rhs);
+    // Overloading move assignment operator
+    MyString &MyString::operator=(MyString &&rhs);
 };
 
 MyString &MyString::operator=(const MyString &rhs) {
@@ -169,8 +174,18 @@ MyString &MyString::operator=(const MyString &rhs) {
     return *this;
 }
 
+MyString &MyString::operator=(MyString &&rhs) { // rvalue reference, it'll be changed so it's not const
+    if (this == &rhs) {
+        return *this;
+    }
+    delete [] str;
+    str = rhs.str;
+    rhs.str = nullptr;
+    return *this;
+}
 str1 = str2;        // we write this in the real code
 str1.operator=(s2); // operator= method is called actually
+str1 = MyString{"Hello"}; // move assignment is called, more efficient than copying
 ```
 
 ## Inheritance
