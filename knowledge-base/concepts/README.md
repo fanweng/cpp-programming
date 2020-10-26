@@ -196,7 +196,7 @@ If using member method to overload an operator, the element on the left-hand sid
 /* Unary Operators */
 Number Number::operator-() const;   // -n
 Number Number::operator++();        // pre-increment, ++n
-Number Number::operator++(int);     // post-increment, n++
+Number Number::operator++(int);     // post-increment, "int" isn't used just to distinguish with pre-increment, n++
 bool Number::operator!() const;     // !n
 
 /* Binary Operators */
@@ -275,6 +275,10 @@ It is possible to inherit attributes and methods from one class to another.
 
 - **derived class (child)**: class that inherits from another class.
 - **base class (parent)**: class being inherited from.
+
+Both *inheritance* and *composition* reuse code but they are different:
+- Inheritance "is-a" relationship: student "is a" person
+- Composition "has-a" relationship: person "has a" book
 
 ```c++
 class MyClass1 {
