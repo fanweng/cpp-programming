@@ -293,6 +293,14 @@ class MyGrandChild : public MyChild {
 };
 ```
 
+#### The ctor/dtor of derived classes
+
+When a derived object is created, base class ctor executes then the derived class.
+
+When a derived object is destroyed, derived class dtor executes then the base class.
+
+A derived class does NOT inherit: ctor, dtor, overloaded assignment operators, friend functions. C++11 allows explicit inheritance of base "non-special" ctor with `using Base_Class::Base_Class` and some limitations.
+
 ## Polymorphism
 
 Polymorphism is an object can behave differently based on differnt circumstances.
