@@ -301,6 +301,56 @@ When a derived object is destroyed, derived class dtor executes then the base cl
 
 A derived class does NOT inherit: ctor, dtor, overloaded assignment operators, friend functions. C++11 allows explicit inheritance of base "non-special" ctor with `using Base_Class::Base_Class` and some limitations.
 
+If we want to control exactly which Base class ctor to use, simply add the Base class ctor with arguments to the initialization list of the Derived class ctor.
+
+```c++
+Derived::Derived(int x)
+    : Base(x), {optional initializers for Derived} {
+    // Code
+}
+```
+
+#### The copy/move ctors of derived classes
+
+Copy/Move constructors are not inherited from the Base class. If we don't provide our own, compiler will use default versions.
+
+In the following code, `other` is a Derived object and it Derived object content is **sliced** out to fit in the Base class copy ctor.
+
+```c++
+Derivded::Derived(const Derived &other)
+    : Base(other), {Derived initialization list} {
+    // Code
+}
+```
+
+#### The operator= of derived classes
+
+Overloaded assignment operator is not inherited from the Base class.
+
+```c++
+class Base {
+    int value;
+public:
+    Base &operator=(const Base &rhs) {
+        if (this != &rhs) {
+            value = rhs.value;
+        }
+        return *this;
+    }
+};
+class Derived : public Base {
+    int double_value;
+public:
+    Derived &operator=(const Derived &rhs) {
+        if (this != &rhs) {
+            Base::operator=(rhs);   // rhs is sliced out to fit in the Base class
+            double_value = rhs.double_value;
+        }
+        return *this;
+    }
+};
+```
+
 ## Polymorphism
 
 Polymorphism is an object can behave differently based on differnt circumstances.
