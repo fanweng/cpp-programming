@@ -351,6 +351,25 @@ public:
 };
 ```
 
+#### Override/Redefine base class methods
+
+Default binding for C++ is **static** so that method calls to use is bound at compile time. Derived class object will use `Derived::method1` unless `Base::method` is explicitly invoked from Derived class object.
+
+```c++
+class Account {
+public:
+    void deposit(double amount) { balance += amount; }
+    
+};
+class Saving_Account : public Account {
+public:
+    void deposit(double amount) {   // redefine the deposit method
+        amount += some_interest;
+        Account::deposit(amount);   // invoke base class method
+    }
+};
+```
+
 ## Polymorphism
 
 Polymorphism is an object can behave differently based on differnt circumstances.
