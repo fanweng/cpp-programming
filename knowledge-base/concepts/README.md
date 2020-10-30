@@ -374,9 +374,35 @@ public:
 
 Polymorphism is an object can behave differently based on differnt circumstances.
 
-Rumtime polymorphism: virtual function
+Rumtime polymorphism / Late binding / dynamic binding: virtual function
 
-Compile time polymorphism: function overloading, operator overloading
+Compile time polymorphism / Early binding / Static binding: function overloading, operator overloading
+
+#### Runtime Polymorphism
+
+It is achieved by using inheritance and virtual functions, and it is called by Base class pointer/reference.
+
+- **Virtual functions:** are overriden functions bound dynamically. Unlike redefined functions, which are bound statically.
+
+- **Virtual destructor:** if a Derived class is destroyed by deleting its storage via the Base class pointer, the behavior is undefined in the C++ standard. Therefore, if a class has virtual functions, a public virtual destructor *MUST* be provided
+
+```c++
+class Account {
+public:
+    virtual bool deposit(double amount);
+    virtual ~Account();
+};
+class Savings_Account : public Account {
+    virtual bool deposit(double amount); // "virtual" keyword is not required in the derived class
+    virtual ~Savings_Account();
+};
+Account *p1 = new Account();
+Account *p2 = new Savings_Account();
+p1->deposit(100.0); // Account::deposit
+p2->deposit(200.0); // Savings_Account::deposit
+delete p1;
+delete p2;
+```
 
 ## Exceptions
 
