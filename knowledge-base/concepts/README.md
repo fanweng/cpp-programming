@@ -413,6 +413,21 @@ Added to the end of a class: prevents a class from being derived from.
 
 Added to the end of a method: prevents a virtual method from being overriden in the derived class.
 
+#### Pure `virtual` fucntions and Abstract classes
+
+- Abstract class:
+    * cannot instantiate objects
+    * used as base classes in the inheritance hierachies
+    * contains at least one **pure** `virtual` function
+        + pure virtual function is used to make a class abstract
+        + specified with `=0` in its declaration, `virtual void foo() = 0;`
+        + don't provide implementation typically
+
+- Concrete class:
+    * used to instantiate objects
+    * all member functions are defined
+    * derived class MUST override the base class' pure virtual function, i.e. concrete class MUST provides implementation. Otherwise the derived class would be considered as an abstract class
+
 ## Exceptions
 
 When an error occurs, C++ will throw an exception (error).
