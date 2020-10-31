@@ -403,6 +403,15 @@ p2->deposit(200.0); // Savings_Account::deposit
 delete p1;
 delete p2;
 ```
+#### `override` specifier
+
+It is added to the end of Derived class virtual function method, telling compiler to ensure the function will override the the exactly same Base class virtual function.
+
+#### `final` specifier
+
+Added to the end of a class: prevents a class from being derived from.
+
+Added to the end of a method: prevents a virtual method from being overriden in the derived class.
 
 ## Exceptions
 
