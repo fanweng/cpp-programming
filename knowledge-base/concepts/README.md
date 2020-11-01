@@ -428,6 +428,29 @@ Added to the end of a method: prevents a virtual method from being overriden in 
     * all member functions are defined
     * derived class MUST override the base class' pure virtual function, i.e. concrete class MUST provides implementation. Otherwise the derived class would be considered as an abstract class
 
+#### Use a class as an interface
+
+An abstract class that has only pure virtual functions can be used as an interface. These functions provide a set of `public` services to the user of the class. The derived class MUST implement those functions.
+
+```c++
+class Printable { // interface class providing a print() service
+    friend ostream &operator<<(ostream &os, const Printable &obj);
+public:
+    virtual void print(ostream &os) const = 0; // pure virtual function
+};
+ostream &operator<<(ostream &os, const Printable &obj) {
+    obj.print(os);
+    return os;
+}
+
+class Any_Class : public Printable { // derived concrete class
+public:
+    virtual void print(ostream &os) override { // override/implement the print() service
+        os << "Hello from Any_Class";
+    }
+};
+```
+
 ## Exceptions
 
 When an error occurs, C++ will throw an exception (error).
