@@ -11,7 +11,7 @@
     * is an object defined by class templates
         + wrapped around a raw pointer
         + overloaded operators: `*`, `->`. But arithmetic operators not supported: `++`, `--`, etc.
-    * can only point to heap-allcoated memory
+    * can only point to *heap-allcoated* memory
     * automatically call deletion when out of the scope, can have custom deleters
     * adhere to RAII principles
     * `unique_ptr`, `shared_ptr`, `weak_ptr`, `auto_ptr` (deprecated)
@@ -28,7 +28,7 @@ A common idiom used in software design based on the container object lifetime. R
 
 Defined in the `<memory>` header in the C++ Standard Library.
 
-A `unique_ptr` cannot be copied to another `unique_ptr`, passed by value to a function, or used in any C++ Standard Library algorithm that requires copies to be made.
+A `unique_ptr` cannot be assigned/copied to another `unique_ptr`, passed by value to a function, or used in any C++ Standard Library algorithm that requires copies to be made.
 
 It can only be moved by `std::move()`. This means the ownership of the memory resource is transferred to another `unique_ptr` and the original `unique_ptr` no longer owns it.
 
@@ -38,6 +38,11 @@ auto ptrA = make_unique<Song>("May it be", "Enya");
 // ptrA
 // ptrB -> Song object
 auto ptrB = std::move(ptrA);
+
+std::vector<std::unique_ptr<int>> vec;
+std::unique_ptr<int> ptr {new <int>(10)};
+vec.push_back(ptr);             // error, push_back actually copies
+vec.push_back(std::move(ptr));  // Ok
 ```
 
 #### `unique_ptr::get`, `unique_ptr::release`, `unique_ptr::reset`
