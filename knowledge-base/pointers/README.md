@@ -95,3 +95,29 @@ A `weak_ptr` holds a weak reference to an object that is owned by a `shared_ptr`
 - If all pointers are `shared_ptr`: when going out of the scope, only C will be released properly. After C is deleted, A cannot be released because the reference count for A is non-zero (pointed by B). Thus, B cannot be released, too.
 
 - If B points to A as a `weak_ptr`, others are `shared_ptr`: when going out of the scope, all pointers will be cleaned up. Since B points to A *weakly*, the reference count for A reaches zero after C is release. Then, A can be cleaned up and reference count for B decreases to zero. Thus, B is cleaned up, too.
+
+```c++
+class B;    // forward declaration
+class A {
+    std::shared_ptr<B> b_ptr;
+public:
+    void set_B(std::shared_ptr<B> &b) { b_ptr = b; }
+    A();
+    ~A();
+};
+class B {
+    std::shared_ptr<A> a_ptr; // make this a weak_ptr to prevent the circular reference issue
+public:
+    void set_A(std::shared_ptr<A> &a) { a_ptr = a; }
+    B();
+    ~B();
+};
+
+int main(void) {
+    std::shared_ptr<A> a = std::make_shared<A>();
+    std::shared_ptr<B> b = std::make_shared<B>();
+    a->set_B(b);
+    b->set_A(a);
+    return 0;
+} // destructor of A and B won't be called because of circular reference
+```
