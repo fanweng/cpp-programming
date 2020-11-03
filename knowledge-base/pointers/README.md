@@ -14,7 +14,7 @@
     * can only point to *heap-allcoated* memory
     * automatically call deletion when out of the scope, can have custom deleters
     * adhere to RAII principles
-    * `unique_ptr`, `shared_ptr`, `weak_ptr`, `auto_ptr` (deprecated)
+    * `unique_ptr`, `shared_ptr`, `weak_ptr`, `auto_ptr` (deprecated). Defined in the `<memory>` header in the C++ Standard Library.
 
 #### RAII (Resource Acquisition Is Initialization)
 
@@ -25,8 +25,6 @@ A common idiom used in software design based on the container object lifetime. R
 - Resource Relinquishing: in the destructor (close a file, etc.)
 
 ## `unique_ptr`
-
-Defined in the `<memory>` header in the C++ Standard Library.
 
 A `unique_ptr` cannot be assigned/copied to another `unique_ptr`, passed by value to a function, or used in any C++ Standard Library algorithm that requires copies to be made.
 
@@ -70,22 +68,22 @@ p = foo.release();                       // null  (20)  (30)
 
 ## `shared_ptr`
 
-Defined in the `<memory>` header in the C++ Standard Library.
-
 A `shared_ptr` shares the **ownership** of a resource.
 
 A `shared_ptr` can be copied, passed by value in function arguments, and assigned to other `shared_ptr` instances. All instances point to the **same object**, and point to the **same control block** which keeps the reference count. When reference count reaches 0, the control block deletes the memory resource and itself.
 
 ```c++
-auto ptrA = make_shared<Song>("May it be", "Enya");
+auto ptrA = std::make_shared<Song>("May it be", "Enya");
 auto ptr1 = ptrA;
-ptr1.use_count(); // get reference count
+ptr1.use_count();   // get reference count: 2
+ptrA.reset();       // decrement the reference count, nullify the ptrA
+ptr1.use_count();   // get reference count: 1 
 
-shared_ptr<Song> ptrB(new Song("Lady Gaga", "Just Dance"));
-auto ptr2(ptrB);
+std::shared_ptr<Song> ptrB(new Song("Lady Gaga", "Just Dance"));
+auto ptr2 {ptrB};
 
-shared_ptr<Song> ptrC(nullptr);
-ptrC = make_shared<Song>("Elton John", "I'm Still Standing");
+std::shared_ptr<Song> ptrC(nullptr);
+ptrC = std::make_shared<Song>("Elton John", "I'm Still Standing");
 ```
 
 ## `weak_ptr`
