@@ -1,5 +1,29 @@
 # Pointers
 
+## Raw pointers vs. Smart pointers
+
+- Problems with **raw pointers**:
+    * absolute flexibility with memory management: allocation/deallocation/lifetime
+    * potential serious issues: uninitialized pointers, memory leaks, dangling pointers, not exception safe
+    * ownership question: who owns the pointer? when to delete?
+
+- **Smart pointers**:
+    * is an object defined by class templates
+        + wrapped around a raw pointer
+        + overloaded operators: `*`, `->`. But arithmetic operators not supported: `++`, `--`, etc.
+    * can only point to heap-allcoated memory
+    * automatically call deletion when out of the scope, can have custom deleters
+    * adhere to RAII principles
+    * `unique_ptr`, `shared_ptr`, `weak_ptr`, `auto_ptr` (deprecated)
+
+#### RAII (Resource Acquisition Is Initialization)
+
+A common idiom used in software design based on the container object lifetime. RAII objects are allocated on the stack.
+
+- Resource Acquisition: open a file, allocate memory, acquire a lock, etc.
+- Is Initialization: resource is acquired in a constructor.
+- Resource Relinquishing: in the destructor (close a file, etc.)
+
 ## `unique_ptr`
 
 Defined in the `<memory>` header in the C++ Standard Library.
