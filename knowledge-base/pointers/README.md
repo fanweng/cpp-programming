@@ -121,3 +121,22 @@ int main(void) {
     return 0;
 } // destructor of A and B won't be called because of circular reference
 ```
+
+## Custom deleters
+
+For some special use-cases, we need more than to just destroy the object on the heap when destroying a smart pointer.
+
+```c++
+/* Function deleter */
+void my_deleter(Any_Class *raw_ptr) {
+    // your custom deleter code here
+    delete raw_ptr;
+}
+shared_ptr<Any_Class> ptr { new Any_Class{}, my_deleter };
+
+/* Or, Lambda deleter */
+shared_ptr<Any_Class> ptr ( new Any_Class{}, [] (Any_Class *ptr) {
+    // your custom deleter code here
+    delete ptr;
+});
+```
