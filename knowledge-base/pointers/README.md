@@ -24,7 +24,7 @@ A common idiom used in software design based on the container object lifetime. R
 - Is Initialization: resource is acquired in a constructor.
 - Resource Relinquishing: in the destructor (close a file, etc.)
 
-## `unique_ptr`
+#### `unique_ptr`
 
 A `unique_ptr` cannot be assigned/copied to another `unique_ptr`, passed by value to a function, or used in any C++ Standard Library algorithm that requires copies to be made.
 
@@ -32,7 +32,7 @@ It can only be moved by `std::move()`. This means the ownership of the memory re
 
 ```c++
 // ptrA -> Song object
-auto ptrA = make_unique<Song>("May it be", "Enya");
+auto ptrA = std::make_unique<Song>("May it be", "Enya");
 // ptrA
 // ptrB -> Song object
 auto ptrB = std::move(ptrA);
@@ -43,11 +43,10 @@ vec.push_back(ptr);             // error, push_back actually copies
 vec.push_back(std::move(ptr));  // Ok
 ```
 
-#### `unique_ptr::get`, `unique_ptr::release`, `unique_ptr::reset`
-
-* `get()` returns the *stored pointer* which points to the object managed by the `unique_ptr`. The `unique_ptr` still has the ownershipe of the pointer, i.e. responsible for deleting the managed data at some point.
-* `release()` releases the ownership of its *stored pointer* by returning its value and replacing it with `nullptr`. It doesn't destroy the managed object but `unique_ptr` is free of the responsbility of deleting the object.
-* `reset()` destroys the managed object.
+- `unique_ptr::get`, `unique_ptr::release`, `unique_ptr::reset`
+    * `get()` returns the *stored pointer* which points to the object managed by the `unique_ptr`. The `unique_ptr` still has the ownershipe of the pointer, i.e. responsible for deleting the managed data at some point.
+    * `release()` releases the ownership of its *stored pointer* by returning its value and replacing it with `nullptr`. It doesn't destroy the managed object but `unique_ptr` is free of the responsbility of deleting the object.
+    * `reset()` destroys the managed object.
 
 ```c++
                                          // foo   bar    p
@@ -66,7 +65,7 @@ p = foo.release();                       // null  (20)  (30)
 *p = 40;                                 // null  (20)  (40)
 ```
 
-## `shared_ptr`
+#### `shared_ptr`
 
 A `shared_ptr` shares the **ownership** of a resource.
 
@@ -86,7 +85,7 @@ std::shared_ptr<Song> ptrC(nullptr);
 ptrC = std::make_shared<Song>("Elton John", "I'm Still Standing");
 ```
 
-## `weak_ptr`
+#### `weak_ptr`
 
 A `weak_ptr` holds a weak reference to an object that is owned by a `shared_ptr` without increasing the reference count. It must be converted to `shared_ptr` in order to access the referenced object. A `weak_ptr` will only return a *non-null* `shared_ptr` when there is a `shared_ptr` somewhere keeping the object alive.
 
