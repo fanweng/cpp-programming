@@ -112,3 +112,28 @@ catch (const IllegalBalanceException &ex) {
     std::cerr << "Can't create an account from a negative balance!" << std::endl;
 }
 ```
+
+## Exception class hierarchy
+
+The C++ standard library exception class hierarchy.
+
+![Exception Class Hierarchy](./cpp-std-exception-class-hierarchy.jpg)
+
+```c++
+/* IllegalBalanceException.h */
+class IllegalBalanceException : public std::exception {
+public:
+    IllegalBalanceException() noexcept = default;
+    ~IllegalBalanceException() = default;
+    virtual const char* what() const noexcept {
+        return "Illegal balance exception";
+    }
+};
+/* Account.cpp is the same as class-level exception example mentioned above */
+...
+/* main.cpp */
+try { ... } // same as class-level exception example mentioned above
+catch (const IllegalBalanceException &ex) {
+    std::cerr << ex.what() << std::endl;
+}
+```

@@ -160,3 +160,12 @@ private:
     friend class another_clas;  // another_class can access all private members of Player class
 };
 ```
+
+## `noexcept`
+
+This specifies whether a function could throw exceptions or not.
+
+```c++
+void func1() noexcept;          // func1 doesn't throw
+void func2() noexcept(false);   // func2 may throw
+```
