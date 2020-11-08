@@ -60,3 +60,55 @@ catch (...) {
     std::cerr << "Unknown exception!" << std::endl;
 }
 ```
+
+#### Catch handlers while stack unwinding
+
+- If an exception is thrown but not caught in the current function scope, C++ tries to find a `catch` handler by unwinding the stack
+    1. terminate the function at the `throw` line, remove the function from the call stack
+    2. if a `try` block is used, then `catch` block is checked for a match
+    3. if no `try` block is used, or if the `catch` handler doesn't match, stack unwinding occurs again
+    4. if no `catch` handler when unwinding back to the `main`, the program terminates
+
+#### User-defined exceptions
+
+```c++
+class DivideByZeroException {
+};
+catch (const DivideByZeroException &ex) {
+}
+```
+
+#### Class-level exceptions
+
+Exceptions can be thrown from within a class, too.
+
+- From methods
+    * work the same way as they do for functions mentioned above
+
+- From constructor
+    * throw an exception if the object cannot be initiailized
+
+- From destructor
+    * DO NOT throw exception from the destructor - undefined behavior
+
+```c++
+/* IllegalBalanceException.h */
+class IllegalBalanceException {
+public:
+    IllegalBalanceException() = default;
+    ~IllegalBalanceException() = default;
+};
+/* Account.cpp */
+Account::Account(std::string name, double balance)
+    : name{name}, balance{balance} {
+    if (balance < 0.0)
+        throw IllegalBalanceException{};
+}
+/* main.cpp */
+try {
+    std::unique_ptr<Account> jim_account = std::make_unique<Chequeing_Account>("Jim", -10.0);
+}
+catch (const IllegalBalanceException &ex) {
+    std::cerr << "Can't create an account from a negative balance!" << std::endl;
+}
+```
