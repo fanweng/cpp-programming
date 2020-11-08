@@ -34,3 +34,29 @@ catch (int &ex) {               // exception handler
 }
 // program continues...
 ```
+
+#### Catch up multiple exceptions
+
+Different `throw` data types will be handled by different `catch` handlers. `catch (...)` takes care of all types of thrown data if they don't have specific handlers for their types.
+
+```c++
+double div_func(int sum, int total) {
+    if (total == 0)
+        throw 0;
+    if (sum < 0 || total < 0)
+        throw std::string{"Negative value error"};
+    return static_cast<double>(sum)/total;
+}
+try {
+    average = div_func(sum, total);
+}
+catch (int &ex) {
+    std::cerr << "Can't divide by zero!" << std::endl;
+}
+catch (std::string &ex) {
+    std::cerr << ex << std::endl;
+}
+catch (...) {
+    std::cerr << "Unknown exception!" << std::endl;
+}
+```
