@@ -35,6 +35,7 @@ Manipulator version:
 ```c++
 std::cout << std::noboolalpha;  // further output will be 1 or 0
 std::cout << std::boolalpha;    // further output will be true or false
+std::cout << std::resetiosflags(std::ios::boolalpha);   // reset to default
 ```
 
 Member method version:
@@ -44,10 +45,43 @@ std::cout.setf(std::ios::boolalpha);
 std::cout.setf(std::ios::noboolalpha);
 ```
 
-* Integer: `dec`, `hex`, `oct`, `showbase`, ...
-* Floating point: `fixed`, `scientific`, `setprecision`, ...
-* Field width, justification, fill: `setw`, `left`, `right`, `internal`, `setfill`, ...
-* Others: `endl`, `flush`, `ws`, ...
+#### Integer
+
+Default integer value is displayed as `dec`/`noshowbase`/`nouppercase`/`noshowpos`.
+
+Besides the manipulators shown below, we can also use `std::cout.setf()` and `std::resetiosflags()`.
+
+```c++
+int num{255};
+std::cout << std::showbase;                 // show prefixes "0x" and "0"
+std::cout << std::dec << num << std::endl;  // 255
+std::cout << std::hex << num << std::endl;  // 0xff
+std::cout << std::oct << num << std::endl;  // 0377
+```
+
+#### Floating point
+
+Default floating point value is displayed as `setprecision(6)`/not-`fixed`/`noshowpoint`/`nouppercase`/`noshowpos`. For example, `double num{123456789.987654321}` is shown as `1.23457e+008` with rounding.
+
+Also, `std::cout.unsetf(flag1 | flag2)` and `std::resetiosflags(std::ios::floatfield)` can be used to reset flags or reset to defaults.
+
+- `fixed`: count the precision from the decimal point
+- `showpoint`: show trailing zeros up to the precision
+- `scientific`: force a scientific format
+
+#### Align and fill
+
+Field width, justification, fill: `setw`, `left`, `right`, `internal`, `setfill`, ...
+
+Note that those manipulators ONLY affect the object next to them.
+
+```c++
+std::cout << std::setw(10) << std::left << num << str << std::endl; // formats only affect "num"
+```
+
+#### Others
+
+`endl`, `flush`, `ws`, ...
 
 # Files
 
