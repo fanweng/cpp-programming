@@ -97,6 +97,15 @@ Header files: `<iostream>`, `<fstream>`.
 
 Checking file status: `f_obj.is_open()`, `f_obj.eof()`, ...
 
+| `std::ios::open_mode` | Description |
+|-----------------------|-------------|
+| `app`    | **append**, set stream's position indicator to the end of stream before each output operation | 
+| `ate`    | **at end**, set stream's position indicator to the end of the stream on opening |
+| `binary` | **binary**, consider stream as binary rather than text |
+| `in`     | **input**, allow input operation |
+| `out`    | **output**, allow output operation |
+| `trunc`  | **truncate**, discard current content, assuming length of zero at opening |
+
 ```c++
 #include <iostream>
 #include <fstream>
@@ -105,6 +114,9 @@ void main() {
     // Output to a file
     std::ofstream myWriteFile("testfile.txt");   // create and open the file
     myWriteFile << "The story begins at 1984...";
+    /* Another way of writing to a file */
+    // char c{'a'};
+    // myWriteFile.put(c);
     myWriteFile.close();
 
     // Input from a file
