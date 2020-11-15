@@ -95,21 +95,40 @@ Header files: `<iostream>`, `<fstream>`.
 | `ifstream` | read from files |
 | `fstream`  | create, read and write to files |
 
+Checking file status: `f_obj.is_open()`, `f_obj.eof()`, ...
+
 ```c++
 #include <iostream>
 #include <fstream>
-using namespace std;
 
 void main() {
-    ofstream myWriteFile("testfile.txt");   // create and open the file
+    // Output to a file
+    std::ofstream myWriteFile("testfile.txt");   // create and open the file
     myWriteFile << "The story begins at 1984...";
     myWriteFile.close();
 
-    string lineText;
-    ifstream myReadFile("testfile.txt");    // open the file
-    while (getline(myReadFile, lineText)) {
-        cout << lineText;
+    // Input from a file
+    std::string lineText;
+    std::ifstream myReadFile("testfile.txt");    // open the file
+    if (!myReadFile) {
+        std::cerr << "Failed to open file" << std::endl;
+        return 1;
     }
+    /* Another way of opening a file */
+    // std::ifstream myReadFile;
+    // std::string filename{"testfile.txt"};
+    // myReadFile.open(filename);
+
+    while (std::getline(myReadFile, lineText)) {
+        std::cout << lineText;
+    }
+    /* Another way of reading a file */
+    // char c{};
+    // while (myReadFile.get(c)) {
+    //     std::cout << c;
+    // }
+    // std::cout << std::endl;
+
     myReadFile.close();
 }
 ```
