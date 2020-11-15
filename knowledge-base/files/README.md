@@ -144,3 +144,46 @@ void main() {
     myReadFile.close();
 }
 ```
+
+# Strings
+
+String streams allow to read/write strings in memory as we read/write files, especially useful for data validation.
+
+Header: `<sstream>`
+
+Classes: `stringstream`, `istringstream`, `ostringstream`
+
+```c++
+#include <iostream>
+#include <sstream>
+
+/* Read/Input from a string stream */
+int num{};
+double height{};
+std::string name{};
+std::string info{"Mike 23 1.97"};
+std::istringstream iss{info};       // create an iss and connect to the string object
+iss >> name >> num >> height;
+
+/* Write/Output to a string stream */
+num = 41;
+height = 2.17;
+name = "Dirk";
+std::ostringstream oss{};
+oss << name << " " << nume << " " << height;
+std:cout << oss.str() << std::endl;
+
+/* Validate input with string stream */
+int value{};
+std::string input{};
+std::cout << "Enter an integer: ";
+std::cin >> input;
+std::stringstream ss{input};
+if (ss >> value) {
+    std::cout << "An integer was entered";
+}
+else {
+    std::cout << "Input doesn't have an integer";
+}
+std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // discard the remaning content in the input buffer
+```
