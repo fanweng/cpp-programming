@@ -572,10 +572,10 @@ Keywords: `template`, `typename`/`class`.
 template <typename T>
 T myMax(T x, T y) {
     return (x > y)? x : y;
-}
+} // function won't be compiled at here, because T is unknown
 
-cout << myMax<int>(3, 7) << endl;
-cout << myMax<double>(1.2, 3.8) << endl;
+cout << myMax<int>(3, 7) << endl;   // now compiler can generate appropriate function becuase T is int
+cout << myMax(1.2, 3.8) << endl;    // often, compiler can deduce the T according to the inputs
 ```
 
 2. Class templates: if the class definition is independent of the data type.
