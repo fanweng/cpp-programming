@@ -10,7 +10,7 @@ Four STL components:
 
 ## 1. Algorithms
 
-The header `<algorithm>` defines many commonly used algorithms for containers.
+The header `<algorithm>` defines many commonly used algorithms for processing sequences of elements from containers, e.g. `find`, `max`, `sort`, `accumulate`, `count`, etc.
 
 ### Non-modifying
 
@@ -80,7 +80,19 @@ merge(v1.begin(), v1.end(), v2.begin(), v2.begin(), back_inserter(dst));
 
 ## 2. Containers
 
-*Containers* or *container classes* store objects and data.
+*Containers* or *container classes* store objects and data. Collections of objects or primitive types, e.g. `array`, `vector`, `deque`, `set`, `map`, etc. 
+
+Containers used in programming: dynamic arrays (vector), queues (queue), stacks (stack), heaps (priority_queue), linked lists (list), trees (set), associative arrays (map)...
+
+- Sequence containers
+    * array, vector, list, forward_list, deque
+- Associative containers
+    * set, multiset, map, multimap
+- Unordered associative containers
+    * unordered_set, unordered_multiset, unordered_map, unordered_multimap
+- Container adaptors
+    * stack, queue, priority_queue
+
 
 #### `pair`
 
@@ -185,7 +197,7 @@ A *unordered_map* is the same as *map* in terms of the functionalities. But it i
 
 ## 3. Iterators
 
-*Iterators* are used for working upon a sequence of values.
+*Iterators* are used for working upon a sequence of elements from containers, e.g. forward, reverse, by value, by reference, constant, etc.
 
 ## 4. Functions
 
