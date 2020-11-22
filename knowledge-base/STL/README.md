@@ -144,6 +144,27 @@ std::cout << c_val << i_val << f_val << std::endl;    // a, 29, 1.86
 std::tie(c_val, ignore, f_val) = t;  // ignore the 2nd element
 ```
 
+#### `array`
+
+`std::array` has a fixed size, is able to random access the element at a constant time. It provides access to the underlying raw array. Use the `std::array` object whenever possible instead of using raw arrays.
+
+```c++
+std::array<int, 5> arr1 {1, 2, 3, 4, 5};
+std::array<int, 5> arr2 {10, 20, 30, 40, 50};
+
+arr1.empty();       // false (0)
+arr1.size();        // 5
+
+arr1.at(0);         // 1
+arr1[0];            // 1
+arr1.front();       // 1
+arr1.back();        // 5
+
+arr1.fill(10);      // fill all to 10
+arr2.swap(arr1);    // swap two arrays
+int *ptr = arr1.data(); // get the address to the raw array
+```
+
 #### `vector`
 
 *Vector* is an array but with a lot of extra functionalities.
@@ -244,6 +265,15 @@ for (auto it2 = vec.begin(); it != vec.end(); ++it) {   // declare with auto
 - `reverse_iterator`: reverse the direction of a regular iterator
 - `const_reverse_iterator`
 
+#### Iterator invalidation
+
+Iterator is like a raw pointer that could be invalidated, pointing to junk data. In the following code, no compiler error and no warning will be reported. Developer should watch for such errors and prevent them, e.g. `insert()`, `erase()`, `resize()`.
+
+```c++
+for (auto it = map.begin(); it != map.end(); ++it) {
+    map.erase(it->first); // map has been restructured and iterator still thinks itself is healthy
+}
+```
 
 ## 4. Functions
 
