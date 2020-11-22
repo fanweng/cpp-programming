@@ -204,7 +204,28 @@ A *unordered_map* is the same as *map* in terms of the functionalities. But it i
 
 ## 3. Iterators
 
-*Iterators* are used for working upon a sequence of elements from containers, e.g. forward, reverse, by value, by reference, constant, etc.
+*Iterators* are used for working upon a sequence of elements from containers, e.g. forward, reverse, by value, by reference, constant, etc. *Iterators* work like *pointers* by design, most of the container classes can be traversed with iterators.
+
+1. Iterators must be declared based on the container type that they will iterate over
+2. Iterator `.begin()` method points to the **first element**
+3. Iterator `.end()` method points to the location **after the last element**
+
+![Iterator Operations](./iterator-operations.png)
+
+```c++
+std::vector<int> vec {1,2,3};
+std::vector<int>::iterator it1 = vec.begin();           // declare with container type
+for (auto it2 = vec.begin(); it != vec.end(); ++it) {   // declare with auto
+    std::cout << *it << " ";
+}
+```
+
+#### Other iterators
+
+- `const_iterator`: cannot change the values that iterators point to
+- `reverse_iterator`: reverse the direction of a regular iterator
+- `const_reverse_iterator`
+
 
 ## 4. Functions
 
