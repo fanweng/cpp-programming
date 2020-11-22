@@ -93,6 +93,13 @@ Containers used in programming: dynamic arrays (vector), queues (queue), stacks 
 - Container adaptors
     * stack, queue, priority_queue
 
+Each container has member functions: some are specific to the container, others are available to all containers (see below).
+![Containers Common Member Functions](./containers-common-methods.png)
+
+> Q: What type of elements can be stored in containers?
+> - A copy of the element will be stored in the container
+> - Element should be copyable (copy constructor), assignable (copy assignment), and moveable (move constructor, move assignment)
+> - ordered associative containers must be able to compare elements (operator<, operator==)
 
 #### `pair`
 
@@ -121,7 +128,7 @@ tie(c_val, ignore, f_val) = t;  // ignore the 2nd element
 
 #### `vector`
 
-*Vector* is an array but with a lot of extra functionanlities.
+*Vector* is an array but with a lot of extra functionalities.
 
 ```c++
 vector<int> v(N, 0);    // init a vector with N elements of 0
