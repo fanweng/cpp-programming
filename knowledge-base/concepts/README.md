@@ -566,7 +566,7 @@ Template is a powerful tool which idea is to pass data type as a parameter so th
 
 Keywords: `template`, `typename`/`class`.
 
-1. Function templates: A generic function can be used for different data types.
+1. **Function templates:** A generic function can be used for different data types.
 
 ```c++
 template <typename T>
@@ -578,26 +578,44 @@ cout << myMax<int>(3, 7) << endl;   // now compiler can generate appropriate fun
 cout << myMax(1.2, 3.8) << endl;    // often, compiler can deduce the T according to the inputs
 ```
 
-2. Class templates: if the class definition is independent of the data type.
+2. **Class templates:** if the class definition is independent of the data type, i.e. allowing *plug-in* any data type.
 
 ```c++
-template <typename T>
+template <typename T, int N>
 class Array {
-private:
-    T *ptr;
-    int size;
+    friend std::ostream &operator<<(std::ostream &os, const Array<T, N> &arr) {
+        os << "[ ";
+        for (const auto &val: arr.value) {
+            os << val << " ";
+        }
+        os << "]" << std::endl;
+        return os;
+    }
 public:
-    Array(T arr[], int s);
-    void print;
+    Array() = default;
+    Array(T init_val) {
+        for (auto &item: values) {
+            item = init_val;
+        }
+    }
+    void fill(T val) {
+        for (auto &item: values) {
+            item = val;
+        }
+    }
+    int get_size() const {
+        return size;
+    }
+    T &operator[](int index) {  // overloaded subscript operator for easy use
+        return values[index];
+    }
+private:
+    T values[N];    // N needs to be known at compile time
+    int size {N};
 };
 
-template <typename T>
-Array<T>::Array(T arr[], int s) { // constructor
-}
-
-template <typename T>
-void Array<T>::print() { // method
-}
+/* Implementation */
+Array<int, 5> intNums {1};  // Array of five elements filled with integer one
 ```
 
 ## l-value and r-value
