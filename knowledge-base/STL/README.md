@@ -167,7 +167,7 @@ int *ptr = arr1.data(); // get the address to the raw array
 
 #### `vector`
 
-`std::vector` has a **dynamic size**, constant time of random access to element and insertion/deletion at the back, linear time of insertion/removal of any element. All iterators are available but may invalidate.
+`std::vector` likes an array but has a **dynamic size**, and elements are stored in the contiguous memory space. It has constant time of random access to element, constant time insertion/deletion at the back, linear time of insertion/removal of any element. All iterators are available but may invalidate when resizing.
 
 ```c++
 /* Initialization */
@@ -222,6 +222,12 @@ std::transform(vec9.begin(), vec9.end(), vec10.begin(), std::back_inserter(vec11
 > Q: `push_back(MyClass{argu1, argu2})` vs. `emplace_back(argu1, argu2)`?
 > Difference 1 input argument: when vector type is a user-defined type with multiple arguments for constructor, `push_back()` requires we pass an object of that type to it. But we can simply pass the arguments of the constructor directly to `emplace_back()`.
 > Difference 2 efficiency: for built-in types, two methods have no difference. But for user-defined types, `push_back()` requires a temporary object to be created and destroyed while `emplace_back()` avoids using the temporary object.
+
+#### `deque`
+
+`std::deque` likes a vector but its elements are NOT stored in contiguous memory. The underlying implementation is like a linked-list vectors so it supports constant time of insertion/deletion at the front as well at back. Other characteristics are similar to vector.
+
+Common methods: `push_back()`, `pop_back()`, `push_front()`, `pop_back()`, `emplace_back()`, `emplace_front()`
 
 #### `list`
 
