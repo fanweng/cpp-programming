@@ -146,7 +146,7 @@ std::tie(c_val, ignore, f_val) = t;  // ignore the 2nd element
 
 #### `array`
 
-`std::array` has a fixed size, is able to random access the element at a constant time. It provides access to the underlying raw array. Use the `std::array` object whenever possible instead of using raw arrays.
+`std::array` has a **fixed size**, is able to random access the element at a constant time. It provides access to the underlying raw array. Use the `std::array` object whenever possible instead of using raw arrays. All iterators are available and they won't invalidate.
 
 ```c++
 std::array<int, 5> arr1 {1, 2, 3, 4, 5};
@@ -155,8 +155,8 @@ std::array<int, 5> arr2 {10, 20, 30, 40, 50};
 arr1.empty();       // false (0)
 arr1.size();        // 5
 
-arr1.at(0);         // 1
-arr1[0];            // 1
+arr1.at(0);         // 1, has boundary check
+arr1[0];            // 1, no boundary check
 arr1.front();       // 1
 arr1.back();        // 5
 
@@ -167,12 +167,61 @@ int *ptr = arr1.data(); // get the address to the raw array
 
 #### `vector`
 
-*Vector* is an array but with a lot of extra functionalities.
+`std::vector` has a **dynamic size**, constant time of random access to element and insertion/deletion at the back, linear time of insertion/removal of any element. All iterators are available but may invalidate.
 
 ```c++
-vector<int> v(N, 0);    // init a vector with N elements of 0
-vector<vector<int>> matrix(N, vector<int>(M, 0));    // init NxM matrix filled with all 0
+/* Initialization */
+std::vector<int> vec1{1,2,3,4,5};
+std::vector<int> vec2(N, 0); // init a vector with N elements of 0
+std::vector<std::ector<int>> matrix(N, std::vector<int>(M, 0)); // init NxM matrix filled with all 0
+
+/* Size */
+vec1.size();        // number of elements, 5
+vec1.capacity();    // the actual memory space allocated that may larger than size, 5
+vec1.max_size();    // max size that system allows a vector to have
+
+vec1.push_back(6);  // add 6 to the back
+vec1.capacity();    // system may allocate more space than required, let's say 10
+vec1.reserve(40);   // reserve additional space for vector, now capacity() == 50
+vec1.shrink_to_fit();   // this force size() == capacity(), now capacity() == 6
+
+/* Indexing */
+vec1.at(0);         // boundary check, 1
+vec1[0];            // no boundary check, 1
+vec1.front();       // 1
+vec1.back();        // 6
+
+/* Modification */
+vec1.push_back(7);  // add 7 to the back
+vec1.pop_back();    // remove the last element
+
+vec1.erase(vec1.begin(), vec1.begin()+2);   // 4,5
+vec1.clear();       // remove all
+
+/* Common methods */
+std::vector<int> vec3{1,2,7,8};
+std::vector<int> vec4{4,5,6};
+auto it = std::find(vec3.begin(), vec3.end(), 7);   // get iterator
+vec3.insert(it, 3); // 1,2,3,7,8
+std::insert(it, vec4.begin(), vec4.end()); // 1,2,3,4,5,6,7,8
+
+std::vector<int> vec5{1,2,3,4};
+std::vector<int> vec6{5,6};
+std::copy(vec6.begin(), vec6.end(), std::back_inserter(vec5)); // vec5 == {1,2,3,4,5,6}
+
+std::vector<int> vec7{1,2,3,4};
+std::vector<int> vec8{0};
+std::copy_if(vec7.begin(), vec7.end(), std::back_inserter(vec8), [](int x){ return x%2 == 0; }); // vec8 == {0,2,4}
+
+std::vector<int> vec9{1,2,3};
+std::vector<int> vec10{1,2,3};
+std::vector<int> vec11;
+std::transform(vec9.begin(), vec9.end(), vec10.begin(), std::back_inserter(vec11), [](int x, int y){ return x*y; }); // vec11 == {1,4,9}
 ```
+
+> Q: `push_back(MyClass{argu1, argu2})` vs. `emplace_back(argu1, argu2)`?
+> Difference 1 input argument: when vector type is a user-defined type with multiple arguments for constructor, `push_back()` requires we pass an object of that type to it. But we can simply pass the arguments of the constructor directly to `emplace_back()`.
+> Difference 2 efficiency: for built-in types, two methods have no difference. But for user-defined types, `push_back()` requires a temporary object to be created and destroyed while `emplace_back()` avoids using the temporary object.
 
 #### `list`
 
