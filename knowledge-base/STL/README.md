@@ -227,21 +227,41 @@ std::transform(vec9.begin(), vec9.end(), vec10.begin(), std::back_inserter(vec11
 
 `std::deque` likes a vector but its elements are NOT stored in contiguous memory. The underlying implementation is like a linked-list vectors so it supports constant time of insertion/deletion at the front as well at back. Other characteristics are similar to vector.
 
-Common methods: `push_back()`, `pop_back()`, `push_front()`, `pop_back()`, `emplace_back()`, `emplace_front()`
+Common methods: `push_back()`, `pop_back()`, `push_front()`, `pop_front()`, `emplace_back()`, `emplace_front()`
 
 #### `list`
 
-STL implement the *list* as a *doubly linked list*.
+STL implement the *list* as a *doubly linked list* with dynamic size. Random element access is NOT provided. Insertion and deletion of elements anywhere in the container is constant time. All iterators are available but they invalidate when corresponding element is deleted.
+
+Common methods: `push_back()`, `pop_back()`, `push_front()`, `pop_front()`, `emplace_back()`, `emplace_front()`
 
 ```c++
-std::list<int> l;
-l.push_back(1);
-l.push_front(2);
+std::list<int> l1{1,2,3,4,5};
+std::list<int> l2(10,0);
+l1.size();          // 5
+l1.max_size();      // a very large number
+l1.front();         // 1
+l1.back();          // 5
+
+auto it1 = std::find(l1.begin(), l1.end(), 3);
+l1.insert(it1, 10);         // insert element before the iterator: 1,2,10,3,4,5
+l1.erase(it1);              // remove the iterator element: 1,2,10,4,5
+l1.resize(2);               // remove the elements exceeding the size: 1,2
+l1.resize(5);               // fill the list with 0: 1,2,0,0,0
 ```
 
 #### `forward_list`
 
-STL implement the *list* as a *singly linked list*.
+STL implement the *list* as a *singly linked list* with dynamic size. It has less overhead than a `std::list`. Random element access is NOT provided. Insertion and deletion of elements anywhere in the container is constant time. Reverse iterators are NOT available. All usable iterators invalidate when corresponding element is deleted.
+
+Common methods: `push_front()`, `pop_front()`, `emplace_front()`. No concept of **back**.
+
+```c++
+std::forward_list<int> l1{1,2,3,4,5};
+auto it1 = std::find(l1.begin(), l1.end(), 3);
+l1.insert_after(it1, 10);   // insert element after the iterator: 1,2,3,10,4,5
+l1.erase_after(it1);        // remove the element after iterator: 1,2,3,4,5
+```
 
 #### `queue`
 
@@ -312,6 +332,7 @@ std::vector<int>::iterator it1 = vec.begin();           // declare with containe
 for (auto it2 = vec.begin(); it != vec.end(); ++it) {   // declare with auto
     std::cout << *it << " ";
 }
+std::advance(it1, 2);   // move iterator to the right, or negative value to move to the left
 ```
 
 #### Other iterators
