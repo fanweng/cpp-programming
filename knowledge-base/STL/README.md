@@ -297,24 +297,64 @@ s.pop();
 
 #### `set`
 
-*Set* maintains elements sorted internally so it's not necessary to call `sort()` method again and again after adding a new element.
+*Set* has no duplicate elements, maintaining the elements sorted internally so it's not necessary to call `sort()` method again and again after adding a new element. It's ordered by key, that is for a user-defined class, it must supply with an overloaded `operator<` for comparison. All iterators are available but they invalidate when corresponding element is deleted.
 
-#### `unordered_set`
+No concept of **front** or **back**.
+
+> `insert()` returns a `std::pair<iterator, bool>`: iterator points to the inserted element or to the duplicate in the set, boolean indicates success or duplicate.
+
+```c++
+std::set<int> s1{1,1,1,2,3,4,5};        // 1,2,3,4,5
+s1.size();  // 5
+ret = s1.insert(1);     // ret=(iterator_to_1, false_because_1_is_dup)
+
+s1.erase(5);            // 1,2,3,4
+auto it = s1.find(4);   // 1,2,3
+if (it != s1.end())
+    s1.erase(it);
+
+s1.count(1);            // easy way to check if 1 exists
+s1.clear();             // remove all
+s1.empty();             // check if empty
+```
+
+`multi_set`: sorted by key, allowing duplicates, all iterators are available.
+`unordered_set`: unordered elements, no duplicates, elements cannot be modified (must erase and then insert a new one), no reverse iterators.
+`unordered_multiset`: unordered elements, allowing duplicates, no reverse iterators.
 
 #### `map`
 
-A *map* maps the keys to values so that the values can be accessed via their keys. Internally it is implemented as *Binary Search Tree*.
+A *map* stores elements as key/value pairs, ordered by key, no duplicates because keys are unique. Random access to the element value is available via its key. Internally it is implemented as *Binary Search Tree*. All iterators are available but they invalidate when corresponding element is deleted.
 
 ```c++
 std::map<int, int> m = {{1,100}, {2,99}};
-// O(logN) for insertion
+/* Three ways of insertion, O(logN) */
 m.insert(std::make_pair(3,113));
-m[4] = 89;
+m.insert(std::pair<int, int>(4,21));
+m[5] = 89;
+
+/* Update an element value */
+m[5] = 79;
+m.at(5) = 69;
+
+/* Remove an element */
+m.erase(5);
+auto it = m.find(4);
+if (it != m.end())
+    m.erase(it);
+
+/* Check if 4 exists */
+m.count(4);
+if (m.find(4) != m.end())
+    std::cout << "Found 4!";
+
+m.clear();  // remove all
+m.empty();  // check if empty
 ```
 
-#### `unordered_map`
-
-A *unordered_map* is the same as *map* in terms of the functionalities. But it is implemented as an *array* internally. The **key** will be passed into a **hashing function** and the **index** to the corresponding **value** is calculated. The insertion `O(1)` is faster than *map*'s `O(logN)`.
+`multi_map`: ordered by key, allowing duplicates, all iterators are available.
+`unordered_map`: A *unordered_map* is the same as *map* in terms of the functionalities. But it is implemented as an *array* internally. The **key** will be passed into a **hashing function** and the **index** to the corresponding **value** is calculated. The insertion `O(1)` is faster than *map*'s `O(logN)`. No duplicates, no reverse iterators.
+`unordered_multimap`: unordered elements, allowing duplicates, no reverse iterators.
 
 ## 3. Iterators
 
