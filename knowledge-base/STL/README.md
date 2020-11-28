@@ -265,17 +265,21 @@ l1.erase_after(it1);        // remove the element after iterator: 1,2,3,4,5
 
 #### `queue`
 
-*Queue* is FIFO.
+*Queue* is FIFO. It it implemented as an adaptor over other STL containers, can be implemented as a list or deuqe (default). Elements are pushed at the back and popped from the front. No iterators are supported.
+
+Common methods: `push()`, `pop()`, `front()`, `back()`, `empty()`, `size()`.
 
 ```c++
-std::queue<int> q;
-q.push(1);
-q.pop();
+std::queue<int> q; // default implemented as a deque
+std::queue<int, std::list<int>> q1;
+std::queue<int, std::deque<int>> q2;
 ```
 
 #### `priority_queue`
 
-*Priority queue* provides a constant time extraction of the largest element but logarithmic insertion. The internal implementation is *binary-max-heap*. We cannot iterate on the priority queue, only getting the top element and pop it.
+*Priority queue* provides a constant time extraction of the largest element at the front and logarithmic insertion. The internal implementation is *binary-max-heap* and as a vector adaptor by default. We cannot iterate on the priority queue, only getting the top element and pop it.
+
+Common methods: `push()`, `pop()`, `top()`, `empty()`, `size()`.
 
 ```c++
 std::priority_queue<int> pq;
@@ -287,12 +291,17 @@ std::priority_queue<int, std::vector<int>, std::greater<int>> pq_min;  // binary
 
 #### `stack`
 
-*Stack* is LIFO, like a pile of books.
+*Stack* is LIFO, like a pile of books. It is implemented as an adaptor over other STL containers, can be implemented as a vector, list, or deque (default). All operations occur on the one end of the stack (top). No iterators are supported.
+
+Common methods: `push()`, `pop()`, `top()`, `empty()`, `size()`.
 
 ```c++
-std::stack<int> s;
+std::stack<int> s; // default implemented as a deque
 s.push(1);
 s.pop();
+std::stack<int, std::vector<int>> s1;
+std::stack<int, std::list<int>> s2;
+std::stack<int, std::deque<int>> s3;
 ```
 
 #### `set`
