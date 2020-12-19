@@ -11,7 +11,7 @@
     * is an object defined by class templates
         + wrapped around a raw pointer
         + overloaded operators: `*`, `->`. But arithmetic operators not supported: `++`, `--`, etc.
-    * can only point to *heap-allcoated* memory
+    * can only point to *heap-allocated* memory
     * automatically call deletion when out of the scope, can have custom deleters
     * adhere to RAII principles
     * `unique_ptr`, `shared_ptr`, `weak_ptr`, `auto_ptr` (deprecated). Defined in the `<memory>` header in the C++ Standard Library.
@@ -44,8 +44,8 @@ vec.push_back(std::move(ptr));  // Ok
 ```
 
 - `unique_ptr::get`, `unique_ptr::release`, `unique_ptr::reset`
-    * `get()` returns the *stored pointer* which points to the object managed by the `unique_ptr`. The `unique_ptr` still has the ownershipe of the pointer, i.e. responsible for deleting the managed data at some point.
-    * `release()` releases the ownership of its *stored pointer* by returning its value and replacing it with `nullptr`. It doesn't destroy the managed object but `unique_ptr` is free of the responsbility of deleting the object.
+    * `get()` returns the *stored pointer* which points to the object managed by the `unique_ptr`. The `unique_ptr` still has the ownership of the pointer, i.e. responsible for deleting the managed data at some point.
+    * `release()` releases the ownership of its *stored pointer* by returning its value and replacing it with `nullptr`. It doesn't destroy the managed object but `unique_ptr` is free of the responsibility of deleting the object.
     * `reset()` destroys the managed object.
 
 ```c++

@@ -1,12 +1,12 @@
 # UML
 
-Unified Modeling Language (UML) is a standard language for specifying, visualizing, constructuing, and documenting the artifacts of software systems.
+Unified Modeling Language (UML) is a standard language for specifying, visualizing, constructing, and documenting the artifacts of software systems.
 
 Structural Modeling:
 * Class Diagram
 * Object Diagram
 * Deployment Diagram
-* Pacakge Diagram
+* Package Diagram
 * ...
 
 UML **Class Diagram** describes the attributes and operations/methods of a class and also the constraints imposed on the system. It is widely used in the modeling of object-oriented systems.

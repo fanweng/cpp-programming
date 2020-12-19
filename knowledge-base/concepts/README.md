@@ -44,12 +44,12 @@ A special member method, invoked during the object creation. It has the same nam
 
 - **Initialization list**
 
-A better way to create an object with initial attribute values. Assignment in the constructor is a less efficient way because the object is first created with empty values then is assigned with the intial values, one step more than the initialization list.
+A better way to create an object with initial attribute values. Assignment in the constructor is a less efficient way because the object is first created with empty values then is assigned with the initial values, one step more than the initialization list.
 
 - **Copy constructor**
 
 Called when an object is copied:
-1. passing object *by value* as a parameter, `void display_player(Plaery p)`
+1. passing object *by value* as a parameter, `void display_player(Player p)`
 2. returning an object from a function *by value*, `return player_obj`
 3. construct one object based on another with the same class, `Player another_player {player_obj}`
 
@@ -108,7 +108,7 @@ vec.push_pack(Player{"mike"});
 
 - **Destructor**
 
-A special member method, invoked when object is destroyed. It has the same name as the class with a preceeding tilde (~). No return type and no parameters. No overloading is allowed. It's useful to release memory and other resources.
+A special member method, invoked when object is destroyed. It has the same name as the class with a preceding tilde (~). No return type and no parameters. No overloading is allowed. It's useful to release memory and other resources.
 
 ```c++
 class Player {
@@ -372,7 +372,7 @@ public:
 
 ## Polymorphism
 
-Polymorphism is an object can behave differently based on differnt circumstances.
+Polymorphism is an object can behave differently based on different circumstances.
 
 Rumtime polymorphism / Late binding / dynamic binding: virtual function
 
@@ -382,7 +382,7 @@ Compile time polymorphism / Early binding / Static binding: function overloading
 
 It is achieved by using inheritance and virtual functions, and it is called by Base class pointer/reference.
 
-- **Virtual functions:** are overriden functions bound dynamically. Unlike redefined functions, which are bound statically.
+- **Virtual functions:** are overridden functions bound dynamically. Unlike redefined functions, which are bound statically.
 
 - **Virtual destructor:** if a Derived class is destroyed by deleting its storage via the Base class pointer, the behavior is undefined in the C++ standard. Therefore, if a class has virtual functions, a public virtual destructor *MUST* be provided
 
@@ -411,13 +411,13 @@ It is added to the end of Derived class virtual function method, telling compile
 
 Added to the end of a class: prevents a class from being derived from.
 
-Added to the end of a method: prevents a virtual method from being overriden in the derived class.
+Added to the end of a method: prevents a virtual method from being overridden in the derived class.
 
-#### Pure `virtual` fucntions and Abstract classes
+#### Pure `virtual` functions and Abstract classes
 
 - Abstract class:
     * cannot instantiate objects
-    * used as base classes in the inheritance hierachies
+    * used as base classes in the inheritance hierarchies
     * contains at least one **pure** `virtual` function
         + pure virtual function is used to make a class abstract
         + specified with `=0` in its declaration, `virtual void foo() = 0;`

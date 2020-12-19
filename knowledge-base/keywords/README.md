@@ -10,11 +10,11 @@ Access specifiers define how the members (attributes and methods) of a class can
 
 ## `virtual`
 
-A `virtual` member function is declared within a base class and is overriden by a derived class. They are mainly used to achieve **Runtime Polymorphism** and the function resolution is done at runtime. Virtual functions should be accessed using pointer or reference of base class type to achieve runtime polymorphism.
+A `virtual` member function is declared within a base class and is overridden by a derived class. They are mainly used to achieve **Runtime Polymorphism** and the function resolution is done at runtime. Virtual functions should be accessed using pointer or reference of base class type to achieve runtime polymorphism.
 
 ## `explicit`
 
-The compiler is allowed to make the implicit conversion (type casting) to the single-arugment constructor. The `explicit` keyword tells the compiler that a certain constructor may not be used for implicit type conversion.
+The compiler is allowed to make the implicit conversion (type casting) to the single-argument constructor. The `explicit` keyword tells the compiler that a certain constructor may not be used for implicit type conversion.
 
 ```c++
 class Foo {

@@ -86,7 +86,7 @@ Exceptions can be thrown from within a class, too.
     * work the same way as they do for functions mentioned above
 
 - From constructor
-    * throw an exception if the object cannot be initiailized
+    * throw an exception if the object cannot be initialized
 
 - From destructor
     * DO NOT throw exception from the destructor - undefined behavior
