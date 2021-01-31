@@ -4,7 +4,7 @@ C++ allows to allocate the memory in the runtime dynamically but we need to deal
 
 * `new` operator
 
-The basic syntax is `ptrVar = new dataType`. The `new` operator returns the address of the allocated memory location.
+The basic syntax is `ptrVar = new dataType`. The `new` operator returns the address of the allocated memory location (on the heap).
 
 * `delete` operator
 
@@ -12,11 +12,13 @@ The memory deallocation uses `delete` operator, which returns the memory back to
 
 ```c++
 // declare and allocate memory for that pointer
-int* ptr = new int;
+int *ptr = new int;
+int *arr_ptr = new int[10];
 // assign a value to the allocated memory
 *ptr = 10;
 // deallocate the memory
 delete ptr;
+delete [] arr_ptr;
 ```
 
 ## `std::allocator()`

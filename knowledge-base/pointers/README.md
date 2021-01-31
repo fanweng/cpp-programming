@@ -1,6 +1,77 @@
 # Pointers
 
-## Raw pointers vs. Smart pointers
+## I. Pointers Basics
+
+A pointer stores the value of an address for a variable or a function. It is very useful:
+1. access variables not in the current function scope
+2. operate arrays efficiently
+3. dynamical memory management
+4. implement the polymorphism in object oriented programming
+5. access specific addresses in the memory for embedded systems
+
+#### Dereferencing notation
+
+```c++
+int arr[] {1, 2, 3, 4};
+int *arr_ptr {arr};
+/* Subscript Notation */
+std::cout << arr[1] << arr_ptr[1] << std::endl;
+/* Offset Notation */
+std::cout << *(arr + 1) << *(arr_ptr + 1) << std::endl;
+```
+
+#### `const` and pointer
+
+- Pointers to constants
+    * data pointed by the pointer **cannot** be changed
+    * pointer itself can change to point somewhere else
+- Constant pointers
+    * data pointed by the pointer can be changed
+    * pointer itself **cannot** change to point somewhere else
+- Constant pointers to constants
+    * data pointed by the pointer **cannot** be changed
+    * pointer itself **cannot** change to point somewhere else
+
+```c++
+int a {100};
+int b {10};
+
+const int *ptr1 {&a};   // pointer to constant
+*ptr1 = 2;  // Error
+ptr1 = &b;   // Ok
+
+int *const ptr2 {&a};   // constant pointer
+*ptr2 = 2;  // Ok
+ptr2 = b;   // Error
+
+const int *const ptr3 {&a}; // constant pointer to constant
+*ptr3 = 2;  // Error
+ptr3 = b;   // Error
+```
+
+#### Pointers in functions
+
+- Return a pointer from a function
+    * *SHOULD* return pointers to
+        + dynamically allocated memory in the function (remember to deallocate it)
+        + data passed in the function as a parameter
+    * *SHOULDN'T* return pointers to
+        + local function variable (out of scope once returning from the function)
+
+#### Pointer pitfalls
+
+- Uninitialized pointers
+- Dangling pointers
+    * pointing to released memory
+    * pointing to invalid memory address
+- Not checking if `new` fails
+    * if `new` fails, it will throw an exeception
+- Leaking memory
+    * forget to release allocated memory
+
+
+
+## II. Raw pointers vs. Smart pointers
 
 - Problems with **raw pointers**:
     * absolute flexibility with memory management: allocation/deallocation/lifetime
@@ -76,7 +147,7 @@ auto ptrA = std::make_shared<Song>("May it be", "Enya");
 auto ptr1 = ptrA;
 ptr1.use_count();   // get reference count: 2
 ptrA.reset();       // decrement the reference count, nullify the ptrA
-ptr1.use_count();   // get reference count: 1 
+ptr1.use_count();   // get reference count: 1
 
 std::shared_ptr<Song> ptrB(new Song("Lady Gaga", "Just Dance"));
 auto ptr2 {ptrB};
@@ -121,7 +192,9 @@ int main(void) {
 } // destructor of A and B won't be called because of circular reference
 ```
 
-## Custom deleters
+
+
+## III. Custom deleters
 
 For some special use-cases, we need more than to just destroy the object on the heap when destroying a smart pointer.
 
