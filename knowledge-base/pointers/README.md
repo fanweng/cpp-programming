@@ -65,11 +65,56 @@ ptr3 = b;   // Error
     * pointing to released memory
     * pointing to invalid memory address
 - Not checking if `new` fails
-    * if `new` fails, it will throw an exeception
+    * if `new` fails, it will throw an exception
 - Leaking memory
     * forget to release allocated memory
 
+#### Reference
 
+- Reference is implemented as a *constant pointer* that is *automatically dereferenced*
+    * an alias for a variable
+    * must be initialized to a variable when declared (cannot be null)
+    * once initialized, cannot be made to refer to a different variable
+    * very useful as function parameters
+
+```c++
+vector<int> v {1, 2, 3};
+for (auto num : v) {
+    num = 0;    // num is a copy, it doesn't modify the vector element
+}
+for (auto &num : v) {
+    num = 0;    // num is a reference, it changes the vector
+}
+for (auto const &num : v) {
+    num = 0;    // num is a constant reference, compiler error
+}
+```
+
+#### L-values and R-values
+
+- L-value
+    * values that have names and are addressable
+    * modifiable if they are not constants
+    * *reference* must refer to L-value, not R-value
+
+```c++
+int x {10};             // x is L-value
+string name {"Mike"};  // name is L-value
+```
+
+- R-value
+    * non-addressable and non-assignable
+    * a value that is not an L-value
+        + on the right-hand side of an assignment expression
+        + a literal
+        + a temporary which is intended to be non-modifiable
+    * can be assigned to L-value explicitly
+
+```c++
+int y = x + 10;         // x + 10 is R-value
+string name {"Mike"};   // "Mike" is R-value
+int maxNum = max(0,1);  // max(0,1) is R-value
+```
 
 ## II. Raw pointers vs. Smart pointers
 
