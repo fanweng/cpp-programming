@@ -5,6 +5,8 @@ Everything C++
 
 Modern C++ usually refers to C++11, C++14, C++17 and later. C++11 was a revolution and it actually became another language compared to classical C++ as C++98 and before.
 
+[Modern C++ Features by Anthony Calandra](https://github.com/AnthonyCalandra/modern-cpp-features)
+
 # Reference
 
 [1] [GeeksforGeeks](https://www.geeksforgeeks.org/c-plus-plus/).
