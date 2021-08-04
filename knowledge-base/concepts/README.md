@@ -378,6 +378,10 @@ Rumtime polymorphism / Late binding / dynamic binding: virtual function
 
 Compile time polymorphism / Early binding / Static binding: function overloading, operator overloading
 
+#### Implementation
+
+The compiler will not hardcode the method call, it will compile a lookup table to retrieve the function by offsetting to the correct address of the object.
+
 #### Runtime Polymorphism
 
 It is achieved by using inheritance and virtual functions, and it is called by Base class pointer/reference.
