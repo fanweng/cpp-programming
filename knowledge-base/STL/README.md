@@ -76,6 +76,42 @@ struct MyData {
 MyData myData1 = createT<MyData>(1, 2.3, 'a');
 ```
 
+#### Reference Wrappers
+
+Reference wrapper is a *copy-constructible* and *copy-assignable* wrapper for an object of type `&`.
+
+```c++
+template <typename T>
+    void doubleMe(T t) {
+        t *= 2;
+}
+int a = 1;
+doubleMe(a); // a = 1
+/* std::ref creates a non constant reference wrapper */
+doubleMe(std::ref(a)); // a = 2
+
+
+void invokeMe(const std::string& s){
+  std::cout << s << ": const " << std::endl;
+}
+std::string s{"string"};
+/* std::cref creates a constant reference wrapper */
+invokeMe(std::cref(s));
+
+
+/* std::reference_wrapper creates a reference object */
+void foo() {
+  std::cout << "foo invoked" << std::endl;
+}
+typedef void callableUnit();
+std::reference_wrapper<callableUnit> refWrap(foo);
+refWrap(); // foo invoked
+
+int a = 2;
+std::reference_wrapper<int> myInt(a);
+std::cout << myInt << " " << myInt.get() << std::endl; // 2 2
+```
+
 ### Modifying
 
 ```c++
@@ -153,23 +189,27 @@ Each container has member functions: some are specific to the container, others 
 std::pair<int, char> p1 = std::make_pair(1, 'a');
 std::pair<int, pair<int, char>> p2 = {1, {2, 'b'}};
 std::cout << p1.first << p1.second << std::endl;  // 1, a
+std::cout << std::get<0>(p1) << std::get<1>(p1) << std::endl; // 1, a
 std::cout << p2.second.second << std::endl;       // b
 ```
 
 #### `tuple`
 
-*Tuple* is an object that can hold a number of elements.
+`std::tuple` is an object that can hold a number of elements. `std::tie` creates a tuple with reference variables. `std::ignore` can explicitly ignore elements of the tuple.
 
 ```c++
 std::tuple<char, int, float> t;
 t = std::make_tuple('a', 29, 1.78);
 
-std::cout << get<0>(t) << std::endl;  // access the 1st element
-std::get<2>(t) = 1.86;           // modify the 3rd element
+std::cout << get<0>(t) << std::endl;    // access the 1st element
+std::get<2>(t) = 1.86;                  // modify the 3rd element
 
-std::tie(c_val, i_val, f_val) = t;   // unpack tuple values into separate variables
-std::cout << c_val << i_val << f_val << std::endl;    // a, 29, 1.86
-std::tie(c_val, ignore, f_val) = t;  // ignore the 2nd element
+char c_val = 'z';
+int i_val = 0;
+float f_val = 0.0;
+std::tie(c_val, i_val, f_val) = t;                  // unpack tuple values into separate variables
+std::cout << c_val << i_val << f_val << std::endl;  // a, 29, 1.86
+std::tie(c_val, std::ignore, f_val) = t;            // ignore the 2nd element
 ```
 
 #### `array`
@@ -431,6 +471,8 @@ for (auto it = map.begin(); it != map.end(); ++it) {
 ## 4. Functions
 
 The STL includes classes that overload the function call operators. Instances of such classes are *function objects* or *functors*.
+
+#### `std::bind()` and `std::function()`
 
 ```c++
 /* bind() enables to create new function objects
