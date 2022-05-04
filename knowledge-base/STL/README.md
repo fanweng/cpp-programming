@@ -8,6 +8,12 @@ Four STL components:
 - Functions
 - Iterators
 
+In terms of usages:
++ [Numeric Functions](./numeric-functions.md)
++ [Text Processing](./text-processing.md)
++ [I/O and Filesystem](./io-filesystem.md)
++ [Multithreading](./multithreading.md)
+
 ## 1. Algorithms
 
 The header `<algorithm>` defines many commonly used algorithms for processing sequences of elements from containers, e.g. `find`, `max`, `sort`, `accumulate`, `count`, etc.
@@ -50,11 +56,24 @@ if (it != v1.end()) {
     std::cout << "nums is presented at index " << std::distance(v1.begin(), it) << std::endl;
 }
 
-/* min_element(), max_element() returs the min/max element */
+/* min_element(), max_element() return the iterator of min/max element */
 std::vector<int>::iterator it = std::min_element(v1.begin(), v1.end());
+/* min(), max(), minmax() return the values directly, lambda function enabled */
+int intMin = std::min(-10, -5, [](int a, int b) { return std::abs(a) < std::abs(b); }); // -5
+std::pair<int, int> pairint = std::minmax({3, 12, -1, -10}); // -10. 12
 
 /* count() the number of specific element */
 std::vector<int>::iterator it = std::count(v1.begin(), v1.end(), 1);
+
+/* forward() enables to write function templates where the arguments are identically forwarded */
+template <typename T, typename... Args>
+    T createT(Args&&... args) {
+        return T(std::forward<Args>(args)...);
+    }
+struct MyData {
+    MyData(int, double, char){};
+};
+MyData myData1 = createT<MyData>(1, 2.3, 'a');
 ```
 
 ### Modifying
@@ -72,13 +91,22 @@ std::reverse(v.begin(), v.end());
 /* swap() interchanges the values of two elements */
 std::swap(a, b);
 
-/* move() efficiently transfers the resource to another object */
-/* move operation leaves the moved-from object valid but with unspecified value */
-/* after moved, the moved-from object should be destroyed or assigned a new value */
+/* move() efficiently transfers the resource to another object.
+ * thread/lock object cannot be copied, only be moved.
+ * move operation leaves the moved-from object valid but with unspecified value.
+ * after moved, the moved-from object should be destroyed or assigned a new value.
+ */
 std::string str = "hello";
 std::vector<string> v;
-v.push_back(str);       // copy str to vector
-v.push_back(move(str)); // content of str is moved to vector, after which str might be empty
+v.push_back(str);               // copy str to vector
+v.push_back(std::move(str));    // content of str is moved to vector, after which str might be empty
+/* move() also works for class which defines the move constructor/assignment */
+class MyData{
+    MyData(MyData&& m) = default; // move constructor
+    MyData& operator = (MyData&& m) = default; // move assignment 
+    MyData(const MyData& m) = default; // copy constructor
+    MyData& operator = (const myData& m) = default; // copy assignment
+}
 ```
 
 ### Sorting and Searching
@@ -403,3 +431,17 @@ for (auto it = map.begin(); it != map.end(); ++it) {
 ## 4. Functions
 
 The STL includes classes that overload the function call operators. Instances of such classes are *function objects* or *functors*.
+
+```c++
+/* bind() enables to create new function objects
+ * function() takes these temporary function objects and binds them to a variable
+ */
+double divideMe(double a, double b) {
+    return a/b;
+}
+// _1 is assigned to a, _2 is assigned to b
+std::function<double(double, double)> myDiv1 = std::bind(divideMe, std::placeholders::_1, std::placeholders::_2);
+// 20 is assigned to a, _1 is assigned to b
+std::function<double(double)> myDiv2 = std::bind(divideMe, 20, std::placeholders::_1);
+// divideMe(20, 2) == myDiv1(20, 2) == myDiv2(2)
+```
