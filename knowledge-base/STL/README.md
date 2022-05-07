@@ -220,13 +220,14 @@ std::tie(c_val, std::ignore, f_val) = t;            // ignore the 2nd element
 
 ```c++
 std::array<int, 5> arr1 {1, 2, 3, 4, 5};
-std::array<int, 5> arr2 {10, 20, 30, 40, 50};
+std::array<int, 5> arr2 {}; // init to 0 by default
 
 arr1.empty();       // false (0)
 arr1.size();        // 5
 
 arr1.at(0);         // 1, has boundary check
 arr1[0];            // 1, no boundary check
+std::get<0>(arr1);
 arr1.front();       // 1
 arr1.back();        // 5
 
@@ -266,15 +267,16 @@ vec1.push_back(6);  // add 6 to the back
 vec1.capacity();    // system may allocate more space than required, let's say 10
 vec1.reserve(40);   // reserve additional space for vector, now capacity() == 50
 vec1.shrink_to_fit();   // this force size() == capacity(), now capacity() == 6
+vec1.resize(7);     // increase size to 7 elements, and filled with 0s
 
 /* Indexing */
 vec1.at(0);         // boundary check, 1
-vec1[0];            // no boundary check, 1
+vec1[6] = 7;        // no boundary check
 vec1.front();       // 1
-vec1.back();        // 6
+vec1.back();        // 7
 
 /* Modification */
-vec1.push_back(7);  // add 7 to the back
+vec1.push_back(8);  // add 8 to the back
 vec1.pop_back();    // remove the last element
 
 vec1.erase(vec1.begin(), vec1.begin()+2);   // 4,5
@@ -313,13 +315,43 @@ std::transform(vec9.begin(), vec9.end(), vec10.begin(), std::back_inserter(vec11
 
 `std::deque` likes a vector but its elements are NOT stored in contiguous memory. The underlying implementation is like a linked-list vectors so it supports constant time of insertion/deletion at the front as well at back. Other characteristics are similar to vector.
 
-Common methods: `push_back()`, `pop_back()`, `push_front()`, `pop_front()`, `emplace_back()`, `emplace_front()`
+Common methods:
++ `push_back()`, `pop_back()`, `push_front()`, `pop_front()`
++ `emplace_back()`, `emplace_front()`
++ `assign()`
+
+```c++
+class MyInt {
+private:
+  int myInt;
+public:
+  MyInt(int i): myInt(i) {};
+  friend ostream& operator << (ostream& os, const MyInt& m)
+  {
+    os << m.myInt <<" ";
+    return os ;
+  }
+};
+
+std::deque<MyInt> dq;
+dq.push_back(MyInt(5));
+dq.emplace_back(1);     // element will be passed to the constructor: MyInt(5), MyInt(1)
+dq.assign({2, 3, 4});   // assign new content, replace the old, modify the size: 2, 3, 4
+```
 
 #### `list`
 
-STL implement the *list* as a *doubly linked list* with dynamic size. Random element access is NOT provided. Insertion and deletion of elements anywhere in the container is constant time. All iterators are available but they invalidate when corresponding element is deleted.
+STL implement the *list* as a *doubly linked list* with dynamic size. Random element access is NOT provided. Insertion and deletion of elements anywhere in the container is constant time. All iterators are available but they invalidate when corresponding element is deleted (though iterator remains to work without error).
 
-Common methods: `push_back()`, `pop_back()`, `push_front()`, `pop_front()`, `emplace_back()`, `emplace_front()`
+Common methods:
++ `push_back()`, `pop_back()`, `push_front()`, `pop_front()`, `emplace_back()`, `emplace_front()`
+
+Special methods:
++ `l1.merge(l2)`, `l1.merge(l2, op)`: merge sorted `l2` into the sorted `l1`, `op` is the sorting criteria
++ `l.remove(val)`, `l.remove_if(pre)`: remove all elements with value `val`, or fulfilling the predicate `pre`
++ `l1.splice(pos, l2)`: split the elements in `l1` before `pos`, and insert `l2`
++ `l.unique()`: remove adjacent element with the same value, better used after `sort()`
++ `l.unique(pre)`: remove adjacent element fulfilling the predicate `pre`
 
 ```c++
 std::list<int> l1{1,2,3,4,5};
@@ -334,13 +366,29 @@ l1.insert(it1, 10);         // insert element before the iterator: 1,2,10,3,4,5
 l1.erase(it1);              // remove the iterator element: 1,2,10,4,5
 l1.resize(2);               // remove the elements exceeding the size: 1,2
 l1.resize(5);               // fill the list with 0: 1,2,0,0,0
+
+std::list<int> list1 {1, 2, 3, 4, 7, 8, 9};
+std::list<int> list2 {5, 6};
+list1.splice(std::find(list1.begin(), list1.end(), 7), list2); // 1,2,3,4,5,6,7,8,9
 ```
 
 #### `forward_list`
 
 STL implement the *list* as a *singly linked list* with dynamic size. It has less overhead than a `std::list`. Random element access is NOT provided. Insertion and deletion of elements anywhere in the container is constant time. Reverse iterators are NOT available. All usable iterators invalidate when corresponding element is deleted.
 
-Common methods: `push_front()`, `pop_front()`, `emplace_front()`. No concept of **back**.
+Common methods:
++ `push_front()`, `pop_front()`, `emplace_front()`. No concept of **back**
+
+Special methods:
++ `before_begin()`: return iterator before the head
++ `emplace_after(pos, arg...)`: create an element after `pos` with `arg`
++ `emplace_front(arg...)`: create an element before head ` with `arg`
++ `erase_after(pos, ...)`: remove from `pos`
++ `insert_after(pos, ...)`: insert after `pos`
++ `l.merge(c)`, `l.merge(c, op)`: merge sorted `c` into the sorted `l`, `op` is the sorting criteria
++ `l1.splice(pos, l2)`: split the elements in `l1` before `pos`, and insert `l2`
++ `unique()`: remove adjacent element with the same value, better used after `sort()`
++ `unique(pre)`: remove adjacent element fulfilling the predicate `pre`
 
 ```c++
 std::forward_list<int> l1{1,2,3,4,5};
