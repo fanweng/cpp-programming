@@ -239,12 +239,24 @@ int *ptr = arr1.data(); // get the address to the raw array
 
 `std::vector` likes an array but has a **dynamic size**, and elements are stored in the contiguous memory space. It has constant time of random access to element, constant time insertion/deletion at the back, linear time of insertion/removal of any element. All iterators are available but may invalidate when resizing.
 
-```c++
-/* Initialization */
-std::vector<int> vec1{1,2,3,4,5};
-std::vector<int> vec2(N, 0); // init a vector with N elements of 0
-std::vector<std::ector<int>> matrix(N, std::vector<int>(M, 0)); // init NxM matrix filled with all 0
++ Initialization
 
+```c++
+std::vector<int> vec1 {1,2,3,4,5};
+std::vector<int> vec2 = {1,2,3,4,5};
+std::vector<int> vec3(N, 0); // init a vector with N elements of 0
+std::vector<int> vec4(vec3.begin(), vec3.end());
+std::vector<int> vec5(vec4);
+std::vector<int> vec6 = vec5;
+std::vector<int> vec7(std::move(vec6));
+std::vector<int> vec8 = std::move(vec7);
+std::vector<std::vector<int>> matrix(N, std::vector<int>(M, 0)); // init NxM matrix filled with all 0
+```
+
++ Common operations
+
+```c++
+std::vector<int> vec1 {1,2,3,4,5};
 /* Size */
 vec1.size();        // number of elements, 5
 vec1.capacity();    // the actual memory space allocated that may larger than size, 5
@@ -267,13 +279,17 @@ vec1.pop_back();    // remove the last element
 
 vec1.erase(vec1.begin(), vec1.begin()+2);   // 4,5
 vec1.clear();       // remove all
+```
 
-/* Common methods */
++ Common methods
+
+```c++
 std::vector<int> vec3{1,2,7,8};
 std::vector<int> vec4{4,5,6};
 auto it = std::find(vec3.begin(), vec3.end(), 7);   // get iterator
 vec3.insert(it, 3); // 1,2,3,7,8
 std::insert(it, vec4.begin(), vec4.end()); // 1,2,3,4,5,6,7,8
+for (auto v: vec4) std::cout << v << " ";
 
 std::vector<int> vec5{1,2,3,4};
 std::vector<int> vec6{5,6};
@@ -331,6 +347,7 @@ std::forward_list<int> l1{1,2,3,4,5};
 auto it1 = std::find(l1.begin(), l1.end(), 3);
 l1.insert_after(it1, 10);   // insert element after the iterator: 1,2,3,10,4,5
 l1.erase_after(it1);        // remove the element after iterator: 1,2,3,4,5
+l1.empty(); // std::forward_list doesn't have a method of size()
 ```
 
 #### `queue`
