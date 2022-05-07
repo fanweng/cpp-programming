@@ -13,6 +13,8 @@ In terms of usages:
 + [Text Processing](./text-processing.md)
 + [I/O and Filesystem](./io-filesystem.md)
 + [Multithreading](./multithreading.md)
++ [Type Traits](./type-traits.md)
++ [Time](./time.md)
 
 ## 1. Algorithms
 
