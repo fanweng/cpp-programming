@@ -214,6 +214,8 @@ std::cout << c_val << i_val << f_val << std::endl;  // a, 29, 1.86
 std::tie(c_val, std::ignore, f_val) = t;            // ignore the 2nd element
 ```
 
+### Sequence Containers
+
 #### `array`
 
 `std::array` has a **fixed size**, is able to random access the element at a constant time. It provides access to the underlying raw array. Use the `std::array` object whenever possible instead of using raw arrays. All iterators are available and they won't invalidate.
@@ -326,8 +328,7 @@ private:
   int myInt;
 public:
   MyInt(int i): myInt(i) {};
-  friend ostream& operator << (ostream& os, const MyInt& m)
-  {
+  friend ostream& operator << (ostream& os, const MyInt& m) {
     os << m.myInt <<" ";
     return os ;
   }
@@ -386,17 +387,19 @@ Special methods:
 + `erase_after(pos, ...)`: remove from `pos`
 + `insert_after(pos, ...)`: insert after `pos`
 + `l.merge(c)`, `l.merge(c, op)`: merge sorted `c` into the sorted `l`, `op` is the sorting criteria
-+ `l1.splice(pos, l2)`: split the elements in `l1` before `pos`, and insert `l2`
++ `l1.splice_after(pos, l2)`: split the elements in `l1` after `pos`, and insert `l2`
 + `unique()`: remove adjacent element with the same value, better used after `sort()`
 + `unique(pre)`: remove adjacent element fulfilling the predicate `pre`
 
 ```c++
-std::forward_list<int> l1{1,2,3,4,5};
+std::forward_list<int> l1 {1,2,3,4,5};
 auto it1 = std::find(l1.begin(), l1.end(), 3);
 l1.insert_after(it1, 10);   // insert element after the iterator: 1,2,3,10,4,5
 l1.erase_after(it1);        // remove the element after iterator: 1,2,3,4,5
 l1.empty(); // std::forward_list doesn't have a method of size()
 ```
+
+### Container Adaptors
 
 #### `queue`
 
@@ -439,9 +442,11 @@ std::stack<int, std::list<int>> s2;
 std::stack<int, std::deque<int>> s3;
 ```
 
+### Associative Containers
+
 #### `set`
 
-*Set* has no duplicate elements, maintaining the elements sorted internally so it's not necessary to call `sort()` method again and again after adding a new element. It's ordered by key, that is for a user-defined class, it must supply with an overloaded `operator<` for comparison. All iterators are available but they invalidate when corresponding element is deleted.
+*Set* has no duplicate elements, maintaining the elements sorted internally so it's not necessary to call `sort()` method again and again after adding a new element (thus, access time is logarithmic `O(log(n))`). It's ordered by key, that is for a user-defined class, it must supply with an overloaded `operator<` for comparison. All iterators are available but they invalidate when corresponding element is deleted.
 
 No concept of **front** or **back**.
 
@@ -453,25 +458,35 @@ s1.size();  // 5
 ret = s1.insert(1);     // ret=(iterator_to_1, false_because_1_is_dup)
 
 s1.erase(5);            // 1,2,3,4
+
 auto it = s1.find(4);   // 1,2,3
 if (it != s1.end())
     s1.erase(it);
 
+std::array<int, 3> arr {4, 7, 9};
+s1.insert(arr.begin(), arr.end()); // 1,2,3,4,7,9
+s1.erase(s1.lower_bound(5), s1.upper_bound(10)); // 1,2,3,4
 s1.count(1);            // easy way to check if 1 exists
 s1.clear();             // remove all
 s1.empty();             // check if empty
+
+std::multiset<int> s2 {3, 1, 5, 3, 4, 5, 1, 4, 4, 3, 2, 2, 7, 6, 4, 3, 6};
+auto pair = s2.equal_range(3); // itr_lower_bound(3), itr_upper_bound(3)
+std::distance(pair.first, pair.second); // 4, equivalent to count(3)
 ```
 
-`multi_set`: sorted by key, allowing duplicates, all iterators are available.
-`unordered_set`: unordered elements, no duplicates, elements cannot be modified (must erase and then insert a new one), no reverse iterators.
-`unordered_multiset`: unordered elements, allowing duplicates, no reverse iterators.
+`multi_set`: sorted by key, allowing duplicates, all iterators are available, access time is `O(log(n))`.
+`unordered_set`: unordered elements, no duplicates, elements cannot be modified (must erase and then insert a new one), no reverse iterators, access time is `O(log(k))`.
+`unordered_multiset`: unordered elements, allowing duplicates, no reverse iterators, access time is `O(k)`.
 
 #### `map`
 
 A *map* stores elements as key/value pairs, ordered by key, no duplicates because keys are unique. Random access to the element value is available via its key. Internally it is implemented as *Binary Search Tree*. All iterators are available but they invalidate when corresponding element is deleted.
 
 ```c++
-std::map<int, int> m = {{1,100}, {2,99}};
+std::map<int, int, std::greater<int>> m0 = {{1,100}, {2,99}}; // descending order, {2,99}, {1,100}
+std::map<int, int> m = {{1,100}, {2,99}}; // default ascending order std::less<int>, {1,100}, {2,99}
+
 /* Three ways of insertion, O(logN) */
 m.insert(std::make_pair(3,113));
 m.insert(std::pair<int, int>(4,21));
