@@ -5,8 +5,8 @@ STL is a set of C++ template classes to provide common data structures and funct
 Four STL components:
 - Algorithms
 - Containers
-- Functions
 - Iterators
+- Functions
 
 In terms of usages:
 + [Numeric Functions](./numeric-functions.md)
@@ -403,7 +403,7 @@ l1.empty(); // std::forward_list doesn't have a method of size()
 
 #### `queue`
 
-*Queue* is FIFO. It it implemented as an adaptor over other STL containers, can be implemented as a list or deuqe (default). Elements are pushed at the back and popped from the front. No iterators are supported.
+*Queue* is FIFO. It it implemented as an adaptor over other STL containers, can be implemented as a `list` or `deque` (default). Elements are pushed at the back and popped from the front. No iterators are supported.
 
 Common methods: `push()`, `pop()`, `front()`, `back()`, `empty()`, `size()`.
 
@@ -429,7 +429,7 @@ std::priority_queue<int, std::vector<int>, std::greater<int>> pq_min;  // binary
 
 #### `stack`
 
-*Stack* is LIFO, like a pile of books. It is implemented as an adaptor over other STL containers, can be implemented as a vector, list, or deque (default). All operations occur on the one end of the stack (top). No iterators are supported.
+*Stack* is LIFO, like a pile of books. It is implemented as an adaptor over other STL containers, can be implemented as a `vector`, `list`, or `deque` (default). All operations occur on the one end of the stack (top). No iterators are supported.
 
 Common methods: `push()`, `pop()`, `top()`, `empty()`, `size()`.
 
@@ -515,6 +515,10 @@ m.empty();  // check if empty
 `unordered_map`: A *unordered_map* is the same as *map* in terms of the functionalities. But it is implemented as an *array* internally. The **key** will be passed into a **hashing function** and the **index** to the corresponding **value** is calculated. The insertion `O(1)` is faster than *map*'s `O(logN)`. No duplicates, no reverse iterators.
 `unordered_multimap`: unordered elements, allowing duplicates, no reverse iterators.
 
+#### Rehashing
+
+For the `unordered_` associative containers, if the number of buckets (capacity) are all filled (`load_factor()==1`), C++ runtime will generate new buckets (**rehashing**) using `rehash()`.
+
 ## 3. Iterators
 
 *Iterators* are used for working upon a sequence of elements from containers, e.g. forward, reverse, by value, by reference, constant, etc. *Iterators* work like *pointers* by design, most of the container classes can be traversed with iterators.
@@ -532,6 +536,25 @@ for (auto it2 = vec.begin(); it != vec.end(); ++it) {   // declare with auto
     std::cout << *it << " ";
 }
 std::advance(it1, 2);   // move iterator to the right, or negative value to move to the left
+std::prev(it1);         // return iterator before it1
+std::next(it1);         // return iterator after it1
+
+/* Inserter */
+std::deque<int> dq {5,6,7,10,11,12};
+std::vector<int> v {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+std::copy(std::find(v.begin(), v.end(), 13),
+            v.end(),
+            std::back_inserter(dq)); // 5,6,7,10,11,12,13,14,15
+std::copy(std::find(v.begin(), v.end(), 8),
+            std::find(v.begin(), v.end(), 10),
+            std::inserter(dq, std::find(dq.begin(), dq.end(), 10))); // 5,6,7,8,9,10,11,...,15
+std::copy(v.rbegin() + 11,
+            v.rend(),
+            std::front_inserter(dq)); // 1,2,3,4,5,6,...,15
+
+/* Stream Iterators */
+std::istream_iterator<int> myIntStreamReader(std::cin);
+std::ostream_iterator<int>(std::cout, ":");
 ```
 
 #### Other iterators
@@ -553,6 +576,28 @@ for (auto it = map.begin(); it != map.end(); ++it) {
 ## 4. Functions
 
 The STL includes classes that overload the function call operators. Instances of such classes are *function objects* or *functors*.
+
+#### Callable Units
+
+- functions
+- function objects
+    + user-defined
+    + predefined: `std::less<T>()`, `std::bit_and<T>()`,  `std::logical_and<T>()`, `std::multiplies<T>()`, etc.
+- lambda functions
+
+```c++
+// Function
+void square1(int& i) { i = i * i; }
+// Function object
+struct square2 {
+    void operator()(int& i) { i = i * i; }
+};
+std::vector<int> v {1,2,3};
+std::for_each(v.begin(), v.end(), square1);     // 1,4,9
+std::for_each(v.begin(), v.end(), square2());   // 1,16,81
+// Lambda function <- preferred
+std::for_each(v.begin(), v.end(), [](int& i){i=i*i;}); // 1,256,6561
+```
 
 #### `std::bind()` and `std::function()`
 
