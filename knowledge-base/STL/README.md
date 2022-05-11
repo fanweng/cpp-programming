@@ -50,12 +50,13 @@ std::for_each(nums.begin(), nums.end(), print);
 /* find() the 1st element in the container */
 /* return an iterator pointing to the located element or end() */
 auto it = std::find(nums.begin(), nums.end(), 2);   // if found 2, it!=nums.ends()
+/* find_if(), find_first_of(), adjacent_find() */
 
 /* search() the 1st occurrence of the sequence of elements */
 std::vector<int> v1 = {9,1,2,3,4,1,1};
 auto it = std::search(v1.begin(), v1.end(), nums.begin(), nums.end());
 if (it != v1.end()) {
-    std::cout << "nums is presented at index " << std::distance(v1.begin(), it) << std::endl;
+    std::cout << "nums[] is presented at index " << std::distance(v1.begin(), it) << std::endl;
 }
 
 /* min_element(), max_element() return the iterator of min/max element */
@@ -66,6 +67,11 @@ std::pair<int, int> pairint = std::minmax({3, 12, -1, -10}); // -10. 12
 
 /* count() the number of specific element */
 std::vector<int>::iterator it = std::count(v1.begin(), v1.end(), 1);
+/* count_if() */
+
+/* std::all_of, std::any_of, std::none_of return condition over a range of elements */
+std::vector<int> v2 {1, 2, 3, 4, 5, 6, 7, 8, 9};
+std::any_of(v2.begin(), v2.end(), [](int i){return i%2;}); // true
 
 /* forward() enables to write function templates where the arguments are identically forwarded */
 template <typename T, typename... Args>
@@ -76,6 +82,22 @@ struct MyData {
     MyData(int, double, char){};
 };
 MyData myData1 = createT<MyData>(1, 2.3, 'a');
+
+/* std::equal() checks if both ranges are equal */
+std::string str1{"Only For Testing Purpose."};
+std::string str2{"Only For Testing purpose."}
+std::equal(str1.begin(), str1.end(), str2.begin()); // false
+std::equal(str1.begin(), str1.end(),
+            str2.begin(),
+            [](char c1, char c2){return std::toupper(c1) == std::toupper(c2);}); // true
+
+/* std::lexicographical_compare() checks if first range is smaller than the second */
+
+/* std::mismatch() finds the first position at which both ranges are not equal */
+auto itr_pair = std::mismatch(str1.begin(), str1.end(), str2.begin());
+// if str1 == str2, then itr_pair.first == str1.end()
+*itr_pair.first;    // P
+*itr_pair.second;   // p
 ```
 
 #### Reference Wrappers
