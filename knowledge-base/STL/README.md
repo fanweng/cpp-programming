@@ -142,8 +142,52 @@ std::cout << myInt << " " << myInt.get() << std::endl; // 2 2
 /* copy() a range of elements to another range */
 std::copy(src_vector.begin(), src_vector.end(), dest_vector.begin());
 
+/* replace() elements in a range */
+std::string str {"only for test"};
+std::replace(str.begin(), str.end(), ' ', '1'); // only1for1test
+str::string str2;
+std::replace_copy_if(str.begin(), str.end(), std::back_inserter(str2), [](char c){return c == '1';}, '2'); // str2=only2for2test
+
+/* remove() a range of elements */
+std::vector<int> v {0, 1, 2, 3, 4, 5, 6, 7, 8, 9,10};
+auto fwdIt = std::remove_if(v.begin(), v.end(), [](int a){return a%2;});
+v.erase(fwdIt, v.end()); // 0,2,4,6,8,10
+/* or, a compact way */
+// v.erase(std::remove_if(v.begin(), v.end(), [](int a){return a%2;}), v.end());
+
 /* fill() a range of elements with specific value */
 std::fill(v.begin(), v.end(), -1);
+/* generate() a range of elements */
+int genNext() {
+    static int next {0};
+    return ++next;
+}
+std::vector<int> v(8, 0);
+std::generate_n(v.begin(), 5, genNext); // 1,2,3,4,5,8,8,8
+
+/* move() a range of elements to destination */
+std::vector<int> src {0,1,2,3,4,5,6,7};
+std::vector<int> des(10);
+std::move(src.begin(), src.end(), des.begin());
+// src remains the same
+// des = 0,1,2,3,4,5,6,7,0,0
+
+/* transform() applies a unary/binary callable to a range and copies the modified to destination */
+std::string str {"abcd"};
+std::transform(str.begin(), str.end(), str.begin(), [](char c){ return std::toupper(c); }); // ABCD
+
+/* rotate() makes the picked element as the new first element */
+std::string str {"12345"};
+std::rotate(str.begin(), str.begin()+2, str.end()); // 3,4,5,1,2
+
+/* shuffle() */
+std::vector<int> v {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+std::shuffle(v.begin(), v.end(), std::default_random_engine(seed));
+
+/* unique() removes the duplicates */
+std::vector<int> v {0, 0, 2, 3, 4, 0};
+v.erase(std::unique(v.begin(), v.end()), v.end()); // 0,2,3,4
 
 /* reverse() elements in a range */
 std::reverse(v.begin(), v.end());
@@ -167,6 +211,25 @@ class MyData{
     MyData(const MyData& m) = default; // copy constructor
     MyData& operator = (const myData& m) = default; // copy assignment
 }
+
+/* partition() decompose a set into subsets */
+bool isOdd(int i){ return (i%2); }
+std::vector<int> vec{1, 4, 3, 8, 5, 6};
+auto parPoint_it = std::partition(vec.begin(), vec.end(), isOdd);
+// 1,3,5,4,8,6, and parPoint_it points to 4
+
+/* make_heap() creates a heap */
+std::vector<int> vec{4, 3, 2, 1, 5, 6, 7, 9, 10};
+std::make_heap(vec.begin(), vec.end()); // 10,9,7,4,5,6,2,3,1
+vec.push_back(100); // 10,9,7,4,5,6,2,3,1,100
+std::is_heap_until(vec.begin(), vec.end()); // itr points to 100
+std::push_heap(vec.begin(), vec.end()); // 100 10 7 4 9 6 2 3 1 5
+std::pop_heap(vec.begin(), vec.end());  // 10 9 7 4 5 6 2 3 1 100
+vec.resize(vec.size() - 1); // 10,9,7,4,5,6,2,3,1
+
+/* next_permutation(), prev_permutation() return the next bigger or previous smaller permutation of the newly ordered range */
+
+/* numeric operations: accumulate(), adjacent_difference(), inner_product(), partial_sum(), etc. */
 ```
 
 ### Sorting and Searching
@@ -176,7 +239,7 @@ class MyData{
 std::sort(v.begin(), v.end());
 std::sort(v.begin(), v.end(), greater<int>());   // use operator >, descending order
 
-/* binary_search() finds the matching value */
+/* binary_search() finds the matching value after sort() */
 bool found = std::binary_search(v.begin(), v.end(), val);
 
 /* merge() combines two sorted ranges into one sorted range */
