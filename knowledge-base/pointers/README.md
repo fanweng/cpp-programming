@@ -1,5 +1,7 @@
 # Pointers
 
+
+
 ## I. Pointers Basics
 
 A pointer stores the value of an address for a variable or a function. It is very useful:
@@ -36,17 +38,17 @@ std::cout << *(arr + 1) << *(arr_ptr + 1) << std::endl;
 int a {100};
 int b {10};
 
-const int *ptr1 {&a};   // pointer to constant
+const int* ptr1 {&a};   // pointer to constant
 *ptr1 = 2;  // Error
-ptr1 = &b;   // Ok
+ptr1 = &b;  // Ok
 
-int *const ptr2 {&a};   // constant pointer
+int* const ptr2 {&a};   // constant pointer
 *ptr2 = 2;  // Ok
-ptr2 = b;   // Error
+ptr2 = &b;  // Error
 
-const int *const ptr3 {&a}; // constant pointer to constant
+const int* const ptr3 {&a}; // constant pointer to constant
 *ptr3 = 2;  // Error
-ptr3 = b;   // Error
+ptr3 = &b;  // Error
 ```
 
 #### Pointers in functions
@@ -99,7 +101,7 @@ for (auto const &num : v) {
 
 ```c++
 int x {10};             // x is L-value
-string name {"Mike"};  // name is L-value
+string name {"Mike"};   // name is L-value
 ```
 
 - R-value
@@ -115,6 +117,8 @@ int y = x + 10;         // x + 10 is R-value
 string name {"Mike"};   // "Mike" is R-value
 int maxNum = max(0,1);  // max(0,1) is R-value
 ```
+
+
 
 ## II. Raw pointers vs. Smart pointers
 
@@ -154,10 +158,14 @@ auto ptrA = std::make_unique<Song>("May it be", "Enya");
 auto ptrB = std::move(ptrA);
 
 std::vector<std::unique_ptr<int>> vec;
-std::unique_ptr<int> ptr {new <int>(10)};
+std::unique_ptr<int> ptr {new int(10)};
 vec.push_back(ptr);             // error, push_back actually copies
 vec.push_back(std::move(ptr));  // Ok
+
+std::unique_ptr<int, MyIntDeleter> ptrC(new int(10), myIntDeleter()); // custom deleter
 ```
+
+Common methods: `get()`, `get_deleter()`, `release()`, `reset()`, `swap()`.
 
 - `unique_ptr::get`, `unique_ptr::release`, `unique_ptr::reset`
     * `get()` returns the *stored pointer* which points to the object managed by the `unique_ptr`. The `unique_ptr` still has the ownership of the pointer, i.e. responsible for deleting the managed data at some point.
@@ -187,6 +195,8 @@ A `shared_ptr` shares the **ownership** of a resource.
 
 A `shared_ptr` can be copied, passed by value in function arguments, and assigned to other `shared_ptr` instances. All instances point to the **same object**, and point to the **same control block** which keeps the reference count. When reference count reaches 0, the control block deletes the memory resource and itself.
 
+Common methods: `get()`, `get_deleter()`, `unique()`, `reset()`, `use_count()`.
+
 ```c++
 auto ptrA = std::make_shared<Song>("May it be", "Enya");
 auto ptr1 = ptrA;
@@ -205,6 +215,8 @@ ptrC = std::make_shared<Song>("Elton John", "I'm Still Standing");
 
 A `weak_ptr` holds a weak reference to an object that is owned by a `shared_ptr` without increasing the reference count. It must be converted to `shared_ptr` in order to access the referenced object. A `weak_ptr` will only return a *non-null* `shared_ptr` when there is a `shared_ptr` somewhere keeping the object alive.
 
+Common methods: `expired()` checks if the resource is deleted, `lock()` creates a `shared_ptr` on the resource, `swap()`, `reset()`, `use_count()`.
+
 `weak_ptr` helps to break the *circular references (cyclic dependency)* between `shared_ptr` instances. Take this `C->A<->B` as an example: C points to the circular reference entity made by A and B.
 
 - If all pointers are `shared_ptr`: when going out of the scope, only C will be released properly. After C is deleted, A cannot be released because the reference count for A is non-zero (pointed by B). Thus, B cannot be released, too.
@@ -222,6 +234,7 @@ public:
 };
 class B {
     std::shared_ptr<A> a_ptr; // make this a weak_ptr to prevent the circular reference issue
+    // std::weak_ptr<A> a_ptr;
 public:
     void set_A(std::shared_ptr<A> &a) { a_ptr = a; }
     B();
@@ -256,4 +269,100 @@ shared_ptr<Any_Class> ptr ( new Any_Class{}, [] (Any_Class *ptr) {
     // your custom deleter code here
     delete ptr;
 });
+```
+
+
+
+## IV. Passing smarter pointers
+
+#### Rule 32 - Passing `unique_ptr<Widget>`
+
+Take a `unique_ptr<Widget>` parameter to express that function assumes ownership of a Widget.
+
+```c++
+void sink(std::unique_ptr<Widget> uniqPtr) { /* do something */ }
+auto uniqPtr = std::make_unique<Widget>(0);
+sink(std::move(uniqPtr));
+// sink(uniqPtr); // error, cannot copy
+```
+
+#### Rule 33 - Passing `unique_ptr<Widget>&`
+
+Take a `unique_ptr<Widget>&` parameter to express that function reseats the Widget.
+
+```c++
+void reseat(std::unique_ptr<Widget>& uniqPtr) {
+    uniqPtr.reset(new Widget(1));
+    /* do something */
+}
+auto uniqPtr = std::make_unique<Widget>(0);
+reseat(uniqPtr);
+// reseat(std::move(uniqPtr)); // error
+```
+
+#### Rule 34 - Passing `shared_ptr<Widget>`
+
+Take a `shared_ptr<Widget>` parameter to express that function is part owner of the Widget.
+
+```c++
+void share(std::shared_ptr<Widget> shaWid) {
+    /* reference counter ++ at start of function body */
+    /* reference counter -- at the exiting of function*/
+    /* Widget object will stay alive */
+}
+```
+
+#### Rule 35 - Passing `shared_ptr<Widget>&`
+
+Take a `shared_ptr<Widget>&` parameter to express that function might reseat the shared pointer.
+
+```c++
+void reseat(std::shared_ptr<Widget>& shaWid) {
+    /* reference counter doesn't change */
+    /* Widget object may or may not stay alive */
+    /* function can reseat the resource, more like borrowing the resource with the ability to reseat it */
+}
+```
+
+#### Rule 36 - Passing `const shared_ptr<Widget>&`
+
+Take a `const shared_ptr<Widget>&` parameter to express that function might retain a reference count to the object.
+
+```c++
+void mayShare(const std::shared_ptr<Widget>& shaWid) {
+    /* reference counter doesn't change */
+    /* function cannot reseat the resource, only borrowing the resource */
+    /* better to use a pointer Widget* or a reference Widget& in this case */
+}
+```
+
+#### Rule 37 - Don't pass a pointer or reference obtained from an aliased smart pointer
+
+> **Aliased smart pointer:** when a pointer or a reference to an object managed by a smart pointer, it may suddenly become dangling if the smart pointer is destroyed or modified.
+
+```c++
+void oldFunc(Widget* wid) {
+    /* do something with wid */
+    /* but no guarantee that the Widget object will stay alive during execution */
+}
+void shared(std::shared_ptr<Widget>& shaPtr) {
+    /* reference count doesn't increase */
+    oldFunc(*shaPtr);
+}
+auto globShared = std::make_shared<Widget>(0);
+shared(globShared);
+
+/* Solution 1 */
+void shared1(std::shared_ptr<Widget> shaPtr) {
+    /* reference count ++ because passed by copy */
+    oldFunc(*shaPtr);
+}
+
+/* Solution 2 */
+void shared2(std::shared_ptr<Widget>& shaPtr) {
+    /* reference count doesn't increase because passed by reference */
+    auto keepAlive = shaPtr; // but this copy increase the reference count
+    oldFunc(*shaPtr);
+}
+
 ```

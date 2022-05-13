@@ -15,6 +15,7 @@ In terms of usages:
 + [Multithreading](./multithreading.md)
 + [Type Traits](./type-traits.md)
 + [Time](./time.md)
++ [Smart Pointer](../pointers/README.md)
 
 ## 1. Algorithms
 
