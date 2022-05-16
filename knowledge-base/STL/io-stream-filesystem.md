@@ -1,3 +1,5 @@
+# I/O Stream and Filesystem
+
 # Streams
 
 - Stream is an interface between the program and the input/output devices
@@ -13,7 +15,9 @@
     * `cin`: standard input stream, connected to keyboard by default, buffered
     * `cout`: standard output stream, default to console, buffered
     * `cerr`: standard error stream, unbuffered
-    * `clog`: standard log stream, unbuffered
+    * `clog`: standard log stream, buffered
+
+
 
 # Stream Manipulators
 
@@ -83,7 +87,65 @@ std::cout << std::setw(10) << std::left << num << str << std::endl; // formats o
 
 `endl`, `flush`, `ws`, ...
 
-# Files
+
+
+# State of Streams
+
+| Flags | Query of the Flag | Description |
+|------------|--------------|-------------|
+| `std::ios::goodbit` | `stream.good()` | no bit is set          |
+| `std::ios::eofbit`  | `stream.eof()`  | end-of-file bit is set |
+| `std::ios::failbit` | `stream.fail()` | error, false formatted reading, EOF, error opening, etc. |
+| `std::ios::badbit`  | `stream.bad()`  | undefined behavior     |
+
+The state of a stream can be read and set: `clear()`, `rdstate()`, `setstate(flag)`, etc.
+
+
+
+# Input Functions
+
++ `is.get(ch)`: read one character
++ `is.get(buf, num)`: read at most `num` characters into `buf`
++ `is.getline(buf, num, delim)`: read at most `num` characters into `buf` until `delim`
++ `is.gcount()`: return number of characters extracted from `is` by last operation
++ `is.ignore(size, delim)`: ignore `size` characters until `delim`
++ `is.peek()`: get one character from `is` without consuming it
++ `is.unget()`: push the last read character back to `is`
++ `is.putback(ch)`: push `ch` character onto `is`
+
+
+
+# Format Specifier
+
+#### Display boolean
+
++ `std::boolalpha`: display the boolean as a word
++ `std::noboolalpha`: display the boolean as a number (default)
+
+#### Set field width and fill character
+
++ `std::setw(val)`: set field width to `val`
++ `std::setfill(c)`: set the fill character to `c`, default is space
+
+#### Alignment of text
+
++ `std::left`, `std::right`, etc.
+
+#### Positive sign and letter case
+
++ `std::showpos`, `std::noshowpos` (default), `std::uppercase`, `std::lowercase`
+
+#### Numeric base
+
++ `std::oct`, `std::dec` (default), `std::hex`, `std::showbase`, `std::noshowbase` (default)
+
+#### Floating point numbers
+
++ `std::setprecision(val)`, `std::showpoint`, `std::noshowpoint` (default), `std::fixed`, `std::scientific`, etc.
+
+
+
+# File Streams
 
 ## Basics
 
@@ -145,7 +207,25 @@ void main() {
 }
 ```
 
-# Strings
+#### Random access
+
+| Navigating in a file stream | Description |
+|-----------------------------|-------------|
+| `file.tellg()`    | return the **read** position of `file` |
+| `file.seekg(pos)` | set the the **read** position to `pos` |
+| `file.seekg(off, rpos)` | set the the **read** position to offset relative to `pos` |
+| `file.tellp()`    | return the **write** position of `file` |
+| `file.seekp(pos)` | set the the **write** position to `pos` |
+| `file.seekp(off, rpos)` | set the the **write** position to offset relative to `pos` |
+
++ `rpos` have three values: `std::ios::beg`, `std::ios::cur`, `std::ios::end`
++ `off` has to be a number.
+
+> If randomly accessing, C++ runtime doesn't check the file boundaries!
+
+
+
+# String Streams
 
 String streams allow to read/write strings in memory as we read/write files, especially useful for data validation.
 

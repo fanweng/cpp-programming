@@ -37,7 +37,7 @@ str.at(20); // boundary check, throw an exception
 std::ifstream file("./test.txt");
 std::vector<std::string> lines;
 std::string line;
-while (getline(file, line)) { // default delimiter is new line
+while (std::getline(file, line)) { // default delimiter is new line
     lines.push_back(line);
 }
 ```
