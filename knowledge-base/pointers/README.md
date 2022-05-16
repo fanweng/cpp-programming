@@ -364,5 +364,4 @@ void shared2(std::shared_ptr<Widget>& shaPtr) {
     auto keepAlive = shaPtr; // but this copy increase the reference count
     oldFunc(*shaPtr);
 }
-
 ```
