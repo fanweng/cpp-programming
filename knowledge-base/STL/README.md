@@ -16,6 +16,7 @@ In terms of usages:
 + [Type Traits](./type-traits.md)
 + [Time](./time.md)
 + [Smart Pointer](../pointers/README.md)
++ [Regular Expressions](./regex.md)
 
 ## 1. Algorithms
 
