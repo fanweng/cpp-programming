@@ -3,7 +3,7 @@
 ## Specialties in Embedded Programming
 
 + high performance requirements up to real-time
-+ safety-critical systems
++ [safety-critical systems](./safety-critical-system.md)
 + reduced resources as RAM and CPU power
 + more parallel tasks
 
