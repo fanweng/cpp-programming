@@ -135,3 +135,56 @@ Add<std::string> addStr = Add<std::string>();   // assertion
 
 static_assert(sizeof(void*) >= 8, "64-bit addressing is required");
 ```
+
+### r-value and l-value
+
++ R-value is meeting one of the following requirements:
+    - temporary object
+    - object without a name
+    - object from which we can't get the address
+
+R-value references are declared by two `&&` symbols.
+
+R-values can be bound to r-value references or **const** l-value references.
+
++ L-value:
+    - has a name
+    - has an address
+
+L-value references are declared by one `&` symbol.
+
+L-values can be bound to l-value references.
+
+```c++
+MyData myData;
+MyData& lvalueRef(myData);              // bind lvalue to lvalue ref
+MyData&& rvalueRef(MyData());           // bind rvalue to rvalue ref
+const MyData& constLvalueRef(MyData()); // bind rvalue to const lvalue ref
+
+MyData data = std::move(myData);    // std::move creates an rvalue
+int a, b = 0;
+int c = a + b;                      // a+b is an rvalue, though a, b are lvalue separately
+```
+
+### Copy vs. move semantic
+
++ Copy
+    - expensive
+    - `std::bad_alloc` will be thrown due to out of memory
+    - a class to support copy semantic: copy constructor + copy assignment operator
+
++ Move 
+    - cheap
+    - resource of the move operation is afterwards in a *valid but unspecified* state
+    - a class to support move semantic: move constructor + move assignment operator
+    - if move semantic is not defined, it will fall back to copy semantic
+
+```c++
+class MyData {
+    MyData(MyData&& m) = default;                   // move constructor
+    MyData& operator=(MyData&& m) = default;        // move assignment
+
+    MyData(const MyData& m) = default;              // copy constructor
+    MyData& operator=(const MyData& m) = default;   // copy assignment
+};
+```
