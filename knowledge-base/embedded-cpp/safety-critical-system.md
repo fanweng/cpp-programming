@@ -188,3 +188,43 @@ class MyData {
     MyData& operator=(const MyData& m) = default;   // copy assignment
 };
 ```
+
+### Perfect forwarding
+
+> Perfect forwarding: a function template forwards its arguments without changing their *lvalue or rvalue characteristics*.
+
+**Universal reference** `(Arg&& a)` can bind lvalues or rvalues, sometime it is called *perfect forwarding reference*.
+
+`std::forward` is a conditional move operation:
++ when the argument is an rvalue, it moves its argument
++ when the argument is an lvalue, it copies its argument
+
+```c++
+template <typename T, typename Arg>
+T create(Arg&& a) {
+    return T(std::forward<Arg>(a));
+}
+int five = 5;
+int m1 = create<int>(five); // lvalue
+int m2 = create<int>(5);    // rvalue
+```
+
+> Variadic template: a template that get an arbitrary number of arguments
+
+Parameter pack, i.e. **ellipse** `...`:
++ on the left of `Args`, the parameter pack will be packed
++ on the right of `args`, the parameter pack will be unpacked
+
+```c++
+template <typename T, typename ... Args>
+T create(Args&& ... args) {
+  return T(std::forward<Args>(args)...);
+}
+
+struct MyStruct {
+    MyStruct(int i, double d, std::string s) {}
+};
+
+double m1 = create<double>();                       // accept no argument
+MyStruct m2 = create<MyStruct>(100, 3.14, "test");  // accept three arguments
+```
