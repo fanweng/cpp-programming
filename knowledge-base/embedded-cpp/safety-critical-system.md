@@ -120,3 +120,18 @@ std::cout << "1.0_km + 2.0_m - 40.0_cm: " << 1.0_km + 2.0_m - 40.0_cm << std::en
 | `std::chrono::milliseconds` | `5ms`      |
 | `std::chrono::microseconds` | `5us`      |
 | `std::chrono::nanoseconds`  | `5ns`      |
+
+### Assertions at compile time
+
+`static_assert` evaluates constant expressions at compile-time, which allows to check if ported code on the new platform supports the requirements.
+
+```c++
+template<class T>
+struct Add {
+    static_assert(std::is_arithmetic<T>::value, "T must be an arithmetic type");
+};
+Add<int> addInt = Add<int>();                   // ok
+Add<std::string> addStr = Add<std::string>();   // assertion
+
+static_assert(sizeof(void*) >= 8, "64-bit addressing is required");
+```
