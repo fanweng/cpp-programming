@@ -10,6 +10,8 @@ C++20 introduces atomic smart pointers, extensions of futures, coroutines, trans
 
 ### Memory Model
 
+[Read me...](./memory-model.md)
+
 + Atomic operations
     - operations can be performed without interruption
 + Partial ordering of operations
