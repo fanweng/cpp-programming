@@ -33,8 +33,9 @@ void main() {
     Bar a = 's';        // Compile-time error: can't convert 's' to an object of type Bar
     Bar b = 3;          // Compile-time error: can't convert 3 to an object of type Bar
     Bar c(3);           // OK: calls Bar::Bar(int)
-    Bar d = Bar(3);     // OK: calls Bar::Bar(int)
-    Bar e = (Bar)3;     // OK: calls Bar::Bar(int)
+    Bar d{3};           // OK: calls Bar::Bar(int)
+    Bar e = Bar(3);     // OK: calls Bar::Bar(int)
+    Bar f = (Bar)3;     // OK: calls Bar::Bar(int)
 }
 ```
 

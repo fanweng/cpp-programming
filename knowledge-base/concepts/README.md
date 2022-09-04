@@ -16,7 +16,7 @@ Use `class` for active objects with default private access members, implementing
 
 ## Classes and Objects
 
-Class is a blueprint from which objects are created. It has attributes (data) and methods (functions).
+Class is a blueprint from which objects are created. It has attributes (data members) and methods (member functions).
 
 Object represents a specific instance of a class.
 
@@ -25,6 +25,8 @@ class Player {
 private:
     std::string name;
     int health;
+    // data members must be defined at compile time
+    std::string skill[5];
 public:
     void talk(std::string);
 };
@@ -42,13 +44,15 @@ delete mary;
 
 A special member method, invoked during the object creation. It has the same name as the class, no return type, and can be overloaded. If no constructor provided in the class, C++ will use default no-argument constructor with no initialization.
 
+Constructors can be overloaded, i.e. multiple constructors can exist with the same name/usage but have different arguments.
+
 - **Initialization list**
 
 A better way to create an object with initial attribute values. Assignment in the constructor is a less efficient way because the object is first created with empty values then is assigned with the initial values, one step more than the initialization list.
 
 - **Copy constructor**
 
-Called when an object is copied:
+Called when an object is **copied**:
 1. passing object *by value* as a parameter, `void display_player(Player p)`
 2. returning an object from a function *by value*, `return player_obj`
 3. construct one object based on another with the same class, `Player another_player {player_obj}`
@@ -76,7 +80,7 @@ Best practices:
 
 - **Move ctor**
 
-C++11 introduced move constructor which moves an object instead of copies it. Copy constructor doing deep copy can have significant performance bottleneck. For example: 
+C++11 introduced `move` constructor which moves an object instead of copies it. Copy constructor doing deep copy can have significant performance bottleneck. For example: 
 
 ```c++
 /* suppose data is a raw pointer data member in the Deep class */
@@ -105,6 +109,11 @@ vector<Player> vec; // with move ctor is defined
 // temp object then is dtor-ed and its pointer is null-ed
 vec.push_pack(Player{"mike"});
 ```
+
+- **Explicit ctor**
+
+`explicit` keyword raises the compilation error when the implicit call to a class constructor: [keywords/README.md : keywords/explicit](../keywords/README.md)
+
 
 - **Destructor**
 
@@ -138,6 +147,69 @@ Player::Player(std::string name_val, int health_val)
 }
 Player::Player(const Player &source)
     : name{source.name}, health{source.health}, xp{source.xp} {
+}
+```
+
+- **Request and Suppress Methods**
+
+Compiler can generate implicitly special methods if `=default` is used.
+
+```c++
+class SomeType{
+public:
+  SomeType() = default; // tell compiler to generate a default ctor
+  SomeType(int value) { // user defines the ctor
+    std::cout << "SomeType(int) " << std::endl;
+  };
+  explicit SomeType(const SomeType&) = default; // to generate a explicit default copy ctor
+  virtual ~SomeType() = default; // to generate a virtual default dtor
+};
+
+int main(){
+  SomeType someType; // call default ctor
+  SomeType someType2(2);
+  SomeType someType3(someType2); // call copy ctor
+}
+```
+
+Compiler can restrict special methods if `=delete` is defined.
+
+```c++
+class NonCopyableClass {
+public:
+  NonCopyableClass() = default;
+  // disallow copying
+  NonCopyableClass& operator =(const NonCopyableClass&) = delete;
+  NonCopyableClass (const NonCopyableClass&) = delete;
+  // allow moving
+  NonCopyableClass& operator =(NonCopyableClass&&) = default;
+  NonCopyableClass (NonCopyableClass&&) = default;
+};
+
+class TypeOnStack {
+public:
+  void* operator new(std::size_t) = delete;
+};
+
+class TypeOnHeap {
+public:
+  ~TypeOnHeap() = delete;
+};
+
+void onlyDouble(double){}
+template <typename T>
+void onlyDouble(T) = delete;
+
+int main(){
+  NonCopyableClass nonCopyableClass; // ok: default ctor
+  TypeOnStack typeOnStack; // ok: object created on stack
+  TypeOnHeap* typeOnHeap = new TypeOnHeap; // ok: object created on heap
+  onlyDouble(3.14); // ok: double type argument
+
+  NonCopyableClass nonCopyableClass2(nonCopyableClass); // error: copy ctor disallowed
+  TypeOnStack* typeOnHeap2 = new TypeOnStack; // error: cannot create on heap
+  TypeOnHeap typeOnStack2; // error: cannot create on stack
+  onlyDouble(2011); // error: int argument not accepted
 }
 ```
 
