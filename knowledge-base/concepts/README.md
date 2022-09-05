@@ -537,6 +537,25 @@ public:
     + details of APIs are not important, only input/output of member functions matter to user - abstraction using class
     + implementation of APIs are not visible, only declarations are exposed - abstraction using header file
 
+## Relationships Between Classes
+
+#### Composition
+
+- **part-of** relationship where the part must constitute part of the whole object
+- parent object contains child objects
+- lifetime of the owned objects depend on the lifetime of the owner object
+
+#### Aggregation
+
+- **has-a** relationship where the owned object can continue to exist when owner object gets deleted
+- parent object only contains a **reference** to the child
+- lifetime of the owned objects doesn't depend on the lifetime of the owner
+
+#### Association
+
+- **has-a** relationship where the connection is between unrelated objects of the classes
+- lifespans are not directly tied to each other
+
 ## Exceptions
 
 When an error occurs, C++ will throw an exception (error).
