@@ -527,6 +527,16 @@ public:
 };
 ```
 
+## Data Hiding
+
+- Encapsulation
+    + private data members cannot be accessed directly from the outside
+    + getter/setter member functions are provided to access them
+
+- Abstraction
+    + details of APIs are not important, only input/output of member functions matter to user - abstraction using class
+    + implementation of APIs are not visible, only declarations are exposed - abstraction using header file
+
 ## Exceptions
 
 When an error occurs, C++ will throw an exception (error).
