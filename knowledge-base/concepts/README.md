@@ -341,6 +341,63 @@ std::istream &operator>>(std::istream &in, MyString &rhs) {
 }
 ```
 
+#### Overloading conversion operators
+
+Suppose `MyClass` can perform conversion from `class TypeA` to `MyClass` and from `MyClass` to `class TypeB`.
+
+> TypeB <- `operator TypeB()` <- MyClass <- `MyClass(TypeA)` <- TypeA
+
+```c++
+class TypeA{};
+class TypeB{};
+class MyClass {
+public:
+    MyClass(){}
+    // if removing explicit specifier, implicit conversion then will be allowed
+    explicit MyClass(TypeA){}
+    explicit operator TypeB(){ return TypeB(); }
+};
+void onlyMyClassWorks(MyClass){};
+void onlyTypeBWorks(TypeB){};
+
+TypeA a;
+MyClass myClass1(a);    // explicit invocation
+MyClass myClass2 = a;   // error: implicit conversion
+onlyMyClassWorks(a);    // error: implicit conversion
+
+MyClass mc;
+TypeB b1(mc);           // explicit invocation
+TypeB b2 = mc;          // error: implicit conversion
+onlyTypeBWorks(mc);     // error: implicit conversion
+```
+
+#### Overloading call operator `()`
+
+We can call objects as a function object, or wrongly, as functor.
+
+```c++
+class SumMe {
+private:
+    int sum;
+public:
+    SumMe() : sum(0) {}
+    void operator()(int x) {
+        sum += x;
+    }
+    int getSum() const {
+        return sum;
+    }
+};
+
+std::vector<int> v = {1, 2, 3};
+SumMe s = std::for_each(v.begin(), v.end(), SumMe());
+s.getSum(); // 6
+
+/* also can use lambda function */
+int newS = 0;
+std::for_each(v.begin(), v.end(), [&newS](int x){ sum += x;});
+```
+
 ## Inheritance
 
 It is possible to inherit attributes and methods from one class to another.
@@ -458,19 +515,19 @@ The compiler will not hardcode the method call, it will compile a lookup table t
 
 It is achieved by using inheritance and virtual functions, and it is called by Base class pointer/reference.
 
-- **Virtual functions:** are overridden functions bound dynamically. Unlike redefined functions, which are bound statically.
+- **Virtual functions:** are overridden functions bound dynamically. Unlike redefined functions, which are bound statically. It ensures the base class pointer/reference can execute the derived class's method function.
 
-- **Virtual destructor:** if a Derived class is destroyed by deleting its storage via the Base class pointer, the behavior is undefined in the C++ standard. Therefore, if a class has virtual functions, a public virtual destructor *MUST* be provided
+- **Virtual destructor:** if a Derived class is destroyed by deleting its storage via the Base class pointer, the behavior is undefined in the C++ standard. Therefore, if a class has virtual functions, a public virtual destructor *MUST* be defined
 
 ```c++
 class Account {
 public:
     virtual bool deposit(double amount);
-    virtual ~Account();
+    virtual ~Account() {}
 };
 class Savings_Account : public Account {
     virtual bool deposit(double amount); // "virtual" keyword is not required in the derived class
-    virtual ~Savings_Account();
+    virtual ~Savings_Account() {}
 };
 Account *p1 = new Account();
 Account *p2 = new Savings_Account();
@@ -481,7 +538,7 @@ delete p2;
 ```
 #### `override` specifier
 
-It is added to the end of Derived class virtual function method, telling compiler to ensure the function will override the the exactly same Base class virtual function.
+It is added to the end of Derived class virtual function method, telling compiler to ensure the function will override the the *exactly* same Base class virtual function.
 
 #### `final` specifier
 
