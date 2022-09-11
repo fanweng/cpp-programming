@@ -409,6 +409,11 @@ Both *inheritance* and *composition* reuse code but they are different:
 - Inheritance "is-a" relationship: student "is a" person
 - Composition "has-a" relationship: person "has a" book
 
+Advantages of Inheritance:
++ avoid duplication of code
++ extensibility
++ data hiding
+
 ```c++
 class MyClass1 {
 };
@@ -446,7 +451,7 @@ Copy/Move constructors are not inherited from the Base class. If we don't provid
 In the following code, `other` is a Derived object and it Derived object content is **sliced** out to fit in the Base class copy ctor.
 
 ```c++
-Derivded::Derived(const Derived &other)
+Derived::Derived(const Derived &other)
     : Base(other), {Derived initialization list} {
     // Code
 }
@@ -498,6 +503,45 @@ public:
     }
 };
 ```
+
+#### Diamond Inheritance Problem
+
+A derived class inherits the same member from multiple parent classes.
+
+```c++
+class A {
+protected:
+    int ID;
+public:
+    A() : ID(0) {}
+};
+
+class B : public A {
+public:
+    int length;
+};
+
+class C : public A {
+public:
+    int radius;
+};
+
+class D : public B, public C {
+public:
+    int getID() { return ID; }
+};
+
+int main(void) {
+    D d;
+    cout << d.getID(); // Error: reference to 'ID' is ambiguous
+    return 0;
+}
+```
+
++ Solution 1: `int getID() { return B::ID; }` or `C::ID`
+    * disadvantage: still have two copies of `ID` in the program
+
++ Solution 2: `class B : virtual public A` and `class C : virtual public A`
 
 ## Polymorphism
 

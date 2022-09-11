@@ -8,6 +8,21 @@ Access specifiers define how the members (attributes and methods) of a class can
 * `private`: members cannot be accessed or viewed from outside the class.
 * `protected`: members cannot be accessed from outside the class, however, they can be accessed in **inherited**/**derived** classes (still not accessible by the *object* of class).
 
+#### Mode of Inheritance
+
+```c++
+class derived : inheritance_mode base {}
+```
+
+Members accessible in the *derived* class or in the main function?
+
+| Base Class Member Access Specifier | `public` Mode of Inheritance | `protected` Mode | `private` Mode |
+|-------------|-----------|-----------|---------|
+| `public`    | Public    | Protected | Private |
+| `protected` | Protected | Protected | Private |
+| `private`   | Hidden    | Hidden    | Hidden  |
+
+
 ## `virtual`
 
 A `virtual` member function is declared within a base class and is overridden by a derived class. They are mainly used to achieve **Runtime Polymorphism** and the function resolution is done at runtime. Virtual functions should be accessed using pointer or reference of base class type to achieve runtime polymorphism.
