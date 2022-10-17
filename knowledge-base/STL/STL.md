@@ -8,7 +8,7 @@ Four [STL components](components/stl-components.md):
 - Iterators
 - Functions
 
-Examples of [STL usages](stl-usages.md):
+Examples of [STL usages](usages/stl-usages.md):
 - Numeric Functions
 - Text Processing
 - I/O Stream and Filesystem

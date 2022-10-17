@@ -1,6 +1,6 @@
 # Four STL components
 
-- [Algorithms](components/algorithms.md)
-- [Containers](components/containers.md)
-- [Iterators](components/iterators.md)
-- [Functions](components/functions-functors.md)
+- [Algorithms](algorithms.md)
+- [Containers](containers.md)
+- [Iterators](iterators.md)
+- [Functions](functions-functors.md)

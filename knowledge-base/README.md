@@ -4,4 +4,4 @@ This vault collects essential C++ programming knowledge. For the best result, it
 
 # Contents
 
-[[STL]] - [Link](STL/STL.md)
+[STL](STL/STL.md)

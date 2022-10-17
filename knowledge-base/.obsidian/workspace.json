@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "STL/components/algorithms.md",
                 "mode": "source",
                 "source": true
               }
@@ -158,15 +158,15 @@
   },
   "active": "d45d6e526eceeda9",
   "lastOpenFiles": [
-    "STL/usages/regex.md",
+    "STL/components/stl-components.md",
+    "STL/components/algorithms.md",
+    "STL/STL.md",
+    "README.md",
     "STL/usages/stl-usages.md",
+    "STL/usages/regex.md",
     "pointers/smart-pointer.md",
     "STL/usages/time.md",
     "STL/usages/type-traits.md",
-    "STL/usages/multithreading.md",
-    "STL/usages/io-stream-filesystem.md",
-    "STL/usages/text-processing.md",
-    "STL/components/containers.md",
-    "STL/usages/numeric-functions.md"
+    "STL/usages/multithreading.md"
   ]
 }
