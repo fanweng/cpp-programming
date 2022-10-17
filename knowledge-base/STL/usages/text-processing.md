@@ -11,7 +11,7 @@ const char* cString= str.c_str(); // including the terminating null character
 char buffer[3];
 str.copy(buffer, 3); // copy to C string buffer without null terminator "\0"
 
-std::string str2(buffer, buffer3); // abc
+std::string str2(buffer, 3); // abc
 ```
 
 #### Overloaded `+` operator
@@ -95,4 +95,4 @@ Unique methods:
 + `remove_prefix`: shrink string start forward
 + `remove_suffix`: shrink string end backward
 
-## III. Regular Expression Library `regex`
+## III. Regular Expression Library - [Regex](./regex.md)

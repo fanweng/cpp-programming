@@ -1,6 +1,6 @@
 # Time Library
 
-`<chrono>` library.
+`<chrono>` library
 
 ## Time Point and Duration
 

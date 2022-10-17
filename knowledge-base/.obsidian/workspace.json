@@ -1,0 +1,172 @@
+{
+  "main": {
+    "id": "9dcccbd90187c898",
+    "type": "split",
+    "children": [
+      {
+        "id": "0d8b5e0669f39709",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "96eaaed014279f8b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "README.md",
+                "mode": "source",
+                "source": true
+              }
+            }
+          },
+          {
+            "id": "d45d6e526eceeda9",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "STL/usages/stl-usages.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": true
+              }
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "d4852114a8e97368",
+    "type": "split",
+    "children": [
+      {
+        "id": "6d70137b554406ae",
+        "type": "tabs",
+        "dimension": 64.14285714285714,
+        "children": [
+          {
+            "id": "fc190d654d61e147",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "01e625b74bee8860",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "algorithm",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "id": "b09f4e7f2294264f",
+        "type": "tabs",
+        "dimension": 35.85714285714286,
+        "children": [
+          {
+            "id": "669c15b89b8b3b4d",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "STL/usages/stl-usages.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 217.5
+  },
+  "right": {
+    "id": "6a9253902c292982",
+    "type": "split",
+    "children": [
+      {
+        "id": "96f62909509845ad",
+        "type": "tabs",
+        "dimension": 40.57142857142857,
+        "children": [
+          {
+            "id": "50bca2f97f934df8",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "STL/usages/stl-usages.md",
+                "collapseAll": true,
+                "extraContext": true,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": false
+              }
+            }
+          },
+          {
+            "id": "1f0b9e430b93d71c",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": false
+              }
+            }
+          }
+        ]
+      },
+      {
+        "id": "e211c4668799c8f3",
+        "type": "tabs",
+        "dimension": 59.42857142857143,
+        "children": [
+          {
+            "id": "b263ea7292dcf431",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 481
+  },
+  "ribbon": {
+    "mostRecentAction": ""
+  },
+  "active": "d45d6e526eceeda9",
+  "lastOpenFiles": [
+    "STL/usages/regex.md",
+    "STL/usages/stl-usages.md",
+    "pointers/smart-pointer.md",
+    "STL/usages/time.md",
+    "STL/usages/type-traits.md",
+    "STL/usages/multithreading.md",
+    "STL/usages/io-stream-filesystem.md",
+    "STL/usages/text-processing.md",
+    "STL/components/containers.md",
+    "STL/usages/numeric-functions.md"
+  ]
+}

@@ -4,7 +4,10 @@
 
 Regular expression is a language to describe the text patterns, where the header `<regex>` is used.
 
-Three main concepts: characters, groupings, quantifiers.
+Three main concepts:
+- characters
+- groupings
+- quantifiers
 
 ### Characters
 
@@ -42,7 +45,7 @@ Three main concepts: characters, groupings, quantifiers.
 | An exact number of characters | `{ }`                |
 | Range of number of characters | `{Minimum, Maximum}` |
 
-### Raw string literals
+## Raw string literals
 
 **Use raw string literals** for regular expressions to avoid ugly text.
 
@@ -53,7 +56,7 @@ std::string regex("C\\+\\+");
 std::string regexRaw(R"(C\+\+)");
 ```
 
-### Normal three steps
+## Common three steps
 
 ```c++
 /* Step 1: define regular expression */
