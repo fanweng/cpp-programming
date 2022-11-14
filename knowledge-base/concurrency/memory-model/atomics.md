@@ -1,14 +1,10 @@
-# Memory Model
+# Atomics
 
-Contract: Strong -> Weak
+## Memory model
 
-Single threading (one control flow) -> Multithreading (tasks > threads > condition variables) -> Atomic (sequential consistency > acquire-release semantic > relaxed semantic)
+[Variants of Memory Model](variants-memory-model.md)
 
-## Atomic
-
-### Memory model
-
-1. Strong Memory Model - Sequential Consistency
+1. Strong Memory Model - Sequential Consistency (Default)
 + the instructions of a program are executed in source code order
 + there is a *global order* of all operations on **all threads**
 
@@ -17,6 +13,10 @@ Single threading (one control flow) -> Multithreading (tasks > threads > conditi
 
 3. Between Strong and Weak - Acquire-release Semantic
 + establish an ordering between *read* and *write* operations on the same atomic variable with **different threads**
+
+## Operations
+
+https://en.cppreference.com/w/cpp/atomic
 
 ### `std::atomic_flag`
 
@@ -95,55 +95,3 @@ int main() {
 }
 // Waiting -> Data prepared -> Work done -> mySharedWork={1,2,3}
 ```
-
-## Variants of Memory Model
-
-Synchronization and ordering constraints in C++:
-
-```c++
-enum memory_order {
-    // relaxed
-    memory_order_relaxed,   // no sync and ordering constraints
-
-    // acquire-release
-    memory_order_consume,   // read operation
-    memory_order_acquire,   // read
-    memory_order_release,   // write
-    memory_order_acq_rel,   // read-modify-write
-
-    // sequential consistency
-    memory_order_seq_cst    // read-modify-write, default atomic operation
-}
-```
-
-The acquire-release semantic is transitive, which means if acquire-release semantics between threads (a,b) and threads (b,c), we get an acquire-release semantic between (a,c).
-
-```c++
-std::vector<int> mySharedWork;
-std::atomic<bool> dataProduced(false);
-std::atomic<bool> dataConsumed(false);
-
-void dataProducer() {
-    mySharedWork = {1,0,3};
-    dataProduced.store(true, std::memory_order_release);
-}
-
-void deliveryBoy(){
-    while(!dataProduced.load(std::memory_order_acquire));
-    dataConsumed.store(true, std::memory_order_release);
-}
-
-void dataConsumer(){
-    while(!dataConsumed.load(std::memory_order_acquire));
-    mySharedWork[1] = 2;
-}
-
-int main() {
-  std::thread t1(dataConsumer);
-  std::thread t2(deliveryBoy);
-  std::thread t3(dataProducer);
-  t1.join();
-  t2.join();
-  t3.join();
-  return 0;
-}

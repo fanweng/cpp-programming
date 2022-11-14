@@ -4,30 +4,29 @@
     "type": "split",
     "children": [
       {
-        "id": "0d8b5e0669f39709",
+        "id": "14c8c2cce92b9d06",
         "type": "tabs",
         "children": [
           {
-            "id": "96eaaed014279f8b",
+            "id": "f27e9408d6123aca",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "STL/components/algorithms.md",
+                "file": "concurrency/memory-model/memory-model.md",
                 "mode": "source",
                 "source": true
               }
             }
           },
           {
-            "id": "d45d6e526eceeda9",
+            "id": "234652a5436a806e",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "STL/usages/stl-usages.md",
+                "file": "concurrency/concurrency.md",
                 "mode": "source",
-                "backlinks": false,
                 "source": true
               }
             }
@@ -85,7 +84,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "STL/usages/stl-usages.md"
+                "file": "concurrency/concurrency.md"
               }
             }
           }
@@ -110,7 +109,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "STL/usages/stl-usages.md",
+                "file": "concurrency/concurrency.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -151,22 +150,19 @@
       }
     ],
     "direction": "horizontal",
-    "width": 481
+    "width": 252.5
   },
-  "ribbon": {
-    "mostRecentAction": ""
-  },
-  "active": "d45d6e526eceeda9",
+  "active": "234652a5436a806e",
   "lastOpenFiles": [
-    "STL/components/stl-components.md",
-    "STL/components/algorithms.md",
-    "STL/STL.md",
-    "README.md",
-    "STL/usages/stl-usages.md",
-    "STL/usages/regex.md",
-    "pointers/smart-pointer.md",
-    "STL/usages/time.md",
-    "STL/usages/type-traits.md",
-    "STL/usages/multithreading.md"
+    "concurrency/memory-model/variants-memory-model.md",
+    "concurrency/memory-model/three-memory-barriers.jpg",
+    "concurrency/memory-model/sequential-consistency.md",
+    "concurrency/memory-model/relaxed-semantic.md",
+    "concurrency/memory-model/memory-model.md",
+    "concurrency/memory-model/memory-barriers.md",
+    "concurrency/memory-model/atomics.md",
+    "concurrency/memory-model/acquire-release-semantic.md",
+    "concurrency/concurrency.md",
+    "STL/components/functions-functors.md"
   ]
 }
