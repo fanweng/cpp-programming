@@ -8,18 +8,6 @@
         "type": "tabs",
         "children": [
           {
-            "id": "f27e9408d6123aca",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "concurrency/memory-model/memory-model.md",
-                "mode": "source",
-                "source": true
-              }
-            }
-          },
-          {
             "id": "234652a5436a806e",
             "type": "leaf",
             "state": {
@@ -30,9 +18,45 @@
                 "source": true
               }
             }
+          },
+          {
+            "id": "90ed8a4573005222",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "concurrency/multithreading/shared-data.md",
+                "mode": "source",
+                "source": true
+              }
+            }
+          },
+          {
+            "id": "3e203b808ac8fe87",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "concurrency/multithreading/mutexes.md",
+                "mode": "source",
+                "source": true
+              }
+            }
+          },
+          {
+            "id": "d9b330ca522099cf",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "concurrency/multithreading/locks.md",
+                "mode": "source",
+                "source": true
+              }
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -62,7 +86,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "algorithm",
+                "query": "capture",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -84,7 +108,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "concurrency/concurrency.md"
+                "file": "concurrency/multithreading/locks.md"
               }
             }
           }
@@ -92,7 +116,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 217.5
+    "width": 335.5
   },
   "right": {
     "id": "6a9253902c292982",
@@ -109,7 +133,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "concurrency/concurrency.md",
+                "file": "concurrency/multithreading/locks.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -150,19 +174,19 @@
       }
     ],
     "direction": "horizontal",
-    "width": 252.5
+    "width": 692.5
   },
-  "active": "234652a5436a806e",
+  "active": "d9b330ca522099cf",
   "lastOpenFiles": [
-    "concurrency/memory-model/variants-memory-model.md",
-    "concurrency/memory-model/three-memory-barriers.jpg",
-    "concurrency/memory-model/sequential-consistency.md",
-    "concurrency/memory-model/relaxed-semantic.md",
-    "concurrency/memory-model/memory-model.md",
-    "concurrency/memory-model/memory-barriers.md",
-    "concurrency/memory-model/atomics.md",
-    "concurrency/memory-model/acquire-release-semantic.md",
+    "concurrency/multithreading/mutexes.md",
+    "concurrency/multithreading/shared-data.md",
     "concurrency/concurrency.md",
-    "STL/components/functions-functors.md"
+    "concurrency/multithreading/locks.md",
+    "STL/usages/regex.md",
+    "concurrency/multithreading/threads.md",
+    "concepts/README.md",
+    "pointers/README.md",
+    "STL/components/functions-functors.md",
+    "STL/components/algorithms.md"
   ]
 }
