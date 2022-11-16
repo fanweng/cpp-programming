@@ -1,3 +1,5 @@
+#concurrency/memory-model 
+
 # Acquire Release Semantic
 
 There is no global synchronization between threads:

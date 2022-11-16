@@ -1,3 +1,5 @@
+#concurrency/memory-model 
+
 # Memory Model
 
 The foundation of multithreading is a well-defined memory model.

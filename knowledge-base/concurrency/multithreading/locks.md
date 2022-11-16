@@ -1,3 +1,5 @@
+#concurrency/lock 
+
 # Locks
 
 A lock automatically binds its [mutexes](mutexes.md) in the constructor and release it in the destructor. A lock implements the RAII idiom by binding a mutex's lifetime to its own.

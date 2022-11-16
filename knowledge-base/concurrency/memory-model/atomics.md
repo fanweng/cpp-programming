@@ -1,3 +1,5 @@
+#concurrency/memory-model/atomic 
+
 # Atomics
 
 ## Memory model

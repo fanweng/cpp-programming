@@ -1,3 +1,5 @@
+#concurrency/memory-model 
+
 # Relaxed Semantic
 
 This only guarantees that the operations on the same atomic variable in the same thread won't be reordered.

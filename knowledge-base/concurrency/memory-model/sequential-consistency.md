@@ -1,3 +1,5 @@
+#concurrency/memory-model 
+
 # Sequential Consistency
 
 The key is that all operations on all threads obey a universal lock:

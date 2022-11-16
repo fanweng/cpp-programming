@@ -1,3 +1,5 @@
+#concurrency/memory-model/memory-barrier
+
 # Fences as Memory Barriers
 
 `std::atomic_thread_fence` prevents specific operations from crossing a fence (memory barrier). The fence placed between two operations not reordered, like

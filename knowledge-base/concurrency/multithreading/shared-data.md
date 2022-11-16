@@ -1,3 +1,5 @@
+#concurrency 
+
 # Shared Data
 
 Shared/mutable data across multiple threads is prone to **data races**.
@@ -12,4 +14,4 @@ Mutex is encapsulated in a [lock](locks.md) to release the mutex automatically. 
 
 ## Thread-safe initialization of data
 
-If shared data is read-only, it's sufficient to initialize it in a thread-safe way.
+If shared data is read-only, never modified, it's sufficient to initialize it in a [thread-safe](thread-safe-initialization) way.

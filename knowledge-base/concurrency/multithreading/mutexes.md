@@ -1,3 +1,5 @@
+#concurrency/mutex #concurrency/thread 
+
 # Mutexes
 
 A mutex (mutual exclusion) guarantees that only one thread can access the **critical section** at any given time.
