@@ -20,6 +20,8 @@ It considerably reduces the risk of deadlock because the runtime takes care of t
 	+ its destructor is called, and mutex is released
 + if `getVar()` throws an exception, `std::lock_guard` also releases the mutex
 
+> ideal for the usage that only needs to lock/unlock once.
+
 ## `std::unique_lock`
 
 In addition to `std::lock_guard`, `std::unique_lock` offers:
@@ -36,6 +38,8 @@ In addition to `std::lock_guard`, `std::unique_lock` offers:
 	+ `lk.try_lock()`
 + delay the lock on the associated mutex
 
+> ideal for the usage that needs frequently lock/unlock operations.
+
 ### Solution to Deadlock
 
 The `deadlockFunc()` in the [mutexes](mutexes.md) deadlock example can be revised to:
@@ -50,7 +54,7 @@ void deadlockFunc(CriticalData& a, CriticalData& b) {
   unique_lock<mutex> guard2(b.mtx, defer_lock); // not locked immediatedly
   cout << "  Thread: " << this_thread::get_id() << " second mutex" <<  endl;
 
-  cout << "    Thread: " << this_thread::get_id() << " get both mutex" << endl;
+  cout << "    Thread: " << this_thread::get_id() << " get both mutexes" << endl;
 
   lock(guard1, guard2); // lock all in one atomic step
   // do something with a and b

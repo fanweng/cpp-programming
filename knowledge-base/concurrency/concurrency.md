@@ -38,14 +38,16 @@ It is a variadic template, which can receive an arbitrary number of arguments by
 
 ### 3. Thread-local data
 
-Declaring a variable as thread-local ensures that each thread gets its own copy, no-sharing.
+Declaring a variable as [thread-local](multithreading/thread-local-data.md) ensures that each thread gets its own copy, no-sharing.
 
 ### 4. Synchronization Mechanisms for Threads
 
 #### Condition variables
 
-Condition variables enable threads to be synchronized via messages.
+[Condition variables](multithreading/condvar.md) enable threads to be synchronized via **messages**.
 
 ### 5. Tasks
 
 Also known as *Promises*. Task provides a higher level of abstraction than native threads. While explicitly creating a thread, a task is simply a job you start. C++ runtime will automatically handle the lifetime of the task.
+
+In most cases, tasks is a less error-prone way to synchronize threads.
