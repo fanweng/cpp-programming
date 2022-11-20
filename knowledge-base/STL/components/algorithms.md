@@ -256,3 +256,26 @@ bool found = std::binary_search(v.begin(), v.end(), val);
 std::merge(v1.begin(), v1.end(), v2.begin(), v2.begin(), dst.begin());
 std::merge(v1.begin(), v1.end(), v2.begin(), v2.begin(), back_inserter(dst));
 ```
+
+## Parallel and Vectorized Execution
+
+The policy tag specifies whether a program should run:
++ `std::parallel::seq`: sequentially
++ `std::parallel::par`: in parallel on multiple threads
++ `std::paralell:par_unseq`: in parallel with vectorization
+
+```c++
+vector<int> v = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+// standard sequential sort
+std::sort(v.begin(), v.end());
+std::sort(std::parallel::seq, v.begin(), v.end());
+
+// permitting parallel execution
+std::sort(std::parallel::par, v.begin(), v.end());
+
+// permitting parallel and vectorised execution
+std::sort(std::parallel::par_unseq, v.begin(), v.end());
+```
+
+> NOTE: parallel algorithm does not automatically protect you from **data races** and **deadlocks**

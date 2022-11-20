@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "concurrency/multithreading/task.md",
+                "file": "concurrency/concurrency.md",
                 "mode": "source",
                 "source": true
               }
@@ -49,7 +49,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "lambda",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -138,15 +138,15 @@
   },
   "active": "3bcfe2405e6757b6",
   "lastOpenFiles": [
+    "concurrency/concurrency.md",
+    "concurrency/multithreading/threads.md",
+    "STL/components/algorithms.md",
+    "STL/components/containers.md",
+    "STL/usages/time.md",
     "concurrency/multithreading/task.md",
     "concepts/lambda.md",
     "concepts/README.md",
     "concepts/exception.md",
-    "concepts/cpp-std-exception-class-hierarchy.jpg",
-    "concurrency/concurrency.md",
-    "STL/components/algorithms.md",
-    "concurrency/multithreading/threads.md",
-    "STL/components/functions-functors.md",
-    "pointers/README.md"
+    "concepts/cpp-std-exception-class-hierarchy.jpg"
   ]
 }
