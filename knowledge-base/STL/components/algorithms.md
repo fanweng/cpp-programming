@@ -5,7 +5,7 @@ The header `<algorithm>` defines many commonly used algorithms for processing se
 Many algorithms requires extra information in order to do their work. For example, to use `find()` on a custom class object, that class must have `operator==` defined.
 - Functors (function objects)
 - Function pointers
-- **Lambda expressions** (introduced by C++11) <- recommended
+- **[Lambda expressions](../../concepts/lambda.md)** (introduced by C++11) <- recommended
 
 A complete list of common and useful algorithms can be found at [https://en.cppreference.com/w/cpp/algorithm](https://en.cppreference.com/w/cpp/algorithm).
 

@@ -8,7 +8,7 @@ The STL includes classes that overload the function call operators. Instances of
 - function objects
     + user-defined
     + predefined: `std::less<T>()`, `std::bit_and<T>()`,  `std::logical_and<T>()`, `std::multiplies<T>()`, etc.
-- lambda functions
+- [lambda](../../concepts/lambda.md) functions
 
 ```c++
 // Function

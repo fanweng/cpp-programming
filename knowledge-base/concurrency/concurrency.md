@@ -28,7 +28,7 @@ C++20 introduces atomic smart pointers, extensions of futures, coroutines, trans
 A [thread](multithreading/threads.md) `std::thread` is an independent unit of program execution. Its work package, a *callable unit*, can be:
 + a named function
 + a function object
-+ a lambda function
++ a [lambda](../concepts/lambda.md) function
 
 It is a variadic template, which can receive an arbitrary number of arguments by copy or reference.
 
@@ -48,6 +48,6 @@ Declaring a variable as [thread-local](multithreading/thread-local-data.md) ensu
 
 ### 5. Tasks
 
-Also known as *Promises*. Task provides a higher level of abstraction than native threads. While explicitly creating a thread, a task is simply a job you start. C++ runtime will automatically handle the lifetime of the task.
+Also known as *Promises*. [Task](multithreading/task.md) provides a higher level of abstraction than native threads. While explicitly creating a thread, a task is simply a job you start. C++ runtime will automatically handle the lifetime of the task.
 
 In most cases, tasks is a less error-prone way to synchronize threads.

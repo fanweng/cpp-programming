@@ -1,3 +1,5 @@
+#exception
+
 # Exception Handling
 
 ## Basic concepts

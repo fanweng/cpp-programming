@@ -7,7 +7,7 @@
 A `std::thread` is an executable unit. Its work package, a *callable unit*, can be:
 + a named function
 + a function object
-+ a lambda function
++ a [lambda](../../concepts/lambda.md) function
 
 ```c++
 void helloFunction(){
