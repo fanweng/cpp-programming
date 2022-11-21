@@ -51,3 +51,55 @@ Declaring a variable as [thread-local](multithreading/thread-local-data.md) ensu
 Also known as *Promises*. [Task](multithreading/task.md) provides a higher level of abstraction than native threads. While explicitly creating a thread, a task is simply a job you start. C++ runtime will automatically handle the lifetime of the task.
 
 In most cases, tasks is a less error-prone way to synchronize threads.
+
+## Best Practices
+
+### General
+
++ Minimize the data sharing of mutable data
+	+ performance increasing
+		+ Amdahl's law
+	+ safety on data races
++ Minimize waiting
+	+ performance
+	+ chance of deadlock
++ Prefer immutable data initialized in a thread-safe way
++ Prefer local variables, or thread-local data to minimize the synchronization cost
++ Tools
+	+ Static  code analysis: *[CppMem](cppmem.md)*, etc
+	+ Dynamic enforcement: *ThreadSanitizer*, etc
++ Code review
+
+### For Memory Model
+
++ Don't use `volatile` for synchronization
++ Don't program lock-free
+	+ error-prone if not an expert
++ If have to be lock-free
+	+ sharing an atomic Boolean or an atomic counter
+	+ using a thread-safe or lock-free container to support consumer/producer scenario
++ Don't build your own abstraction, use guarantees of the language
+
+### For Threads
+
++ Use task instead of thread
++ Be extremely careful if to `detach()`
+	+ the lifetime of the object in main thread and detached thread
++ Use an atomic joining thread
+	+ create your own wrapper around `std::thread`
+		+ check in the constructor
+		+ join in the destructor
+
+### For Shared Data
+
++ Pass data per default by copy
+	+ pass by reference is error-prone and expensive in terms of synchronization
++ Minimize the time holding a lock
++ Put a mutex into a lock, instead of using a primitive mutex
++ Use `std::lock` or `std::scoped_lock` for locking more mutexes atomically
++ Never call unknown code while holding a lock
+
+### For Condition Variables
+
++ Don't use condvar without a predicate
++ Better to use promise/future instead of condvar

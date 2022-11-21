@@ -70,14 +70,16 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "concurrency/concurrency.md"
+              }
             }
           }
         ]
       }
     ],
     "direction": "horizontal",
-    "width": 335.5
+    "width": 238.5
   },
   "right": {
     "id": "6a9253902c292982",
@@ -94,7 +96,8 @@
             "state": {
               "type": "backlink",
               "state": {
-                "collapseAll": false,
+                "file": "concurrency/concurrency.md",
+                "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
                 "showSearch": false,
@@ -134,10 +137,12 @@
       }
     ],
     "direction": "horizontal",
-    "width": 917.5
+    "width": 858.5,
+    "collapsed": true
   },
-  "active": "3bcfe2405e6757b6",
+  "active": "9338c9bbefa8c578",
   "lastOpenFiles": [
+    "concurrency/cppmem.md",
     "concurrency/concurrency.md",
     "concurrency/multithreading/threads.md",
     "STL/components/algorithms.md",
@@ -146,7 +151,6 @@
     "concurrency/multithreading/task.md",
     "concepts/lambda.md",
     "concepts/README.md",
-    "concepts/exception.md",
-    "concepts/cpp-std-exception-class-hierarchy.jpg"
+    "concepts/exception.md"
   ]
 }
