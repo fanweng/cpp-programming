@@ -21,8 +21,8 @@ void addThreadLocal(std::string const& s2){
 }
 
 void main(){
-  std::thread t1(addThreadLocal,"t1"); // hello from t1, &s is different from t2
-  std::thread t2(addThreadLocal,"t2"); // hello from t2, &s is different from t1
+  std::thread t1(addThreadLocal, "t1"); // hello from t1, &s is different from t2
+  std::thread t2(addThreadLocal, "t2"); // hello from t2, &s is different from t1
   t1.join();
   t2.join();
 }

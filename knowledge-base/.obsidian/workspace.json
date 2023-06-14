@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "concurrency/concurrency.md",
+                "file": "concurrency/multithreading/task.md",
                 "mode": "source",
                 "source": true
               }
@@ -49,13 +49,21 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "atomic",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical"
               }
+            }
+          },
+          {
+            "id": "1dee239ab82dc5b1",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
             }
           }
         ]
@@ -71,7 +79,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "concurrency/concurrency.md"
+                "file": "concurrency/multithreading/task.md"
               }
             }
           }
@@ -96,7 +104,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "concurrency/concurrency.md",
+                "file": "concurrency/multithreading/task.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -137,19 +145,42 @@
       }
     ],
     "direction": "horizontal",
-    "width": 858.5,
+    "width": 510.5,
     "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "command-palette:Open command palette": false,
+      "markdown-importer:Open format converter": false
+    }
   },
   "active": "9338c9bbefa8c578",
   "lastOpenFiles": [
-    "concurrency/cppmem.md",
     "concurrency/concurrency.md",
+    "concurrency/multithreading/task.md",
+    "concurrency/multithreading/thread-local-data.md",
+    "keywords/thread_local.md",
+    "concurrency/memory-model/atomics.md",
+    "concurrency/multithreading/locks.md",
+    "concurrency/memory-model/acquire-release-semantic.md",
+    "concurrency/multithreading/shared-data.md",
+    "concepts/lambda.md",
+    "keywords/README.md",
+    "keywords/constexpr.md",
+    "concurrency/memory-model/memory-model.md",
+    "concurrency/memory-model/variants-memory-model.md",
+    "concurrency/memory-model/three-memory-barriers.jpg",
+    "concurrency/memory-model/sequential-consistency.md",
+    "concurrency/memory-model/relaxed-semantic.md",
+    "concurrency/memory-model/memory-barriers.md",
+    "concurrency/cppmem.md",
     "concurrency/multithreading/threads.md",
     "STL/components/algorithms.md",
     "STL/components/containers.md",
     "STL/usages/time.md",
-    "concurrency/multithreading/task.md",
-    "concepts/lambda.md",
     "concepts/README.md",
     "concepts/exception.md"
   ]

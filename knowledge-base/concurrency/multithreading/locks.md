@@ -12,7 +12,7 @@ It considerably reduces the risk of deadlock because the runtime takes care of t
 {
   std::mutex m,
   std::lock_guard<std::mutex> lockGuard(m);
-  sharedVariable= getVar();
+  sharedVariable = getVar();
 }
 ```
 
@@ -20,7 +20,9 @@ It considerably reduces the risk of deadlock because the runtime takes care of t
 	+ its destructor is called, and mutex is released
 + if `getVar()` throws an exception, `std::lock_guard` also releases the mutex
 
-> ideal for the usage that only needs to lock/unlock once.
+> **Note**
+> 1. ideal for the usage that only needs to lock/unlock once.
+> 2. synchronization is slower than [atomic](../memory-model/atomics.md)
 
 ## `std::unique_lock`
 
