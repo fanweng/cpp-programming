@@ -103,3 +103,7 @@ In most cases, tasks is a less error-prone way to synchronize threads.
 
 + Don't use condvar without a predicate
 + Better to use promise/future instead of condvar
+
+## Examples
+
+1. Summation of vector elements: [sumVector.cpp](examples/sumVector.cpp)
