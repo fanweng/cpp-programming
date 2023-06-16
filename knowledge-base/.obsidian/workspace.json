@@ -159,6 +159,7 @@
   },
   "active": "61da10e1feecba4c",
   "lastOpenFiles": [
+    "concurrency/examples/singleton.cpp",
     "concurrency/examples/sumVector.cpp",
     "concurrency/examples",
     "concurrency/multithreading/test.cpp",
