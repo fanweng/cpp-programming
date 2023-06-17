@@ -65,3 +65,7 @@ Two exceptions:
 void transferMoney(int amount, Account& from, Account& to) {}
 std::thread t1(transferMoney, 50, std::ref(account1), std::ref(account2));
 ```
+
+## Moving a Thread
+
+A `std::thread` supports `std::move()` semantic but not copy semantic (imagine what will happen when copying a thread that holds a lock).
