@@ -107,3 +107,4 @@ In most cases, tasks is a less error-prone way to synchronize threads.
 ## Examples
 
 1. Summation of vector elements: [sumVector.cpp](examples/sumVector.cpp)
+2. Singleton class: [singleton.cpp](examples/singleton.cpp)

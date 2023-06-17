@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "concurrency/multithreading/mutexes.md",
+                "file": "concurrency/concurrency.md",
                 "mode": "source",
                 "source": true
               }
@@ -79,7 +79,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "concurrency/multithreading/mutexes.md"
+                "file": "concurrency/concurrency.md"
               }
             }
           }
@@ -104,7 +104,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "concurrency/multithreading/mutexes.md",
+                "file": "concurrency/concurrency.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -157,12 +157,12 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "fc190d654d61e147",
+  "active": "61da10e1feecba4c",
   "lastOpenFiles": [
+    "concurrency/multithreading/mutexes.md",
     "concurrency/concurrency.md",
     "STL/components/algorithms.md",
     "concurrency/multithreading/locks.md",
-    "concurrency/multithreading/mutexes.md",
     "concurrency/multithreading/threads.md",
     "concurrency/examples/singleton.cpp",
     "concurrency/examples/sumVector.cpp",
