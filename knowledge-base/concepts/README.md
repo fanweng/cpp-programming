@@ -547,17 +547,19 @@ int main(void) {
 
 Polymorphism is an object can behave differently based on different circumstances.
 
-Rumtime polymorphism / Late binding / dynamic binding: virtual function
++ Rumtime/Dynamic polymorphism or Late/Dynamic binding
+	+ Method **overriding**: `virtual` function
++ Compile-time/Static polymorphism or Early/Static binding
+	+ Method **overloading**
+	+ Operator **overloading**
 
-Compile time polymorphism / Early binding / Static binding: function overloading, operator overloading
-
-#### Implementation
+### Implementation
 
 The compiler will not hardcode the method call, it will compile a lookup table to retrieve the function by offsetting to the correct address of the object.
 
-#### Runtime Polymorphism
+### Runtime Polymorphism
 
-It is achieved by using inheritance and virtual functions, and it is called by Base class pointer/reference.
+It is achieved by using inheritance and `virtual` functions, and it is called by **base class pointer/reference**.
 
 - **Virtual functions:** are overridden functions bound dynamically. Unlike redefined functions, which are bound statically. It ensures the base class pointer/reference can execute the derived class's method function.
 
@@ -580,6 +582,7 @@ p2->deposit(200.0); // Savings_Account::deposit
 delete p1;
 delete p2;
 ```
+
 #### `override` specifier
 
 It is added to the end of Derived class virtual function method, telling compiler to ensure the function will override the the *exactly* same Base class virtual function.
@@ -627,6 +630,18 @@ public:
     }
 };
 ```
+
+### Static Polymorphism
+
+#### Method Overloading
+
+A class has multiple methods with same name, but:
++ number of arguments is different
++ or, type of arguments is different
+
+#### Operator Overloading
+
+Customize the operator definitions.
 
 ## Data Hiding
 
