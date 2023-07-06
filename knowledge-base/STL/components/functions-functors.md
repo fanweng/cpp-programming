@@ -1,10 +1,10 @@
-# Functions
+# Functions Objects
 
 The STL includes classes that overload the function call operators. Instances of such classes are *function objects* or *functors*.
 
 ## Callable Units
 
-- functions
+- [functions](../../concepts/functions.md)
 - function objects
     + user-defined
     + predefined: `std::less<T>()`, `std::bit_and<T>()`,  `std::logical_and<T>()`, `std::multiplies<T>()`, etc.

@@ -13,13 +13,26 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "embedded-cpp/README.md",
+                "file": "concepts/functions.md",
+                "mode": "source",
+                "source": true
+              }
+            }
+          },
+          {
+            "id": "3805b2c02717f995",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "concepts/lambda.md",
                 "mode": "source",
                 "source": true
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -49,7 +62,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "const",
+                "query": "lambda function",
                 "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -79,7 +92,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "embedded-cpp/README.md"
+                "file": "concepts/lambda.md"
               }
             }
           }
@@ -87,7 +100,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 238.5
+    "width": 290.5
   },
   "right": {
     "id": "6a9253902c292982",
@@ -104,7 +117,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "embedded-cpp/README.md",
+                "file": "concepts/lambda.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -157,22 +170,28 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "0bdcc5703930eff6",
+  "active": "3805b2c02717f995",
   "lastOpenFiles": [
+    "concepts/functions.md",
+    "concepts/lambda.md",
+    "STL/components/functions-functors.md",
+    "STL/components/stl-components.md",
+    "concepts/README.md",
+    "concurrency/multithreading/threads.md",
+    "STL/usages/text-processing.md",
+    "concurrency/multithreading/task.md",
+    "embedded-cpp/README.md",
     "concepts/data-types.md",
     "concepts/exception.md",
     "concepts/cpp-std-exception-class-hierarchy.jpg",
     "README.md",
-    "embedded-cpp/README.md",
     "keywords/README.md",
     "pointers/README.md",
     "keywords/constexpr.md",
-    "concepts/README.md",
     "concurrency/concurrency.md",
     "concurrency/multithreading/mutexes.md",
     "STL/components/algorithms.md",
     "concurrency/multithreading/locks.md",
-    "concurrency/multithreading/threads.md",
     "concurrency/examples/singleton.cpp",
     "concurrency/examples/sumVector.cpp",
     "concurrency/examples",
@@ -181,15 +200,9 @@
     "concurrency/memory-model/memory-model.md",
     "concurrency/memory-model/relaxed-semantic.md",
     "concurrency/memory-model/sequential-consistency.md",
-    "concurrency/multithreading/task.md",
     "concurrency/memory-model/three-memory-barriers.jpg",
     "concurrency/multithreading/thread-local-data.md",
     "keywords/thread_local.md",
-    "concurrency/memory-model/atomics.md",
-    "concurrency/memory-model/acquire-release-semantic.md",
-    "concurrency/multithreading/shared-data.md",
-    "concepts/lambda.md",
-    "concurrency/memory-model/variants-memory-model.md",
-    "concurrency/cppmem.md"
+    "concurrency/memory-model/atomics.md"
   ]
 }
