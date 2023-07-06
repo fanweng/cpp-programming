@@ -6,5 +6,6 @@
   "foldIndent": true,
   "showLineNumber": true,
   "spellcheck": true,
-  "showUnsupportedFiles": true
+  "showUnsupportedFiles": true,
+  "vimMode": true
 }
