@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "concepts/functions.md",
+                "file": "pointers/mem_management.md",
                 "mode": "source",
                 "source": true
               }
@@ -25,14 +25,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "concepts/lambda.md",
+                "file": "pointers/smart-pointer.md",
                 "mode": "source",
                 "source": true
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -44,7 +43,7 @@
       {
         "id": "6d70137b554406ae",
         "type": "tabs",
-        "dimension": 64.14285714285714,
+        "dimension": 49.714285714285715,
         "children": [
           {
             "id": "fc190d654d61e147",
@@ -62,7 +61,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "lambda function",
+                "query": "",
                 "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -84,7 +83,7 @@
       {
         "id": "b09f4e7f2294264f",
         "type": "tabs",
-        "dimension": 35.85714285714286,
+        "dimension": 50.28571428571429,
         "children": [
           {
             "id": "669c15b89b8b3b4d",
@@ -92,7 +91,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "concepts/lambda.md"
+                "file": "pointers/mem_management.md"
               }
             }
           }
@@ -117,7 +116,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "concepts/lambda.md",
+                "file": "pointers/mem_management.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -170,9 +169,14 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "3805b2c02717f995",
+  "active": "fc190d654d61e147",
   "lastOpenFiles": [
+    "pointers/smart-pointer.md",
+    "pointers/README.md",
+    "pointers/mem_management.md",
     "concepts/functions.md",
+    "STL/usages/stl-usages.md",
+    "concurrency/cppmem.md",
     "concepts/lambda.md",
     "STL/components/functions-functors.md",
     "STL/components/stl-components.md",
@@ -186,7 +190,6 @@
     "concepts/cpp-std-exception-class-hierarchy.jpg",
     "README.md",
     "keywords/README.md",
-    "pointers/README.md",
     "keywords/constexpr.md",
     "concurrency/concurrency.md",
     "concurrency/multithreading/mutexes.md",
@@ -199,10 +202,6 @@
     "concurrency/memory-model/memory-barriers.md",
     "concurrency/memory-model/memory-model.md",
     "concurrency/memory-model/relaxed-semantic.md",
-    "concurrency/memory-model/sequential-consistency.md",
-    "concurrency/memory-model/three-memory-barriers.jpg",
-    "concurrency/multithreading/thread-local-data.md",
-    "keywords/thread_local.md",
-    "concurrency/memory-model/atomics.md"
+    "concurrency/memory-model/three-memory-barriers.jpg"
   ]
 }
