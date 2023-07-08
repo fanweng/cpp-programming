@@ -61,7 +61,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "allocation",
                 "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -169,7 +169,7 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "fc190d654d61e147",
+  "active": "0bdcc5703930eff6",
   "lastOpenFiles": [
     "pointers/smart-pointer.md",
     "pointers/README.md",
