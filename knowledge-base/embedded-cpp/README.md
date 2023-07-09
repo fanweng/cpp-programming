@@ -26,7 +26,6 @@
     - `dynamic_cast` in runtime has **some** overhead, no similar C predecessor
 + Inheritance
     - Class
-        * **equivalent** to `struct` if without virtual functions
         * has overhead of a **pointer** and a **virtual function table** if having virtual functions
     - Function calls
         * non-virtual, non-static, non-inline functions are **equivalent** to free function calls

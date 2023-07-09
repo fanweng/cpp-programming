@@ -10,9 +10,13 @@
 
 ## `struct` vs. `class`
 
-Use `struct` for passive objects with public access (default), don't declare methods in it.
+Both can have a mixture of `public`, `protected`, and `private` members and member functions, and can use inheritance.
 
-Use `class` for active objects with default private access members, implementing getters/setters and other methods in it.
+The only difference is `struct` members are `public` by default, while `class` are `private`.
+
+In real practice, it is recommended to:
++ use `struct` for passive objects with plain old data (like in C), don't declare methods in it
++ use `class` for active objects with members of different access levels, implementing getters/setters and other methods in it.
 
 ## Classes and Objects
 

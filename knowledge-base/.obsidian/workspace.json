@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "pointers/mem_management.md",
+                "file": "embedded-cpp/README.md",
                 "mode": "source",
                 "source": true
               }
@@ -25,13 +25,14 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "pointers/smart-pointer.md",
+                "file": "concepts/README.md",
                 "mode": "source",
                 "source": true
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -61,7 +62,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "allocation",
+                "query": "template",
                 "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -91,7 +92,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "pointers/mem_management.md"
+                "file": "concepts/README.md"
               }
             }
           }
@@ -116,7 +117,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "pointers/mem_management.md",
+                "file": "concepts/README.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -169,39 +170,39 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "0bdcc5703930eff6",
+  "active": "fc190d654d61e147",
   "lastOpenFiles": [
-    "pointers/smart-pointer.md",
+    "embedded-cpp/README.md",
     "pointers/README.md",
+    "concurrency/concurrency.md",
+    "STL/components/algorithms.md",
+    "concepts/README.md",
+    "embedded-cpp/safety-critical-system.md",
+    "pointers/smart-pointer.md",
+    "concurrency/multithreading/task.md",
+    "STL/usages/type-traits.md",
+    "STL/components/functions-functors.md",
+    "concepts/exception.md",
+    "concepts/data-types.md",
     "pointers/mem_management.md",
     "concepts/functions.md",
     "STL/usages/stl-usages.md",
     "concurrency/cppmem.md",
     "concepts/lambda.md",
-    "STL/components/functions-functors.md",
     "STL/components/stl-components.md",
-    "concepts/README.md",
     "concurrency/multithreading/threads.md",
     "STL/usages/text-processing.md",
-    "concurrency/multithreading/task.md",
-    "embedded-cpp/README.md",
-    "concepts/data-types.md",
-    "concepts/exception.md",
     "concepts/cpp-std-exception-class-hierarchy.jpg",
     "README.md",
     "keywords/README.md",
     "keywords/constexpr.md",
-    "concurrency/concurrency.md",
     "concurrency/multithreading/mutexes.md",
-    "STL/components/algorithms.md",
     "concurrency/multithreading/locks.md",
     "concurrency/examples/singleton.cpp",
     "concurrency/examples/sumVector.cpp",
     "concurrency/examples",
     "concurrency/multithreading/test.cpp",
     "concurrency/memory-model/memory-barriers.md",
-    "concurrency/memory-model/memory-model.md",
-    "concurrency/memory-model/relaxed-semantic.md",
     "concurrency/memory-model/three-memory-barriers.jpg"
   ]
 }
