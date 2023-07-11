@@ -787,61 +787,7 @@ void ns::display()
 
 ## Template
 
-Template is a powerful tool which idea is to pass data type as a parameter so that we don't need to write the same code for different data type. Templates are expanded at compiler time, similar to macros, but compiler does type checking before template expansion.
-
-Keywords: `template`, `typename`/`class`.
-
-1. **Function templates:** A generic function can be used for different data types.
-
-```c++
-template <typename T>
-T myMax(T x, T y) {
-    return (x > y)? x : y;
-} // function won't be compiled at here, because T is unknown
-
-cout << myMax<int>(3, 7) << endl;   // now compiler can generate appropriate function becuase T is int
-cout << myMax(1.2, 3.8) << endl;    // often, compiler can deduce the T according to the inputs
-```
-
-2. **Class templates:** if the class definition is independent of the data type, i.e. allowing *plug-in* any data type.
-
-```c++
-template <typename T, int N>
-class Array {
-    friend std::ostream &operator<<(std::ostream &os, const Array<T, N> &arr) {
-        os << "[ ";
-        for (const auto &val: arr.value) {
-            os << val << " ";
-        }
-        os << "]" << std::endl;
-        return os;
-    }
-public:
-    Array() = default;
-    Array(T init_val) {
-        for (auto &item: values) {
-            item = init_val;
-        }
-    }
-    void fill(T val) {
-        for (auto &item: values) {
-            item = val;
-        }
-    }
-    int get_size() const {
-        return size;
-    }
-    T &operator[](int index) {  // overloaded subscript operator for easy use
-        return values[index];
-    }
-private:
-    T values[N];    // N needs to be known at compile time
-    int size {N};
-};
-
-/* Implementation */
-Array<int, 5> intNums {1};  // Array of five elements filled with integer one
-```
+[Template](template.md) is a powerful tool which idea is to pass data type as a parameter so that we don't need to write the same code for different data type.
 
 ## l-value and r-value
 
