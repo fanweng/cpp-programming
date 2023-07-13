@@ -155,3 +155,113 @@ using Square = Matrix<T, Line, Line>;
 template <typename T, int Line>
 using Vector = Matrix<T, Line, 1>;
 ```
+
+## Variadic Templates
+
+Variadic templates can have an arbitrary number of parameters by using parameter pack.
+
+```c++
+template <typename ... Args>
+void variadicTemplate(Args ... args) {
+	// function body
+}
+```
+
+### Parameter Pack
+
++ By using the ellipse `...`
+	+ `Args` become a template parameter pack
+	+ `args` become a function parameter pack
++ Parameter packs can only be packed and unpacked
+	+ if `...` is left from `Args`, the parameter pack will be **packed**
+	+ if `...` is right from `Args`, the parameter pack will be **unpacked**
+
+## Friend
+
+Friends of a class template have unrestricted access to all members of that class template:
++ declaration of friendship can be made at an arbitrary place in the class template
++ access right in the class template have no influence
++ friendship cannot be inherited
++ friendship is not transitive
+
+### General Friends
+
+> The `typename` (`T`) of the class template should be different from the `typename` (`U`) of the friend template. If they are the same, the friendship is only granted for the instances of the same types.
+
+```c++
+template <typename T> int myFriendFunction(T);
+template <typename T> class MyFriend;
+
+template <typename T>
+class GrantFriendshipClassTemplate {
+	template <typename U> friend int myFriendFunction(U);
+	template <typename U> friend class MyFriend;
+};
+```
+
+### Special Friends
+
+Friendship is limited to specific type of the template parameter.
+
+```c++
+template <typename T> int myFriendFunction(T);
+template <typename T> class MyFriend;
+
+template <typename T>
+class GrantFriendshipClassTemplate {
+	friend int myFriendFunction<>(double);
+	friend class MyFriend<int>;
+	friend class MyFriend<T>;
+};
+```
+
+### Friend to Types
+
+The friendship can be granted to a type parameter.
+
+```c++
+template <typename T>
+class Array {
+    friend T;
+    // ...
+};
+Array<Account> myAccounts;
+```
+
+## Dependent Names
+
+A dependent name is essentially a name that depends on a template parameter. It can be:
++ a type
++ a non-type
++ a template
+
+Two-phase name lookup:
++ dependent names are resolved during *template instantiation*
++ non-dependent names are resolved during *template definition*
+
+### ... When it is a Type
+
+```c++
+template <typename T>
+void func() {
+    std::vector<T>::const_iterator* p1; // error, * is interpreted as multiply
+    typename std::vector<T>::const_iterator* p2; // OK
+}
+```
+
+### ... When it is a Template
+
+```c++
+template <typename T>
+struct S {
+    template <typename U>
+    void func() {}
+};
+
+template <typename T>
+void func2() {
+    S<T> s;
+    s.func<T>(); // error, < is interpreted as a comparison operator
+    s.template func<T>(); // OK
+}
+```
