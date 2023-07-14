@@ -317,3 +317,59 @@ int main() {
    std::cout << Power<2, 10>::value << std::endl;   // 1024
 }
 ```
+
+## Type-traits
+
+Type-traits library enables the following features at compile-time:
++ type checks
++ type comparisons
++ type modifications
+
+Benefits:
++ code optimization
+	+ analyze code at compile-time
+	+ optimize code based on the analysis
++ check code correctness
+
+### Categories
+
++ Type category (`::value`)
+
+```c++
+std::is_pointer<T>,
+std::is_integral<T>,
+std::is_arithmetic<T>,
+std::is_object<T>,
+... ...
+```
+
++ Type comparison (`::value`)
+
+```c++
+std::is_same<T>,
+std::is_convertible<From, To>,
+... ...
+```
+
++ Type transformation (`::type`)
+
+```c++
+std::add_const<T>,
+std::remove_reference<T>,
+std::make_signed<T>,
+... ...
+```
+
++ Others (`::type`)
+
+```c++
+std::enable_if<bool, T>,
+std::conditional<bool, T, F>,
+... ...
+```
+
+### Examples
+
+```c++
+std::cout << std::is_same<int, std::remove_const<const int>::type>::value << std::endl; // true
+```
