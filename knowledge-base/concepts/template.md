@@ -265,3 +265,55 @@ void func2() {
     s.template func<T>(); // OK
 }
 ```
+
+## Automatic Return Type
+
+> A function template is automatically able to deduce their return type.
+
+C++11 use `auto` to indicate the delayed return type, and `decltype` declares the return type.
+
+```c++
+template <typename T1, typename T2>
+auto add(T1 a, T2 b) -> decltype(a + b) {
+    return a + b;
+}
+```
+
+C++14 syntax doesn't repeat itself.
+
+```c++
+template <typename T1, typename T2>
+auto add(T1 a, T2 b) {
+    return a + b;
+}
+```
+
+## Metaprogramming
+
+Class template can be used to implement metafunctions, which are executed at **compile-time**. Their values are returned by `::value`.
+
+```c++
+// Function
+int power(int m, int n) {
+    int r = 1;
+    for (int k=1; k<=n; ++k) { r *= m; }
+    return r;
+}
+
+// Metafunction
+template<int m, int n>
+struct Power {
+   static int const value = m * Power<m, n-1>::value; 
+};
+
+template<int m>
+struct Power<m, 0> {
+   static int const value =1; 
+};
+
+// Examples
+int main() {
+   std::cout << power(2, 10) << std::endl;          // 1024
+   std::cout << Power<2, 10>::value << std::endl;   // 1024
+}
+```
