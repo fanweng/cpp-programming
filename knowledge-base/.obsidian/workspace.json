@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "concepts/template.md",
+                "file": "concepts/README.md",
                 "mode": "source",
                 "source": true
               }
@@ -49,8 +49,8 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "template",
-                "matchingCase": true,
+                "query": "override",
+                "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
                 "extraContext": false,
@@ -66,7 +66,8 @@
               "state": {}
             }
           }
-        ]
+        ],
+        "currentTab": 1
       },
       {
         "id": "b09f4e7f2294264f",
@@ -79,7 +80,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "concepts/template.md"
+                "file": "concepts/README.md"
               }
             }
           }
@@ -104,7 +105,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "concepts/template.md",
+                "file": "concepts/README.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -159,21 +160,21 @@
   },
   "active": "a9e753fd9a502302",
   "lastOpenFiles": [
-    "concepts/README.md",
-    "concepts/template.md",
-    "embedded-cpp/README.md",
+    "concepts/functions.md",
     "pointers/README.md",
+    "pointers/mem_management.md",
+    "pointers/smart-pointer.md",
+    "concepts/data-types.md",
+    "concepts/template.md",
+    "concepts/README.md",
+    "embedded-cpp/README.md",
     "concurrency/concurrency.md",
     "STL/components/algorithms.md",
     "embedded-cpp/safety-critical-system.md",
-    "pointers/smart-pointer.md",
     "concurrency/multithreading/task.md",
     "STL/usages/type-traits.md",
     "STL/components/functions-functors.md",
     "concepts/exception.md",
-    "concepts/data-types.md",
-    "pointers/mem_management.md",
-    "concepts/functions.md",
     "STL/usages/stl-usages.md",
     "concurrency/cppmem.md",
     "concepts/lambda.md",

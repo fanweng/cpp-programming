@@ -1,5 +1,7 @@
 # Smart Pointers
 
+> A.k.a Scoped Pointer.
+
 ## RAII (Resource Acquisition Is Initialization)
 
 A common idiom used in software design based on the container object lifetime. RAII objects are allocated on the stack.
