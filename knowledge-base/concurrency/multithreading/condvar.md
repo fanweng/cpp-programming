@@ -9,12 +9,13 @@
 	+ ...
 + interfaces
 	+ `cv.notify_one()`
+		+ wake up one of the waiting thread (not specified which one)
 	+ `cv.notify_all()`
-	+ `cv.wait(lock, predicate)`
-		+ locks the `std::unique_lock` mutex
-		+ checks if predicate evaluates to true
-			+ if true, unlocks the mutex, and continue
-			+ if false, unlocks the mutex, and put itself back to wait state
+	+ `cv.wait(lock, optional_predicate)`
+		+ when *blocked waiting*, lock is **released**
+		+ when *waken up*, lock is **acquired**
+		+ checks if predicate evaluates to true in a while loop
+			+ `while(!predicate()){ wait(lock); }`
 	+ ...
 
 ```c++
@@ -22,15 +23,11 @@ std::mutex mtx;
 std::condition_variable condVar;
 bool dataReady{false};
 
-void doWork() {
-	std::cout << "Processing the data" << std::endl;
-}
-
 void waitingForWork() {
 	std::cout << "Worker: waiting for work" << std::endl;
 	std::unique_lock<std::mutex> lk(mtx);
 	condVar.wait(lk, []{ return dataReady; });
-	doWork();
+	// do work
 	std::cout << "Worker: done work" << std::endl;
 }
 
@@ -43,15 +40,18 @@ void setDataReady() {
 	condVar.notify_one();
 }
 
-void main() {
+int main() {
 	std::thread t1(waitingForWork);
 	std::thread t2(setDataReady);
 	t1.join();
 	t2.join();
+	return 0;
 }
 ```
 
 ## Caveats
+
+> Solution is using the optional predicate when `wait()`
 
 ### 1. Lost Wakeup
 
