@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "concurrency/multithreading/condvar.md",
+                "file": "concepts/README.md",
                 "mode": "source",
                 "source": true
               }
@@ -49,7 +49,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "condition",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -66,8 +66,7 @@
               "state": {}
             }
           }
-        ],
-        "currentTab": 1
+        ]
       },
       {
         "id": "b09f4e7f2294264f",
@@ -80,7 +79,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "concurrency/multithreading/condvar.md"
+                "file": "concepts/README.md"
               }
             }
           }
@@ -105,7 +104,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "concurrency/multithreading/condvar.md",
+                "file": "concepts/README.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -160,6 +159,7 @@
   },
   "active": "a9e753fd9a502302",
   "lastOpenFiles": [
+    "concurrency/multithreading/condvar.md",
     "embedded-cpp/safety-critical-system.md",
     "concepts/README.md",
     "concepts/functions.md",
@@ -186,7 +186,6 @@
     "keywords/README.md",
     "keywords/constexpr.md",
     "concurrency/multithreading/mutexes.md",
-    "concurrency/multithreading/locks.md",
     "concurrency/examples/singleton.cpp",
     "concurrency/examples/sumVector.cpp",
     "concurrency/examples",

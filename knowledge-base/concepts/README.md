@@ -559,7 +559,11 @@ Polymorphism is an object can behave differently based on different circumstance
 
 ### Implementation
 
-The compiler will not hardcode the method call, it will compile a lookup table to retrieve the function by offsetting to the correct address of the object.
+The compiler will not hardcode the method call, it will compile a lookup table to retrieve the function (i.e. virtual function table - VTable) by offsetting to the correct address of the object.
+
++ VTable is an array of function pointers corresponding to virtual functions associated with the class, not individual objects
++ Each object of the class contains a hidden pointer `vptr` to the class VTable
++ function call is dynamically dispatched based on the **actual type of the object** at runtime
 
 ### Runtime Polymorphism
 
