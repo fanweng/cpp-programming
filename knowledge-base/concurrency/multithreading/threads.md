@@ -20,7 +20,20 @@ class HelloFunctionObject{
       std::cout << "Hello from a function object." << std::endl;
     }
 };
-  
+
+class MyClass {
+public:
+  void func1(int x) {}
+  void start() {
+    mThread = std::thread(&MyClass::func1, this, 1);
+  }
+  void stop() {
+    if (mThread.joinable()) mThread.join();
+  }
+private:
+  std::thread mThread;
+};
+
 int main(){
   std::thread t1(helloFunction);
   
@@ -29,6 +42,10 @@ int main(){
 
   std::thread t3([]{std::cout << "Hello from a lambda." << std::endl;});
 
+  MyClass myObj;
+  std::thread t4(&MyClass::func1, std:ref(myObj), 1);
+  // std::thread t4(&MyClass::func1, &myObj, 1);
+  // std::thread t4(&MyClass::func1, myObj, 1);
   t1.join();
   t2.join();
   t3.join();
