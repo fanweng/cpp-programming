@@ -60,6 +60,13 @@ It declares a local variable whose scope remains within the block of code. It's 
 
 It hints to compiler that a given variable can be put in a register. Registers are faster than memory access so the variable which is most frequently used in a program can be declared with `register`. However, it's compiler's choise to put it in a register or not.
 
+### What is `extern` keyword?
+
+Used to declare a variable or function that is defined in another file, typically in a multi-file project.
+
++ only one file should **define** the variable
++ other files use `extern` to **declare** of using that variable
+
 ### Types of storage classes?
 
 `auto`, `extern`, `static`, `register`.
@@ -68,7 +75,11 @@ It hints to compiler that a given variable can be put in a register. Registers a
 
 ### What is `inline` keyword? Compared to macro?
 
-A suggestion (not guaranteed) to the compiler to substitute the body of the function in each call to that inline function by expanding its definition. It increases the code size but reduces the code execution because it skips the argument passing, value returning and stack changing procedures.
+A suggestion (not guaranteed) to the compiler to substitute the body of the function in each call to that inline function by expanding its definition.
++ cons
+	+ increases the code size and compilation time (function duplicated at each occurrence)
++ pros
+	+ reduces the code execution because it skips the argument passing, value returning and stack changing procedures.
 
 |  | `inline` | Macro |
 |--|----------|---------|
@@ -473,3 +484,12 @@ Three types of linkages:
 - External linkage: global, non-static variables/functions, `extern int a`
 - Internal linkage: static variables/functions, `static int b`
 - None linkage: local variables, `int c`
+
+### What is intrinsic functions?
+
+Functions are provided by the compiler or processor rather than by libraries or code written by developers.
+
++ more efficient because they are machine instructions
++ examples
+	+ atomic memory operations, `fetch_and_add`, etc.
+	+ bit operations

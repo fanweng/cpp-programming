@@ -13,7 +13,19 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "quizzes/c.md",
+                "file": "quizzes/cpp.md",
+                "mode": "source",
+                "source": true
+              }
+            }
+          },
+          {
+            "id": "cb2507a589e2ae02",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "concurrency/concurrency.md",
                 "mode": "source",
                 "source": true
               }
@@ -31,7 +43,7 @@
       {
         "id": "6d70137b554406ae",
         "type": "tabs",
-        "dimension": 49.714285714285715,
+        "dimension": 39.5,
         "children": [
           {
             "id": "fc190d654d61e147",
@@ -49,7 +61,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "singleton",
+                "query": "mutable",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -71,7 +83,7 @@
       {
         "id": "b09f4e7f2294264f",
         "type": "tabs",
-        "dimension": 50.28571428571429,
+        "dimension": 60.5,
         "children": [
           {
             "id": "669c15b89b8b3b4d",
@@ -79,7 +91,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "quizzes/c.md"
+                "file": "quizzes/cpp.md"
               }
             }
           }
@@ -87,7 +99,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 257.5
+    "width": 344.5
   },
   "right": {
     "id": "6a9253902c292982",
@@ -104,7 +116,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "quizzes/c.md",
+                "file": "quizzes/cpp.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -155,8 +167,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 510.5,
-    "collapsed": true
+    "width": 510.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -167,39 +178,40 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "50bca2f97f934df8",
+  "active": "fc190d654d61e147",
   "lastOpenFiles": [
+    "concurrency/concurrency.md",
+    "concurrency/multithreading/shared-data.md",
+    "quizzes/cpp.md",
+    "concepts/README.md",
+    "concepts/exception.md",
+    "quizzes/c.md",
+    "concepts/data-types.md",
+    "concurrency/memory-model/atomics.md",
+    "embedded-cpp/README.md",
+    "keywords/README.md",
+    "STL/components/containers.md",
+    "STL/STL.md",
+    "STL/components/algorithms.md",
+    "concepts/lambda.md",
+    "STL/components/functions-functors.md",
+    "concepts/functions.md",
+    "pointers/mem_management.md",
+    "pointers/smart-pointer.md",
     "res/storage-classes-in-c.png",
     "res/process-virtual-addr-space.png",
     "res",
-    "quizzes/cpp.md",
-    "quizzes/c.md",
     "pointers/README.md",
-    "concepts/README.md",
     "quizzes",
-    "pointers/smart-pointer.md",
     "README.md",
-    "concepts/data-types.md",
     "concepts/cpp-std-exception-class-hierarchy.jpg",
-    "pointers/mem_management.md",
     "STL/usages/numeric-functions.md",
-    "STL/STL.md",
     "STL/usages/type-traits.md",
     "STL/usages/time.md",
     "STL/usages/text-processing.md",
     "STL/usages/stl-usages.md",
     "STL/usages/regex.md",
-    "STL/usages/multithreading.md",
-    "STL/usages/io-stream-filesystem.md",
-    "STL/components/stl-components.md",
-    "STL/components/iterators.md",
-    "STL/components/functions-functors.md",
     "STL/components/containers-common-methods.png",
-    "STL/components/containers.md",
-    "STL/components/algorithms.md",
-    "concepts/lambda.md",
-    "concepts/functions.md",
-    "concepts/exception.md",
     "concurrency/examples/singleton.cpp",
     "concurrency/examples/sumVector.cpp",
     "concurrency/examples",

@@ -95,6 +95,14 @@ No, `virtual` function relies on a concrete object to call the correct function,
 + Static global variable
   + similar to C
 
+### What is `mutable`?
+
+Allow a particular member of an object to be modified even if the object itself is `const`.
+
++ ensure the *logical* constness rather than *bitwise* constness
+	+ an `Order` class object should be *logically* constant but its member can be changed if customer wants within 5 minutes, etc.
+	+ a member used for synchronization (e.g. mutex) which need to be modified even in a `const` member function
+
 
 
 ## Pointers ##
@@ -582,8 +590,6 @@ public:
 ### Q2: Difference between overload and override?
 
 ### stack vs. heap?
-
-### new vs. malloc?
 
 ### how new/delete is implemented?
 
