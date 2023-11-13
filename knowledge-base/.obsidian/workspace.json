@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "concurrency/multithreading/threads.md",
+                "file": "quizzes/c.md",
                 "mode": "source",
                 "source": true
               }
@@ -79,7 +79,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "concurrency/multithreading/threads.md"
+                "file": "quizzes/c.md"
               }
             }
           }
@@ -96,7 +96,7 @@
       {
         "id": "96f62909509845ad",
         "type": "tabs",
-        "dimension": 57.72357723577236,
+        "dimension": 52.42857142857142,
         "children": [
           {
             "id": "50bca2f97f934df8",
@@ -104,7 +104,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "concurrency/multithreading/threads.md",
+                "file": "quizzes/c.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -125,13 +125,23 @@
                 "useHierarchy": true
               }
             }
+          },
+          {
+            "id": "d4aa08455cabdeef",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency"
+              }
+            }
           }
         ]
       },
       {
         "id": "0569cd6ebfc705b2",
         "type": "tabs",
-        "dimension": 42.27642276422765,
+        "dimension": 47.57142857142857,
         "children": [
           {
             "id": "3bcfe2405e6757b6",
@@ -157,35 +167,39 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "a9e753fd9a502302",
+  "active": "50bca2f97f934df8",
   "lastOpenFiles": [
-    "concurrency/multithreading/thread-safe-initialization.md",
-    "concurrency/multithreading/thread-local-data.md",
-    "concurrency/multithreading/task.md",
-    "concurrency/multithreading/shared-data.md",
-    "concurrency/multithreading/mutexes.md",
-    "concurrency/multithreading/locks.md",
-    "concurrency/multithreading/condvar.md",
-    "concurrency/concurrency.md",
-    "concepts/README.md",
-    "embedded-cpp/safety-critical-system.md",
-    "concepts/functions.md",
+    "res/storage-classes-in-c.png",
+    "res/process-virtual-addr-space.png",
+    "res",
+    "quizzes/cpp.md",
+    "quizzes/c.md",
     "pointers/README.md",
-    "pointers/mem_management.md",
+    "concepts/README.md",
+    "quizzes",
     "pointers/smart-pointer.md",
+    "README.md",
     "concepts/data-types.md",
-    "concepts/template.md",
-    "embedded-cpp/README.md",
-    "STL/components/algorithms.md",
-    "STL/usages/type-traits.md",
-    "STL/components/functions-functors.md",
-    "concepts/exception.md",
-    "STL/usages/stl-usages.md",
-    "concurrency/cppmem.md",
-    "concepts/lambda.md",
-    "STL/components/stl-components.md",
-    "concurrency/multithreading/threads.md",
     "concepts/cpp-std-exception-class-hierarchy.jpg",
+    "pointers/mem_management.md",
+    "STL/usages/numeric-functions.md",
+    "STL/STL.md",
+    "STL/usages/type-traits.md",
+    "STL/usages/time.md",
+    "STL/usages/text-processing.md",
+    "STL/usages/stl-usages.md",
+    "STL/usages/regex.md",
+    "STL/usages/multithreading.md",
+    "STL/usages/io-stream-filesystem.md",
+    "STL/components/stl-components.md",
+    "STL/components/iterators.md",
+    "STL/components/functions-functors.md",
+    "STL/components/containers-common-methods.png",
+    "STL/components/containers.md",
+    "STL/components/algorithms.md",
+    "concepts/lambda.md",
+    "concepts/functions.md",
+    "concepts/exception.md",
     "concurrency/examples/singleton.cpp",
     "concurrency/examples/sumVector.cpp",
     "concurrency/examples",
