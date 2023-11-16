@@ -405,51 +405,6 @@ Stack is used to store function variables (main and user-defined functions), e.g
 The dynamic memory allocation takes place in the heap, e.g. `malloc()`, `calloc()`, `realloc()`.
 
 
-## 7. Application Quiz
-
-### Make an allocated region 4-byte aligned
-
-Get the pointer from malloc, and set the pointer to `ptr & ~0x1F` making the 5 least significant bits to 0.
-
-### Implement `memmove()`
-
-Copy memory bytes and take care of the overlapping between source and destination.
-
-```c
-void memmove(void* dest, void* src, size_t n) {
-  if (dest < src) { // no overlapping issue, regular memcpy()
-    for (size_t i = 0; i < n; ++i) {
-      ((char*)dest)[i] = ((char*)src)[i];
-    }
-  }
-  else if (dest > src) { // may have overlapping issue, copy from end
-    for (size_t i = n; i > 0; --i) { // can't use i = n -1 with i >= 0, because size_t>=0 always, infinite loop
-      ((char*)dest)[i - 1] = ((char*)src)[i - 1];
-    }
-  }
-}
-```
-
-### Implement `memcpy()`
-
-Copy memory bytes when there is no overlapping between source and destination.
-
-```c
-void memcpy(void* dest, void* src, size_t n) {
-  for (size_t i = 0; i < n; ++i) {
-    ((char*)dest)[i] = ((char*)src)[i];
-  }
-}
-```
-
-#### Difference between `memcpy(dest, src, N)` and `strcpy(dest, src)`/`strncpy(dest, src, N)`
-
-`memcpy()` will copy all `N` bytes.
-
-`strcpy()` will copy until reaching `\0` null terminator.
-
-`strncpy()` will copy until reaching `\0` null terminator or reaching `N` bytes.
-
 
 ## Others
 

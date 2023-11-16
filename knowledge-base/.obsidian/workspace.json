@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "quizzes/cpp.md",
+                "file": "pointers/smart-pointer.md",
                 "mode": "source",
                 "source": true
               }
@@ -91,7 +91,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "quizzes/cpp.md"
+                "file": "pointers/smart-pointer.md"
               }
             }
           }
@@ -116,7 +116,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "quizzes/cpp.md",
+                "file": "pointers/smart-pointer.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -178,17 +178,18 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "fc190d654d61e147",
+  "active": "a9e753fd9a502302",
   "lastOpenFiles": [
+    "pointers/mem_management.md",
+    "embedded-cpp/README.md",
     "concurrency/concurrency.md",
-    "concurrency/multithreading/shared-data.md",
     "quizzes/cpp.md",
+    "concurrency/multithreading/shared-data.md",
     "concepts/README.md",
     "concepts/exception.md",
     "quizzes/c.md",
     "concepts/data-types.md",
     "concurrency/memory-model/atomics.md",
-    "embedded-cpp/README.md",
     "keywords/README.md",
     "STL/components/containers.md",
     "STL/STL.md",
@@ -196,7 +197,6 @@
     "concepts/lambda.md",
     "STL/components/functions-functors.md",
     "concepts/functions.md",
-    "pointers/mem_management.md",
     "pointers/smart-pointer.md",
     "res/storage-classes-in-c.png",
     "res/process-virtual-addr-space.png",
