@@ -569,6 +569,7 @@ Both are used to copy objects, but the purpose and scenarios are different.
   + to create a new object as a copy of an existing one, using its values
 + Copy assignment operator
   + an operator member function to assign the value of one object to another of the same class
+
 ```c++
 class MyClass {
 private:
@@ -584,6 +585,13 @@ public:
   }
 };
 ```
+
+### How to efficiently copy a vector with a large amount of data?
+
+1. Using default copy constructor or copy assignment operator, which are typically optimized by compiler for efficiency
+2. Pre-allocate enough memory to avoid multiple reallocations, e.g. `vec2.reserve(vec1.size());vec2 = vec1;`
+3. If original vector is no longer needed, consider moving the ownership, e.g. `vec2 = std::move(vec1)`
+4. Parallel copy with multiple threads
 
 ### Q1: What are class, struct, friend in C++?
 

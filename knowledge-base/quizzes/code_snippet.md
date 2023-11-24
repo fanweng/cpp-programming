@@ -395,3 +395,122 @@ void myPrint(int low, int high) {
     return;
 }
 ```
+
+## Check if current machine is big-endian
+
+```c
+bool isBigEndian1() {
+    union {
+        unsigned int a;
+        char b[sizeof(unsigned int)];
+    } x;
+
+    x.a = 1;
+    if (x.b[0] == 1) {
+        printf("little-endian");
+        return false;
+    }
+    else {
+        printf("big-endian");
+        return true;
+    }
+}
+
+bool isBigEndian2() {
+    unsigned int a = 1;
+    char* b = (char*)&a; // point to the first byte of the integer
+    if (*b == 1) {
+        printf("little-endian");
+        return false;
+    }
+    else {
+        printf("big-endian");
+        return true;
+    }
+}
+```
+
+## Get the length of a UTF-8 encode string
+
+UTF-8 strings are null-terminated. UTF-8 uses 8 bits while ASCII uses 7 bits of a byte.
+
+| Byte 0's pattern | Num bytes in character |
+|------------------|------------------------|
+| 0??????? | 1 <-- ASCII compatible |
+| 110????? | 2 |
+| 1110???? | 3 |
+| 11110??? | 4 |
+| 111110?? | 5 |
+| 1111110? | 6 |
+
+For multi-byte characters, first Byte 0 indicates the number of bytes following. The subsequent bytes have the format `10??????`. Each character requires 1 to 6 bytes to encode. Different characters in the same string can have different numbers of bytes.
+
+```c
+size_t getCharSize1(char byte0) {
+    if ((byte0 & 0x80) == 0x00) {
+        return 1;
+    }
+    else { // MSBit is 1
+        byte0 << 1;
+        if ((byte0 & 0x80) == 0x00) { // 10xxxxxx is invalid for the Byte0
+            return 0;
+        }
+        else {
+            size_t len = 2;
+            for (int i = 0; i < 4; ++i) {
+                if ((byte0 & 0xC0) == 0x80) { // reach '10'
+                    return len;
+                }
+                byte0 << 1;
+                len++;
+            }
+        }
+    }
+    return 0;
+}
+
+size_t getCharSize2(char byte0) {
+    size_t len;
+    if ((byte0 & 0x80) == 0x00) {          // 0xxxxxxx, single-byte (ASCII)
+        len = 1;
+    } else if ((byte0 & 0xE0) == 0xC0) {   // 110xxxxx, start of two-byte seq
+        len = 2;
+    } else if ((byte0 & 0xF0) == 0xE0) {   // 1110xxxx, start of three-byte seq
+        len = 3;
+    } else if ((byte0 & 0xF8) == 0xF0) {   // 11110xxx, start of four-byte seq
+        len = 4;
+    } else if ((byte0 & 0xFC) == 0xF8) {   // 111110xx, start of five-byte seq
+        len = 5;
+    } else if ((byte0 & 0xFE) == 0xFC) {   // 1111110x, start of six-byte seq
+        len = 6;
+    } else { // Invalid leading byte
+        len = 0;
+    }
+    return len;
+}
+
+size_t getStrLen(const char* s) {
+    size_t res = 0;
+    const char* ptr = s; // point to the byte0
+
+    while (*ptr) { // while ptr is not null terminator
+        size_t charSize = getCharSize1(*ptr);
+        if (charSize > 1) {
+            ptr++;
+            for (int i = 0; i < charSize; ++i) {
+                char curByte = *ptr;
+                if ((curByte & 0xC0) != 0x80) { // not in 10xxxxxx pattern
+                    throw exception();
+                }
+                ptr++;
+            }
+        }
+        else {
+            ptr++;
+        }
+
+        res += 1; // a UTF-8 character
+    }
+    return res;
+}
+```
