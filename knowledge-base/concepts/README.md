@@ -217,6 +217,27 @@ int main(){
 }
 ```
 
+### Rule of 0/3/5 in C++ Design
+
+This guideline relates to the management of resource ownership and object lifecycle.
+
++ Rule of 0
+	+ use [[smart-pointer]] and other RAII objects to manage object
+	+ should not explicitly define any custom destructor, copy constructor, or copy assignment operator
++ Rule of 3 (before C++11)
+	+ if define any one of the following three, we should define all three
+		+ destructor
+		+ copy constructor
+		+ copy assignment operator
+	+ because if dynamic memory is used, we need to define a custom destructor. also we are likely to define the copying operation correctly
++ Rule of 5 (after C++11)
+	+ if define any one of the following five, we should define all five
+		+ destructor
+		+ copy constructor
+		+ copy assignment operator
+		+ move constructor
+		+ move assignment operator
+
 ## Operator Overloading
 
 C++ doesn't know how to deal with the operators on a user-defined type data, it will only apply the default member-wise assignment `=` (shallow copy). Operator overloading must be explicitly defined before using that operator on user-defined data types.

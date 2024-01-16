@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "pointers/smart-pointer.md",
+                "file": "concepts/README.md",
                 "mode": "source",
                 "source": true
               }
@@ -61,7 +61,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "mutable",
+                "query": "destructor",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -78,7 +78,8 @@
               "state": {}
             }
           }
-        ]
+        ],
+        "currentTab": 1
       },
       {
         "id": "b09f4e7f2294264f",
@@ -91,7 +92,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "pointers/smart-pointer.md"
+                "file": "concepts/README.md"
               }
             }
           }
@@ -116,7 +117,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "pointers/smart-pointer.md",
+                "file": "concepts/README.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -167,7 +168,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 510.5
+    "width": 510.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -180,10 +182,12 @@
   },
   "active": "a9e753fd9a502302",
   "lastOpenFiles": [
+    "pointers/smart-pointer.md",
+    "pointers/README.md",
+    "quizzes/cpp.md",
     "pointers/mem_management.md",
     "embedded-cpp/README.md",
     "concurrency/concurrency.md",
-    "quizzes/cpp.md",
     "concurrency/multithreading/shared-data.md",
     "concepts/README.md",
     "concepts/exception.md",
@@ -197,11 +201,9 @@
     "concepts/lambda.md",
     "STL/components/functions-functors.md",
     "concepts/functions.md",
-    "pointers/smart-pointer.md",
     "res/storage-classes-in-c.png",
     "res/process-virtual-addr-space.png",
     "res",
-    "pointers/README.md",
     "quizzes",
     "README.md",
     "concepts/cpp-std-exception-class-hierarchy.jpg",
